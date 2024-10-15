@@ -11,6 +11,9 @@ const DEFAULT_STATE_DATA = {
             warning: 'Function "onChange" is not set.',
             alert: 'Set the function "onChange"!',
         }
+    },
+    VARIABLES: {
+        MAX_MOBILE_SCREEN_WIDTH: 520,
     }
 };
 

@@ -1,9 +1,9 @@
 import './App.css';
-import { Button } from './components/button';
+import { UIDisplayAdapter } from './components/display_UI_adapter';
 
 function App() {
   return (
-    <Button label='Informacje' />    
+    <UIDisplayAdapter />  
   );
 }
 
