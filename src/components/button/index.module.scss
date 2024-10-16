@@ -1,8 +1,10 @@
+@import '../../../src/styles/globalVariables.scss';
+
 .button:enabled {
     appearance: none;
     border: none;
     background: none;
-    color: #0f1923;
+    color: $dark-color;
     cursor: pointer;
     position: relative;
     padding: 8px;
@@ -19,7 +21,7 @@
         display: block;
         padding: 10px 20px;
         color: #fff;
-        background-color: #0f1923;
+        background-color: $dark-color;
         overflow: hidden;
         box-shadow: inset 0px 0px 0px 1px transparent;
     }
@@ -31,7 +33,7 @@
         bottom: -1px;
         left: -8px;
         width: 0;
-        background-color: #ff5246;
+        background-color: $primary-color;
         transform: skew(-15deg);
         transition: all .5s ease;
     }
@@ -88,10 +90,28 @@
         .buttonLg {
             position: relative;
             display: block;
-            border: 1px solid #dadada;
+            background-color: $secondary-color;
             padding: 10px 20px;
             overflow: hidden;
             box-shadow: inset 0px 0px 0px 1px transparent;
         }
+    }
+}
+
+.iconButton {
+    color: white;
+    border: none;
+    background: none;
+    font-size: 22px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .2s;
+
+    &:hover {
+        color: $primary-color;
+        transform: translateY(-5px);
     }
 }

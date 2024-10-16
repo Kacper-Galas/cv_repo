@@ -1,9 +1,18 @@
+import { ConfigProvider } from 'antd';
 import './App.css';
 import { UIDisplayAdapter } from './components/display_UI_adapter';
 
+const theme = {
+  token: {
+    colorPrimary: '#ff5246',
+  }
+}
+
 function App() {
   return (
-    <UIDisplayAdapter />  
+    <ConfigProvider theme={theme}>
+      <UIDisplayAdapter /> 
+    </ConfigProvider> 
   );
 }
 
