@@ -1,0 +1,11 @@
+@import '../../styles/globalVariables.scss';
+
+.introPageContainer {
+    height: 800px;
+    width: 100%;
+    border-bottom: 1px solid $secondary-color;
+
+    img {
+        width: 50%;
+    }
+}

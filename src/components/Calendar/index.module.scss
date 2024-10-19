@@ -1,0 +1,58 @@
+@import '../../styles/globalVariables.scss';
+
+.calendarContainer {
+    width: 100%;
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    font-family: "Bebas Neue", sans-serif;
+
+    .calendarHeader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .calendarHeaderYear, .calendarHeaderMonth {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    .calendarDays {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        font-size: 20px;
+
+        .dayName {
+            font-weight: bold;
+        }
+
+        .day {
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            &:hover:not(.daySelected, .prevMonthDay, .nextMonthDay) {
+                background-color: $secondary-color;
+            }
+        }
+
+        .prevMonthDay, .nextMonthDay {
+            color: $secondary-color;
+            cursor: default;
+
+            &:hover {
+                background: none;
+            }
+        }
+
+        .daySelected:not(.prevMonthDay, .nextMonthDay) {
+            background-color: $primary-color;
+            color: white;
+        }
+    }
+}
