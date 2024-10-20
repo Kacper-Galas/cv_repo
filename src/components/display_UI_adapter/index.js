@@ -27,6 +27,7 @@ export const UIDisplayAdapter = () => {
                     <div style={{width: '60%', margin: '0 auto'}}>
                         <HeaderBar />
                         <IntroPage />
+                        <IntroPage />
                     </div>
                 </div>
             )

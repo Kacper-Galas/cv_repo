@@ -1,11 +1,32 @@
 @import '../../styles/globalVariables.scss';
 
 .introPageContainer {
-    height: 800px;
+    height: 850px;
     width: 100%;
     border-bottom: 1px solid $secondary-color;
+    display: flex;
+    font-family: "Bebas Neue", sans-serif;
+    flex-direction: row;
+
+    .introPageLeft, .introPageRight {
+        width: 100%;
+        height: 100%;
+    }
+
+    .introPageLeft {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 26px;
+        flex-direction: column;
+    }
+
+    .introPageRight {
+        display: flex;
+        align-items: flex-end;
+    }
 
     img {
-        width: 50%;
+        width: 100%;
     }
 }

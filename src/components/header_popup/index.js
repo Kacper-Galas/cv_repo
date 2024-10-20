@@ -29,7 +29,7 @@ export const HeaderPopup = () => {
         <div className={isOpenPopup ? styles.popupOpen : styles.popupClosed}>
             <div className={styles.popupContent}>
                 <p>Click the button below to translate the page.</p>
-                <Button label="Translate" />
+                <Button label="Translate" onClick={handleButtonIcon} />
             </div>
             <div className={styles.popupFooter}>
                 <Button

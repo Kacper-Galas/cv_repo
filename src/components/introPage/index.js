@@ -6,7 +6,13 @@ import { Calendar } from "../Calendar";
 export const IntroPage = () => {
     return (
         <div className={styles.introPageContainer}>
-            <Calendar />
+            <div className={styles.introPageLeft}>
+                <p>Kacper Galas</p>
+                <p>Portfolio {process.env.REACT_APP_LAST_COMMIT_DATE}</p>
+            </div>
+            <div className={styles.introPageRight}>
+                <img src={portrait} />
+            </div>
         </div>
     )
 }
