@@ -1,7 +1,7 @@
 @import '../../styles/globalVariables.scss';
 
 .introPageContainer {
-    height: 850px;
+    height: 85vh;
     width: 100%;
     border-bottom: 1px solid $secondary-color;
     display: flex;
@@ -19,6 +19,14 @@
         align-items: center;
         font-size: 26px;
         flex-direction: column;
+
+        p {
+            margin: 0;
+            span {
+                font-size: 18px;
+                border-bottom: 1px solid black;
+            }
+        }
     }
 
     .introPageRight {

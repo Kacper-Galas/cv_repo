@@ -3,6 +3,7 @@ import DEFAULT_STATE_DATA from "../../constants";
 import { HeaderBar } from "../header";
 import { IntroPage } from "../introPage";
 import { HeaderPopup } from "../header_popup";
+import { Footer } from "../footer";
 
 export const UIDisplayAdapter = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -27,8 +28,8 @@ export const UIDisplayAdapter = () => {
                     <div style={{width: '60%', margin: '0 auto'}}>
                         <HeaderBar />
                         <IntroPage />
-                        <IntroPage />
                     </div>
+                    <Footer />
                 </div>
             )
         } else {

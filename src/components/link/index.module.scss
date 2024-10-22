@@ -1,0 +1,11 @@
+@import '../../styles/globalVariables.scss';
+
+.linkContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    color: $primary-color;
+    a {
+        color: $primary-color;
+    }
+}

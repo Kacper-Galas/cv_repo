@@ -20,6 +20,9 @@ const DEFAULT_STATE_DATA = {
     // TEXT CONSTANTS
 
     STRINGS: {
+        INTRO: {
+            DATE: '20.10.2024',
+        },
         BUTTONS: {
             HEADER_BUTTONS: {
                 INFO_LABEL: 'Informacje',
