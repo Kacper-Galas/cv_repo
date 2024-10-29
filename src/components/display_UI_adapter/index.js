@@ -4,6 +4,8 @@ import { HeaderBar } from "../header";
 import { IntroPage } from "../introPage";
 import { HeaderPopup } from "../header_popup";
 import { Footer } from "../footer";
+import { PageTemplate } from "../PageTemplate";
+import { Modal } from "../modal";
 
 export const UIDisplayAdapter = () => {
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -28,6 +30,12 @@ export const UIDisplayAdapter = () => {
                     <div style={{width: '60%', margin: '0 auto'}}>
                         <HeaderBar />
                         <IntroPage />
+                        <PageTemplate label="Informacje"/>
+                        <PageTemplate label="Wykształcenie"/>
+                        <PageTemplate />
+                        <PageTemplate />
+                        <PageTemplate />
+                        <Modal />
                     </div>
                     <Footer />
                 </div>

@@ -1,19 +1,27 @@
-import React from "react"
-import { Button } from "../button"
-import styles from './index.module.scss'
-import DEFAULT_STATE_DATA from "../../constants"
+import React from "react";
+import { Button } from "../button";
+import styles from './index.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export const HeaderBar = () => {
-    const buttonsLabels = DEFAULT_STATE_DATA.STRINGS.BUTTONS.HEADER_BUTTONS;
+    const { t } = useTranslation();
+
+    const buttonKeys = [
+        'header.button_info_label',
+        'header.button_formation_label',
+        'header.button_skills_label',
+        'header.button_experience_label',
+        'header.button_projects_label'
+    ];
 
     return (
         <div className={styles.headerContainer}>
-            {Object.entries(buttonsLabels).map(([key, label]) => (
+            {buttonKeys.map((key) => (
                 <Button 
                     key={key} 
-                    label={label}
+                    label={t(key)}
                 />
             ))}
         </div>
-    )
-}
+    );
+};

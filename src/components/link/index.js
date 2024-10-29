@@ -10,7 +10,7 @@ export const Link = ({
 }) => {
     return (
         <div className={styles.linkContainer}>
-            {icon}<a href={href}>{label}</a>
+            {icon}<a href={href} target="blank">{label}</a>
         </div>
     )
 }

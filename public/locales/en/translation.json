@@ -1,0 +1,27 @@
+{
+  "intro": {
+    "date": "20.10.2024"
+  },
+  "header": {
+    "button_info_label": "Information",
+    "button_formation_label": "Education",
+    "button_skills_label": "Skills",
+    "button_experience_label": "Experience",
+    "button_projects_label": "Projects"
+  },
+  "modal": {
+    "body_note": "If you encounter issues with the page, visit external websites.",
+    "button_close_label": "Close"
+  },
+  "footer": {
+    "button_show_label": "Show",
+    "button_hide_label": "Hide",
+    "hyperlinks": {
+      "linkedin_label": "View LinkedIn profile! Experience and skills at a glance.",
+      "github_label": "Check out the source code for this page on GitHub.",
+      "discord_label": "Discord server managed by a custom bot."
+    },
+    "informations": "Kacper Galas. All rights reserved."
+  }
+}
+  

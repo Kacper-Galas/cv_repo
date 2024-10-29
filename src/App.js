@@ -1,6 +1,7 @@
 import { ConfigProvider } from 'antd';
 import './App.css';
 import { UIDisplayAdapter } from './components/display_UI_adapter';
+import './i18n';
 
 const theme = {
   token: {
