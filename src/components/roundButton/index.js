@@ -6,6 +6,7 @@ import { faLinkSlash } from "@fortawesome/free-solid-svg-icons/faLinkSlash";
 export const RoundButton = ({
     icon = <FontAwesomeIcon icon={faLinkSlash}/>,
     darkMode = true,
+    link = '#',
 }) => {
     return (
         <div className={styles.roundButtonBackground}>

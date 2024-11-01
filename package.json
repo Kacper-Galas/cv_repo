@@ -18,6 +18,7 @@
     "react-dom": "^18.3.1",
     "react-i18next": "^15.1.0",
     "react-scripts": "5.0.1",
+    "react-useportal": "^1.0.19",
     "sass": "^1.79.5",
     "storybook": "^8.3.6",
     "web-vitals": "^2.1.4"
