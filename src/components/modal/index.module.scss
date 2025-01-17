@@ -15,11 +15,11 @@
     .modal {
         background-color: white;
         height: 350px;
-        width: 700px;
+        width: 30%;
         box-shadow: rgba(0, 0, 0, 0.8) 0px 5px 15px;
         overflow: hidden;
         transition: 0.6s;
-        white-space: nowrap;
+        text-wrap: nowrap;
         color: black;
 
         .modalHeader {
@@ -67,5 +67,12 @@
 
     .modalClosed {
         width: 0px;
+    }
+}
+
+
+@media (orientation: portrait) {
+    .modal {
+        width: 80% !important;
     }
 }

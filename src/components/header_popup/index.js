@@ -15,7 +15,7 @@ export const HeaderPopup = () => {
     const { i18n } = useTranslation();
 
     const handleButtonIcon = () => {
-        setIsOpenPopup(!isOpenPopup);
+        setIsOpenPopup(prev => !prev);
         handleModalOpen()
     };
 
@@ -58,7 +58,7 @@ export const HeaderPopup = () => {
             </div>
             <div className={styles.popupFooter}>
             </div>
-            <Modal isOpen={isModalOpen} handleClose={handleModalClose} headerLabel={'Nie udało się przetłumaczyć strony'}/>
+            <Modal isOpen={isModalOpen} handleClose={handleModalClose} headerLabel={'take a look at other sources'}/>
             {!isOpenPopup && floatBtn}
         </div>
     );

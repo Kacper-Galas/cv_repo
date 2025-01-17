@@ -21,13 +21,11 @@
             align-items: center;
         }
     }
-    .pageTempHeaderBody {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 80vh;
+    .pageTempBody {
+        min-height: auto;
         width: 100%;
-        background-color: white;
+        padding-top: 20px;
+        padding-bottom: 20px;
         .pageTempEmptyBodyContainer {
             width: 100%;
             height: 100%;
@@ -45,3 +43,10 @@
         }
     }
 }
+
+@media (orientation: portrait) {
+    .pageTempHeader {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+  }

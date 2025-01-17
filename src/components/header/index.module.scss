@@ -9,4 +9,11 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    z-index: 1000;
+}
+
+@media (orientation: portrait) {
+    .headerContainer {
+        display: none;
+    }
 }

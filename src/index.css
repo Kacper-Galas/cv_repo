@@ -17,3 +17,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+p {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.slick-dots.slick-dots-bottom li button {
+  background-color: black;
+  height: 6px;
+  border-radius: 6px;
+}
+
+.slick-dots.slick-dots-bottom .slick-active button {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+}

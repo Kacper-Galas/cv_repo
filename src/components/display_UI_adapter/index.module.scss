@@ -1,0 +1,10 @@
+.displayUIWrapper {
+    width: 60%;
+    margin: 0 auto;
+}
+
+@media (orientation: portrait) {
+    .displayUIWrapper {
+        width: 100%;
+    }
+}

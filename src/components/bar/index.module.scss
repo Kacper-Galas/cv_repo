@@ -1,0 +1,68 @@
+@import '../../styles/globalVariables.scss';
+
+.barContainer {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    .barHeader {
+        width: 100%;
+        text-align: left;
+
+        .barLabel {
+            margin: 0;
+        }
+    }
+
+    .barBodyContainer {
+        width: 100%;
+
+        .barBody {
+            width: 60%;
+            height: 12px;
+            background-color: black;
+            margin-bottom: 8px;
+    
+            .barFill {
+                height: 100%;
+                background-color: $primary-color;
+            }
+        }
+
+        .barMeasureContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+            width: 60%;
+            .barMeasurePart {
+                display: flex;
+                align-items: center;
+                justify-content: left;
+                width: 100%;
+                height: auto;
+                box-sizing: border-box;
+                border-right: 1px solid $secondary-color;
+                border-bottom: 1px solid $secondary-color;
+
+                .barMeasureLabel {
+                    margin: 0;
+                    height: min-content;
+                    font-size: 10px;
+                    color: #a3a3a3;
+                    margin-left: 2px;
+                }
+            }
+        }
+    }
+}
+
+@media (orientation: portrait) {
+    .barBody {
+        width: 100% !important;
+    }
+
+    .barMeasureContainer {
+        width: 100% !important;
+    }
+}
