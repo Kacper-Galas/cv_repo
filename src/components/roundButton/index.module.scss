@@ -1,0 +1,50 @@
+@import '../../styles/globalVariables.scss';
+
+.roundButtonBackground {
+    background-color: $dark-color;
+    height: 60px;
+    width: 60px;
+    border-radius: 100%;
+    .roundButtonContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        background-color: $dark-color;
+        font-size: 22px;
+        border: 2px dashed;
+        border-color: black;
+        border-radius: 100%;
+        transition: 0.2s;
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        &:hover {
+            cursor: pointer;
+            border-color: $primary-color;
+            color: $primary-color;
+            transform: translateY(-5px);
+        }
+    }
+    .roundButtonContainerLight {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        background-color: white;
+        font-size: 22px;
+        border: 2px dashed;
+        border-color: black;
+        border-radius: 100%;
+        transition: 0.2s;
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        &:hover {
+            cursor: pointer;
+            border-color: $primary-color;
+            color: $primary-color;
+            transform: translateY(-5px);
+        }
+    }
+}

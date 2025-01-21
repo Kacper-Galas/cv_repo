@@ -1,0 +1,19 @@
+@import '../../../src/styles/globalVariables.scss';
+
+.headerContainer {
+    border-bottom: 1px solid $secondary-color;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+@media (orientation: portrait) {
+    .headerContainer {
+        display: none;
+    }
+}

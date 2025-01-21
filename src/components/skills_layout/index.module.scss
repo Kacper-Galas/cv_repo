@@ -1,0 +1,35 @@
+
+.skillsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+
+    .skillsHeader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+
+        .skillsImg {
+            width: 25%;
+        }
+
+        .skillsLabel {
+            padding-left: 20%;
+            padding-right: 20%;
+            font-size: 24px;
+            border-bottom: 1px dashed black;
+        }
+    }
+
+    .skillsBody {
+        font-size: 18px;
+        width: 80%;
+        letter-spacing: 1px;
+        padding-bottom: 20px;
+    }
+}

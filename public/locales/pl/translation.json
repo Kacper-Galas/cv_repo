@@ -1,0 +1,26 @@
+{
+  "intro": {
+    "date": "20.10.2024"
+  },
+  "header": {
+    "button_info_label": "Informacje",
+    "button_formation_label": "Wykształcenie",
+    "button_skills_label": "Umiejętności",
+    "button_experience_label": "Doświadczenie",
+    "button_projects_label": "Projekty"
+  },
+  "modal": {
+    "body_note": "If you encounter issues with the page, visit external websites.",
+    "button_close_label": "Zamknij"
+  },
+  "footer": {
+    "button_show_label": "Pokaż",
+    "button_hide_label": "Schowaj",
+    "hyperlinks": {
+      "linkedin_label": "Zobacz profil na Linkedin! Doświadczenie i umiejętności w pigułce.",
+      "github_label": "Sprawdź kod źródłowy tej strony na Github.",
+      "discord_label": "Serwer Discord zarządany przez autorskiego bota."
+    },
+    "informations": "Kacper Galas. Wszelkie prawa zastrzeżone."
+  }
+}  

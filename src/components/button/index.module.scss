@@ -1,0 +1,116 @@
+@import '../../../src/styles/globalVariables.scss';
+
+.button:enabled {
+    appearance: none;
+    border: none;
+    background: none;
+    color: $dark-color;
+    cursor: pointer;
+    position: relative;
+    padding: 8px;
+    transition: all .15s ease;
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 2px;
+    font-size: 20px;
+
+    .buttonLg {
+        position: relative;
+        display: block;
+        padding: 10px 20px;
+        color: #fff;
+        background-color: $dark-color;
+        overflow: hidden;
+        box-shadow: inset 0px 0px 0px 1px transparent;
+    }
+    
+    .buttonSl {
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: -1px;
+        left: -8px;
+        width: 0;
+        background-color: $primary-color;
+        transform: skew(-15deg);
+        transition: all .5s ease;
+    }
+}
+  
+.button:active::before,
+.button:active::after {
+    right: 3px;
+    left: 3px;
+}
+  
+.button:active::before {
+    top: 3px;
+}
+  
+.button:active::after {
+    bottom: 3px;
+}
+  
+.buttonText {
+    position: relative;
+}
+  
+.button:hover {
+    &:enabled {
+        color: #0f1923;
+    }
+}
+  
+.button:hover .buttonSl {
+    width: calc(100% + 15px);
+}
+  
+.button:hover .buttonLg::after {
+    background-color: #fff;
+}
+
+.button {
+    &:disabled {
+        appearance: none;
+        background: none;
+        border: none;
+        cursor: not-allowed;
+        position: relative;
+        padding: 8px;
+        margin-bottom: 20px;
+        transition: all .15s ease;
+        font-family: "Bebas Neue", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        letter-spacing: 2px;
+        font-size: 20px;
+
+        .buttonLg {
+            position: relative;
+            display: block;
+            background-color: $secondary-color;
+            padding: 10px 20px;
+            overflow: hidden;
+            box-shadow: inset 0px 0px 0px 1px transparent;
+        }
+    }
+}
+
+.iconButton {
+    color: white;
+    border: none;
+    background: none;
+    font-size: 22px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .2s;
+
+    &:hover {
+        color: $primary-color;
+        transform: translateY(-5px);
+    }
+}

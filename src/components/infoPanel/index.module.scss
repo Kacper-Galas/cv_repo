@@ -1,0 +1,42 @@
+@import '../../../src/styles/globalVariables.scss';
+
+.infoPanelContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    .infoPanelParts {
+        display: flex;
+        flex-direction: column;
+        width: 20%;
+        padding-top: 28px;
+        padding-bottom: 28px;
+        border-right: 1px solid $secondary-color;
+
+        .infoPanelPart {
+            cursor: pointer;
+            border-right: 0px solid $primary-color;
+            transition: .2s;
+            text-align: right;
+            padding-right: 8px;
+            font-size: 18px;
+
+            &:hover {
+                border-right: 5px solid $primary-color;
+            }
+
+            &:focus {
+                border-right: 5px solid $primary-color;
+            }
+        }
+    }
+
+    .infoPanelDesc {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+    }
+}
