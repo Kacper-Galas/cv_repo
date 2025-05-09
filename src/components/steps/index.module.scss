@@ -1,0 +1,50 @@
+@import '../../../src/styles/globalVariables.scss';
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    justify-content: space-between;
+    height: 100%;
+    gap: 1rem;
+  }
+  
+  .stepItem {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .verticalLine {
+    position: absolute;
+    top: 100%;
+    width: 2px;
+    height: 40px;
+    background-color: $secondary-color;
+    z-index: 0;
+  }
+  
+  .circle {
+    background-color: $dark-color;
+    border-radius: 50%;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    transition: all 0.3s ease;
+  }
+  
+.active {
+    background-color: $primary-color;
+}
+
+.completed {
+    background-color: $primary-color;
+}
+  
+.completedLine {
+    background-color: $primary-color;
+}

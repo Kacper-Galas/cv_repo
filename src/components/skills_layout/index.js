@@ -9,7 +9,7 @@ export const SkillsLayout = ({
         <>
             <div className={styles.skillsContainer}>
                 <div className={styles.skillsHeader}>
-                    <img src={logo} className={styles.skillsImg}/>
+                    <img src={logo} className={styles.skillsImg} alt='img'/>
                     <p className={styles.skillsLabel}>{label}</p>
                 </div>
                 <div className={styles.skillsBody}>

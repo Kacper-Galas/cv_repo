@@ -6,19 +6,20 @@ import { faImage } from "@fortawesome/free-solid-svg-icons";
 export const PageTemplate = ({
     icon = <FontAwesomeIcon icon={faImage}/>,
     label = 'Page Title',
-    desc = 'Description',
+    desc = '',
     children,
+    ...props
 }) => {
 
     return (
-        <div className={styles.pageTempContainer}>
+        <div className={styles.pageTempContainer} {...props}>
             <div className={styles.pageTempHeader}>
                 <div className={styles.pageTempHeaderTitle}>
                     {icon}{label}
                 </div>
-                <div className={styles.pageTempHeaderDesc}>
+                {desc && <div className={styles.pageTempHeaderDesc}>
                     {`@${desc}`}
-                </div>
+                </div>}
             </div>
             <div className={styles.pageTempBody}>
                 {children ? (

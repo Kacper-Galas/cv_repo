@@ -49,12 +49,14 @@ export const InfoPanel = ({
                             ))}
                         </div>
                         <div className={styles.infoPanelDesc}>
-                            {description}
+                            <div className={styles.infoPanelDescContent}>
+                                {description}
+                            </div>
                         </div>
                     </>
                 ) : (
                     <Tabs 
-                        defaultActiveKey='1'
+                        defaultActiveKey='0'
                         items={content.map(item => ({
                             key: String(item.id),
                             label: item.label,

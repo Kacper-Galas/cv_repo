@@ -10,7 +10,6 @@ export const IntroPage = () => {
         <div className={styles.introPageContainer}>
             <div className={styles.introPageLeft}>
                 <p>Kacper Galas</p>
-                <p>Portfolio - <span>{`${t('intro.date')}`}</span></p>
             </div>
             <div className={styles.introPageRight}>
                 <img src={portrait} alt="img"/>

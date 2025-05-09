@@ -3,8 +3,23 @@
     margin: 0 auto;
 }
 
+.certificatsContainer {
+    display: flex;
+    flex-direction: row;
+
+    img {
+        max-width: 300px;
+    }
+}
+
 @media (orientation: portrait) {
     .displayUIWrapper {
         width: 100%;
+    }
+}
+
+@media (orientation: portrait) {
+    .certificatsContainer {
+        flex-direction: column;
     }
 }

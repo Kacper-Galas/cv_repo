@@ -50,6 +50,7 @@ export const HeaderPopup = () => {
         </FloatButton.Group>
     );
 
+    /*
     return (
         <div className={isOpenPopup ? styles.popupOpen : styles.popupClosed}>
             <div className={styles.popupContent}>
@@ -59,7 +60,14 @@ export const HeaderPopup = () => {
             <div className={styles.popupFooter}>
             </div>
             <Modal isOpen={isModalOpen} handleClose={handleModalClose} headerLabel={'take a look at other sources'}/>
-            {!isOpenPopup && floatBtn}
+            { !isOpenPopup && floatBtn }
+        </div>
+    );
+    */
+
+    return (
+        <div>
+            {floatBtn}
         </div>
     );
 };
