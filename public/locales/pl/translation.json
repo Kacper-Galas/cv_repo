@@ -1,0 +1,32 @@
+{
+  "intro": {
+    "date": "24.02.2025"
+  },
+  "header": {
+    "button_info_label": "Informacje",
+    "button_formation_label": "Wykształcenie",
+    "button_skills_label": "Umiejętności",
+    "button_experience_label": "Doświadczenie",
+    "button_projects_label": "Kontakt"
+  },
+  "info": {
+    "info-about": "",
+    "info-hobby": "",
+    "info-certificates": "",
+    "info-language": ""
+  },
+  "modal": {
+    "body_note": "If you encounter issues with the page, visit external websites.",
+    "button_close_label": "Zamknij"
+  },
+  "footer": {
+    "button_show_label": "Pokaż",
+    "button_hide_label": "Schowaj",
+    "hyperlinks": {
+      "linkedin_label": "Zobacz mój profil na Linkedin!",
+      "github_label": "Kontakt telefoniczny: 512 055 867",
+      "discord_label": "Mail: kacperjangalas@gmail.com"
+    },
+    "informations": "Kacper Galas. Strona autorska. Wszelkie prawa zastrzeżone."
+  }
+}  

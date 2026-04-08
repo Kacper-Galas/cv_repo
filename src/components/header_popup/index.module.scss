@@ -1,0 +1,60 @@
+.popup {
+    background-color: black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 26px;
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+.popupContent {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    height: 80%;
+    width: 100%;
+
+    p {
+        margin: 0;
+    }
+}
+
+.popupFooter {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popupOpen {
+    @extend .popup;
+    height: 200px;
+}
+
+.popupClosed {
+    @extend .popup;
+    height: 0px;
+}
+
+.floatBtnOption {
+    div {
+        div {
+            div {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                img {
+                    border-radius: 5px;
+                    height: 16px;
+                }
+            }
+        }
+    }
+}

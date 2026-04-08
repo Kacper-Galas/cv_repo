@@ -1,0 +1,66 @@
+.footerMainContainer {
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Bebas Neue", sans-serif;
+  
+    .footerContainer {
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+  
+      .footerSliderSection {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-bottom: 1px solid white;
+        padding-bottom: 10px;
+  
+        .footerSliderLeft {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          border: none;
+          box-sizing: border-box;
+        }
+  
+        .footerSliderRight {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: auto;
+          overflow: hidden;
+          white-space: nowrap;
+          font-size: 18px;
+          width: 100%;
+          color: white;
+  
+          p {
+            margin: 0;
+          }
+  
+          div {
+            display: flex;
+            flex-direction: row;
+            gap: 2px;
+            padding: 2px;
+            align-items: center;
+          }
+        }
+      }
+  
+      .footerBottom {
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+    }
+  }
+  
