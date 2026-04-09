@@ -1,0 +1,448 @@
+@import '../../../src/styles/globalVariables.scss';
+
+$grey-text: #666;
+$grey-light: #999;
+$grey-border: #e0e0e0;
+
+.blogPage {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f7f7f7;
+}
+
+.blogMain {
+    flex: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 80px 40px 60px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* â”€â”€ Top bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.topBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid $grey-border;
+}
+
+.topBarLeft {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.heroTitle {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 52px;
+    letter-spacing: 4px;
+    color: $dark-color;
+    margin: 0;
+    line-height: 1;
+    border-left: 4px solid $primary-color;
+    padding-left: 16px;
+}
+
+.topBarRight {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    flex: 0 0 auto;
+
+    > :first-child {
+        width: 280px;
+    }
+}
+
+/* â”€â”€ Tabs bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.tabsBar {
+    margin-bottom: 24px;
+}
+
+/* â”€â”€ 2-column layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.bodyLayout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 0;
+    align-items: start;
+    flex: 1;
+}
+
+/* â”€â”€ Left panel â€“ article list â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.leftPanel {
+    border-right: 2px solid $grey-border;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+.listItem {
+    appearance: none;
+    background: none;
+    border: none;
+    border-bottom: 1px solid $grey-border;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    text-align: left;
+    padding: 14px 16px;
+    transition: background-color 0.15s ease;
+
+    &:hover {
+        background-color: #f7f7f7;
+
+        .listItemArrow {
+            color: $primary-color;
+            transform: translateX(3px);
+        }
+    }
+
+    &.listItemActive {
+        background-color: $dark-color;
+
+        .listItemCategory {
+            background-color: $primary-color;
+        }
+
+        .listItemTitle,
+        .listItemMeta,
+        .listItemArrow {
+            color: #fff;
+        }
+
+        .listItemDot {
+            background-color: #fff;
+        }
+    }
+}
+
+.listItemInner {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+    flex: 1;
+}
+
+.listItemCategory {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.8px;
+    color: #fff;
+    background-color: $primary-color;
+    padding: 1px 8px;
+    align-self: flex-start;
+    text-transform: uppercase;
+}
+
+.listItemTitle {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: $dark-color;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.listItemMeta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: $grey-light;
+}
+
+.listItemDot {
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: $grey-light;
+}
+
+.listItemArrow {
+    color: $grey-light;
+    flex-shrink: 0;
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.listPagination {
+    display: flex;
+    justify-content: center;
+    padding: 16px 8px;
+    border-top: 1px solid $grey-border;
+}
+
+.emptyMsg {
+    padding: 32px 16px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    color: $grey-light;
+    text-align: center;
+}
+
+/* â”€â”€ Center panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.centerPanel {
+    padding: 0 0 0 32px;
+    min-height: 480px;
+}
+
+/* â”€â”€ Tiles grid â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.tilesGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.tile {
+    appearance: none;
+    border: 2px solid $grey-border;
+    background-color: #fff;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    text-align: left;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3px;
+        height: 0;
+        background-color: $primary-color;
+        transition: height 0.25s ease;
+    }
+
+    &:hover {
+        border-color: $dark-color;
+        box-shadow: 3px 3px 0 $dark-color;
+
+        &::before {
+            height: 100%;
+        }
+    }
+}
+
+.tileCategory {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #fff;
+    background-color: $primary-color;
+    padding: 1px 8px;
+    align-self: flex-start;
+}
+
+.tileTitle {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 17px;
+    letter-spacing: 1.2px;
+    color: $dark-color;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.tileExcerpt {
+    font-size: 12px;
+    color: $grey-text;
+    margin: 0;
+    line-height: 1.55;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.tileMeta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: $grey-light;
+}
+
+.tileTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.tileTag {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 10px;
+    letter-spacing: 0.4px;
+    color: $grey-text;
+    border: 1px solid $grey-border;
+    padding: 2px 6px;
+}
+
+/* â”€â”€ Article detail â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.detail {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.detailBack {
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    color: $grey-text;
+    padding: 0;
+    align-self: flex-start;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: $primary-color;
+    }
+}
+
+.detailHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-left: 4px solid $primary-color;
+    padding-left: 20px;
+}
+
+.detailCategory {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #fff;
+    background-color: $primary-color;
+    padding: 2px 10px;
+    align-self: flex-start;
+}
+
+.detailTitle {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 42px;
+    letter-spacing: 2px;
+    color: $dark-color;
+    margin: 0;
+    line-height: 1.05;
+}
+
+.detailMeta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 13px;
+    color: $grey-text;
+
+    span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+}
+
+.detailBody {
+    font-size: 15px;
+    color: $grey-text;
+    line-height: 1.7;
+
+    p {
+        margin: 0 0 16px;
+    }
+}
+
+.detailPlaceholder {
+    font-size: 13px;
+    color: $grey-light;
+    font-style: italic;
+    border-top: 1px dashed $grey-border;
+    padding-top: 16px;
+    margin-top: 8px;
+}
+
+.detailTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+/* â”€â”€ Responsive â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@media (max-width: 1100px) {
+    .tilesGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .bodyLayout {
+        grid-template-columns: 1fr;
+    }
+
+    .leftPanel {
+        border-right: none;
+        border-bottom: 2px solid $grey-border;
+    }
+
+    .centerPanel {
+        padding: 24px 0 0;
+    }
+
+    .tilesGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .blogMain {
+        padding: 76px 16px 40px;
+    }
+
+    .topBar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .topBarRight {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+
+        > :first-child {
+            width: 100%;
+        }
+    }
+
+    .heroTitle {
+        font-size: 40px;
+    }
+
+    .tilesGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .detailTitle {
+        font-size: 30px;
+    }
+}

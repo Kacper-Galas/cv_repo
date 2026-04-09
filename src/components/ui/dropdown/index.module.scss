@@ -1,0 +1,86 @@
+@import '../../../../src/styles/globalVariables.scss';
+
+.dropdownWrapper {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    font-family: "Bebas Neue", sans-serif;
+}
+
+.dropdownTrigger {
+    appearance: none;
+    border: 2px solid $dark-color;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 16px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    color: $dark-color;
+    transition: border-color 0.2s ease, color 0.2s ease;
+    min-width: 160px;
+
+    &:hover,
+    &.open {
+        border-color: $primary-color;
+        color: $primary-color;
+    }
+}
+
+.dropdownLabel {
+    flex: 1;
+    text-align: left;
+}
+
+.dropdownChevron {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    background-color: $dark-color;
+    list-style: none;
+    margin: 0;
+    padding: 4px 0;
+    z-index: 200;
+    overflow: hidden;
+    transform-origin: top;
+    min-width: 100%;
+}
+
+.dropdownOption {
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 16px;
+    letter-spacing: 1.2px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.08);
+        color: $primary-color;
+    }
+
+    &.selectedOption {
+        color: $primary-color;
+        background-color: rgba(255, 82, 70, 0.15);
+    }
+}
+
+.optionIcon {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}

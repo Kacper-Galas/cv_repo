@@ -1,0 +1,89 @@
+@import '../../../../src/styles/globalVariables.scss';
+
+.menuContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+
+    &.vertical {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.menuItem {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    text-decoration: none;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    color: $dark-color;
+    position: relative;
+    transition: color 0.2s ease;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        left: 14px;
+        right: 14px;
+        height: 2px;
+        background-color: $primary-color;
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.25s ease;
+    }
+
+    &:hover {
+        color: $primary-color;
+
+        &::after {
+            transform: scaleX(1);
+        }
+    }
+
+    &.activeItem {
+        color: $primary-color;
+
+        &::after {
+            transform: scaleX(1);
+        }
+    }
+}
+
+.menuItemIcon {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.menuItemLabel {
+    display: flex;
+    align-items: center;
+}
+
+/* Vertical variant overrides */
+.vertical .menuItem {
+    width: 100%;
+    padding: 10px 16px;
+
+    &::after {
+        bottom: 0;
+        left: 0;
+        right: auto;
+        top: 0;
+        width: 3px;
+        height: 100%;
+        transform: scaleY(0);
+        transform-origin: top center;
+    }
+
+    &:hover::after,
+    &.activeItem::after {
+        transform: scaleY(1);
+    }
+}

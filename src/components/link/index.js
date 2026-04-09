@@ -1,12 +1,11 @@
 import React from "react";
 import styles from './index.module.scss';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLink } from "@fortawesome/free-solid-svg-icons/faLink";
+import { FiLink } from "react-icons/fi";
 
 export const Link = ({
     label,
     href,
-    icon = <FontAwesomeIcon icon={faLink}/>
+    icon = <FiLink />
 }) => {
     return (
         <div className={styles.linkContainer}>

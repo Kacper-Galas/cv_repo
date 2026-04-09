@@ -1,0 +1,60 @@
+@import '../../../../src/styles/globalVariables.scss';
+
+.paginationContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    font-family: "Bebas Neue", sans-serif;
+}
+
+.paginationArrow {
+    appearance: none;
+    border: 2px solid $secondary-color;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: $dark-color;
+    font-size: 18px;
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+        border-color: $dark-color;
+        color: $primary-color;
+    }
+
+    &:disabled {
+        opacity: 0.3;
+        cursor: default;
+    }
+}
+
+.paginationPage {
+    appearance: none;
+    border: 2px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    color: $dark-color;
+    font-family: "Bebas Neue", sans-serif;
+    transition: all 0.2s ease;
+
+    &:hover {
+        border-color: $dark-color;
+    }
+
+    &.activePage {
+        background-color: $dark-color;
+        color: #fff;
+    }
+}

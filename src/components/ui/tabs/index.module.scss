@@ -1,0 +1,57 @@
+@import '../../../../src/styles/globalVariables.scss';
+
+.tabsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.tabsList {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    border-bottom: 2px solid $secondary-color;
+}
+
+.tabItem {
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    color: lighten(#0f1923, 40%);
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+
+    &:hover {
+        color: $dark-color;
+    }
+
+    &.activeTab {
+        color: $dark-color;
+    }
+}
+
+.tabIcon {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.tabIndicator {
+    position: absolute;
+    bottom: -2px;
+    height: 3px;
+    background-color: $primary-color;
+    border-radius: 2px 2px 0 0;
+}
+
+.tabContent {
+    padding: 20px 0;
+}

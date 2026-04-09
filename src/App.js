@@ -1,7 +1,9 @@
 import { ConfigProvider } from 'antd';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import { UIDisplayAdapter } from './components/display_UI_adapter';
 import './i18n';
+import { CVPage } from './pages/cv';
+import { BlogPage } from './pages/blog';
 
 const theme = {
   token: {
@@ -12,8 +14,13 @@ const theme = {
 function App() {
   return (
     <ConfigProvider theme={theme}>
-      <UIDisplayAdapter /> 
-    </ConfigProvider> 
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<BlogPage />} />
+          <Route path="/cv" element={<CVPage />} />
+        </Routes>
+      </BrowserRouter>
+    </ConfigProvider>
   );
 }
 
