@@ -1,0 +1,426 @@
+@import '../../../src/styles/globalVariables.scss';
+
+$grey-text: #666;
+$grey-light: #999;
+$grey-border: #e0e0e0;
+
+.creatorPage {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+.creatorMain {
+    flex: 1;
+    max-width: 860px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 80px 40px 60px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* ── Top bar ───────────────────────────────────────────────── */
+.topBar {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.backBtn {
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    color: $grey-light;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    align-self: flex-start;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: $dark-color;
+    }
+}
+
+.pageTitle {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 42px;
+    letter-spacing: 3px;
+    color: $dark-color;
+    margin: 0;
+    line-height: 1;
+    border-left: 4px solid $primary-color;
+    padding-left: 16px;
+}
+
+/* ── Sections ──────────────────────────────────────────────── */
+.editorPanel {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sectionTitle {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: $dark-color;
+    margin: 0;
+}
+
+/* ── Fields ────────────────────────────────────────────────── */
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.fieldRow {
+    display: flex;
+    gap: 16px;
+}
+
+.label {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    color: $grey-text;
+    text-transform: uppercase;
+}
+
+.input,
+.select,
+.textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: $dark-color;
+    border: 1px solid $grey-border;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s ease;
+    box-sizing: border-box;
+    font-family: inherit;
+
+    &::placeholder {
+        color: $grey-light;
+    }
+
+    &:focus {
+        border-color: $dark-color;
+    }
+}
+
+.select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 80px;
+    line-height: 1.6;
+}
+
+/* ── Chapter cards ─────────────────────────────────────────── */
+.chapterCard {
+    border: 1px solid $grey-border;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: border-color 0.2s ease;
+
+    &:hover {
+        border-color: darken($grey-border, 10%);
+    }
+}
+
+.chapterHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chapterIndex {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: $grey-border;
+    line-height: 1;
+}
+
+.addChapterBtn {
+    appearance: none;
+    border: 1px solid $grey-border;
+    background: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 13px;
+    letter-spacing: 1.2px;
+    color: $grey-text;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+        border-color: $dark-color;
+        color: $dark-color;
+    }
+}
+
+.removeChapterBtn {
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: $grey-light;
+    padding: 4px;
+    display: flex;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: $primary-color;
+    }
+}
+
+/* ── Bottom actions ────────────────────────────────────────── */
+.bottomActions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid $grey-border;
+}
+
+.previewBtn {
+    appearance: none;
+    border: 1px solid $grey-border;
+    background: none;
+    cursor: pointer;
+    padding: 12px 24px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    color: $grey-text;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+        border-color: $dark-color;
+        color: $dark-color;
+    }
+}
+
+.saveBtn {
+    appearance: none;
+    border: 2px solid $dark-color;
+    background: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    padding: 12px 32px;
+
+    &:hover .saveBg {
+        width: calc(100% + 60px);
+    }
+
+    &:hover .saveText {
+        color: #fff;
+    }
+
+    &.saveBtnDisabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}
+
+.saveBg {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -30px;
+    width: 0;
+    background-color: $dark-color;
+    transform: skew(-15deg);
+    transition: width 0.4s ease;
+    pointer-events: none;
+}
+
+.saveText {
+    position: relative;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    color: $dark-color;
+    transition: color 0.2s ease;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ── Preview panel ─────────────────────────────────────────── */
+.previewPanel {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.previewActions {
+    display: flex;
+}
+
+.actionBtn {
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    color: $grey-light;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: $dark-color;
+    }
+}
+
+.previewHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-left: 4px solid $dark-color;
+    padding-left: 20px;
+}
+
+.previewCategory {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: $grey-text;
+    text-transform: uppercase;
+}
+
+.previewTitle {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 38px;
+    letter-spacing: 2px;
+    color: $dark-color;
+    margin: 0;
+    line-height: 1.05;
+}
+
+.previewExcerpt {
+    font-size: 15px;
+    color: $grey-text;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.previewTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.previewTag {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    letter-spacing: 0.4px;
+    color: $grey-light;
+}
+
+.previewChapter {
+    padding: 20px 0;
+    border-bottom: 1px solid $grey-border;
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.previewChapterTitle {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 24px;
+    letter-spacing: 1.5px;
+    color: $dark-color;
+    margin: 0 0 12px;
+    line-height: 1.15;
+}
+
+.previewChapterContent {
+    font-size: 15px;
+    color: $grey-text;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .creatorMain {
+        padding: 76px 16px 40px;
+    }
+
+    .pageTitle {
+        font-size: 32px;
+    }
+
+    .fieldRow {
+        flex-direction: column;
+    }
+
+    .previewTitle {
+        font-size: 28px;
+    }
+
+    .bottomActions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .previewBtn,
+    .saveBtn {
+        justify-content: center;
+    }
+}

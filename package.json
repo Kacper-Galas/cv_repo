@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.23.1",
     "framer-motion": "^12.7.4",
+    "hamburger-react": "^2.5.2",
     "i18next": "^23.16.4",
     "i18next-fs-backend": "^2.3.2",
     "i18next-http-backend": "^2.6.2",

@@ -4,6 +4,8 @@ import './App.css';
 import './i18n';
 import { CVPage } from './pages/cv';
 import { BlogPage } from './pages/blog';
+import { LoginPage } from './pages/login';
+import { CreatorPage } from './pages/creator';
 
 const theme = {
   token: {
@@ -18,6 +20,8 @@ function App() {
         <Routes>
           <Route path="/" element={<BlogPage />} />
           <Route path="/cv" element={<CVPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/creator" element={<CreatorPage />} />
         </Routes>
       </BrowserRouter>
     </ConfigProvider>

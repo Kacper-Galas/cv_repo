@@ -7,19 +7,17 @@
     width: 100%;
     background-color: #fff;
     z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     box-sizing: border-box;
 }
 
-/* Desktop */
-.desktopHeader {
+.headerInner {
     display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: space-between;
     padding: 0 40px;
-    height: 64px;
-    max-width: 1200px;
+    height: 60px;
+    max-width: 1400px;
     margin: 0 auto;
     width: 100%;
     box-sizing: border-box;
@@ -32,42 +30,82 @@
     text-decoration: none;
     color: $dark-color;
     font-family: "Bebas Neue", sans-serif;
-    font-size: 26px;
+    font-size: 24px;
     letter-spacing: 2px;
+    transition: color 0.2s ease;
 
     &:hover {
         color: $primary-color;
     }
 }
 
-.desktopNav {
+.burgerWrap {
+    position: fixed;
+    top: 0;
+    right: 40px;
+    height: 60px;
     display: flex;
-    flex-direction: row;
     align-items: center;
+    z-index: 1080;
+}
+
+/* ── Overlay ───────────────────────────────────────────────── */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1050;
+}
+
+/* ── Side panel ────────────────────────────────────────────── */
+.sidePanel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 320px;
+    max-width: 85vw;
+    height: 100vh;
+    background: #fff;
+    z-index: 1060;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+}
+
+.panelLinks {
+    display: flex;
+    flex-direction: column;
+    padding: 100px 36px 40px;
     gap: 8px;
 }
 
-.navLink {
+.panelLink {
     text-decoration: none;
     font-family: "Bebas Neue", sans-serif;
-    font-size: 18px;
-    letter-spacing: 1.5px;
+    font-size: 28px;
+    letter-spacing: 2px;
     color: $dark-color;
-    padding: 4px 12px;
-    position: relative;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
     transition: color 0.2s ease;
+    position: relative;
+    display: inline-block;
 
     &::after {
         content: '';
         position: absolute;
-        bottom: 0;
-        left: 12px;
-        right: 12px;
+        bottom: 10px;
+        left: 0;
+        width: 100%;
         height: 2px;
         background-color: $primary-color;
         transform: scaleX(0);
         transform-origin: left;
-        transition: transform 0.25s ease;
+        transition: transform 0.3s ease;
+    }
+
+    &:last-child {
+        border-bottom: none;
     }
 
     &:hover {
@@ -79,66 +117,16 @@
     }
 }
 
-/* Mobile */
-.mobileToggle {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 4px;
-    background-color: #fff;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    box-sizing: border-box;
-
-    .labelWrapper {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 6px;
-        margin-left: 8px;
-
-        .label {
-            margin: 0;
-            font-family: "Bebas Neue", sans-serif;
-            font-size: 22px;
-            padding-top: 2px;
-        }
+@media (max-width: 600px) {
+    .headerInner {
+        padding: 0 16px;
     }
 
-    .iconContainer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 8px;
-    }
-}
-
-.mobileMenu {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    background-color: #fff;
-    padding: 0 20px 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    gap: 4px;
-}
-
-.mobileNavLink {
-    text-decoration: none;
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 20px;
-    letter-spacing: 1.5px;
-    color: $dark-color;
-    padding: 8px 4px;
-    border-bottom: 1px solid $secondary-color;
-    transition: color 0.2s ease;
-
-    &:last-child {
-        border-bottom: none;
+    .panelLinks {
+        padding: 90px 24px 40px;
     }
 
-    &:hover {
-        color: $primary-color;
+    .panelLink {
+        font-size: 24px;
     }
 }
