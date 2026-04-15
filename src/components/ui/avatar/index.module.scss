@@ -1,0 +1,110 @@
+@import '../../../../src/styles/globalVariables.scss';
+
+.avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--avatar-color, #{$dark-medium});
+    color: #fff;
+    font-family: $font-body;
+    font-weight: 600;
+    flex-shrink: 0;
+    overflow: hidden;
+    user-select: none;
+
+    // Sizes
+    &.size_xs {
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+    }
+
+    &.size_sm {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+
+    &.size_md {
+        width: 40px;
+        height: 40px;
+        font-size: 15px;
+    }
+
+    &.size_lg {
+        width: 52px;
+        height: 52px;
+        font-size: 18px;
+    }
+
+    &.size_xl {
+        width: 72px;
+        height: 72px;
+        font-size: 24px;
+    }
+
+    // Shapes
+    &.shape_circle {
+        border-radius: $radius-full;
+    }
+
+    &.shape_square {
+        border-radius: $radius-sm;
+    }
+
+    &.shape_rounded {
+        border-radius: $radius-md;
+    }
+
+    // Border
+    &.bordered {
+        box-shadow: 0 0 0 2px #fff, 0 0 0 4px $secondary-color;
+    }
+}
+
+.avatarImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.avatarInitials {
+    line-height: 1;
+    letter-spacing: 0.5px;
+}
+
+.avatarIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: inherit;
+}
+
+.avatarFallback {
+    font-size: inherit;
+    opacity: 0.5;
+}
+
+// Group
+.avatarGroup {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.groupItem {
+    border: 2px solid #fff;
+    margin-left: -8px;
+    transition: transform $transition-fast, z-index 0s;
+
+    &:hover {
+        transform: translateY(-3px);
+    }
+}
+
+.overflow {
+    background-color: $secondary-color;
+    color: $dark-color;
+    font-size: 12px;
+}

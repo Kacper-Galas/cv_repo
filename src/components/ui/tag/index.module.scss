@@ -1,0 +1,83 @@
+@import '../../../../src/styles/globalVariables.scss';
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: $radius-full;
+    font-family: $font-body;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    line-height: 1;
+    cursor: default;
+    user-select: none;
+
+    // Sizes
+    &.size_sm {
+        font-size: 11px;
+        padding: 3px 9px;
+    }
+
+    &.size_md {
+        font-size: 12px;
+        padding: 4px 12px;
+    }
+
+    &.size_lg {
+        font-size: 14px;
+        padding: 6px 16px;
+    }
+
+    // Variants
+    &.variant_default {
+        background-color: $secondary-light;
+        color: $dark-color;
+    }
+
+    &.variant_filled {
+        background-color: var(--tag-color, #{$primary-color});
+        color: #fff;
+    }
+
+    &.variant_outlined {
+        background-color: transparent;
+        color: var(--tag-color, #{$dark-color});
+        border: 1.5px solid var(--tag-color, #{$secondary-color});
+    }
+
+    &.variant_primary {
+        background-color: $primary-light;
+        color: $primary-color;
+    }
+
+    &.variant_ghost {
+        background-color: transparent;
+        color: $dark-color;
+        border: 1px solid $secondary-color;
+    }
+}
+
+.tagIcon {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+}
+
+.closeBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-left: 2px;
+    cursor: pointer;
+    opacity: 0.55;
+    transition: opacity $transition-fast;
+    color: inherit;
+
+    &:hover {
+        opacity: 1;
+    }
+}

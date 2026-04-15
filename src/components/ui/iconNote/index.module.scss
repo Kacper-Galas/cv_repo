@@ -1,0 +1,138 @@
+@import '../../../../src/styles/globalVariables.scss';
+
+.wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+
+    &:focus-visible .iconWrap {
+        box-shadow: 0 0 0 2px $primary-color;
+        border-radius: $radius-sm;
+    }
+}
+
+.iconWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $dark-color;
+    transition: color $transition-fast;
+
+    .wrapper:hover & {
+        color: $primary-color;
+    }
+}
+
+// Variants
+.variant_ghost .iconWrap {
+    padding: 6px;
+    border-radius: $radius-sm;
+    background: transparent;
+    transition: background $transition-fast, color $transition-fast;
+
+    .wrapper:hover & {
+        background: $primary-muted;
+    }
+}
+
+.variant_circle .iconWrap {
+    width: 36px;
+    height: 36px;
+    border-radius: $radius-full;
+    border: 1.5px solid $secondary-color;
+    background: transparent;
+    transition: border-color $transition-fast, background $transition-fast;
+
+    .wrapper:hover & {
+        border-color: $primary-color;
+        background: $primary-muted;
+    }
+}
+
+// Tooltip note
+.note {
+    position: absolute;
+    z-index: 1000;
+    background-color: $dark-color;
+    color: #fff;
+    font-family: $font-body;
+    font-size: 13px;
+    line-height: 1.55;
+    padding: 8px 14px;
+    border-radius: $radius-md;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: $shadow-lg;
+    max-width: 280px;
+    white-space: normal;
+
+    &.top {
+        bottom: calc(100% + 12px);
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &.bottom {
+        top: calc(100% + 12px);
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    &.left {
+        right: calc(100% + 12px);
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    &.right {
+        left: calc(100% + 12px);
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+// Arrow
+.arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+.arrow_top {
+    bottom: -5px;
+    left: 50%;
+    margin-left: -5px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid $dark-color;
+}
+
+.arrow_bottom {
+    top: -5px;
+    left: 50%;
+    margin-left: -5px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid $dark-color;
+}
+
+.arrow_left {
+    right: -5px;
+    top: 50%;
+    margin-top: -5px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid $dark-color;
+}
+
+.arrow_right {
+    left: -5px;
+    top: 50%;
+    margin-top: -5px;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-right: 5px solid $dark-color;
+}

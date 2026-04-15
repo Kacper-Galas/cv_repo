@@ -1,0 +1,129 @@
+@import '../../../../src/styles/globalVariables.scss';
+
+.card {
+    background: $surface;
+    border-radius: $radius-md;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: $shadow-sm;
+    transition: box-shadow $transition-default, transform $transition-default;
+    border: 1px solid $secondary-light;
+    text-align: left;
+    font-family: $font-body;
+    appearance: none;
+    width: 100%;
+
+    &.hoverable {
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: $shadow-lg;
+        }
+    }
+
+    // Variants
+    &.variant_default {
+        // base styles above
+    }
+
+    &.variant_outlined {
+        background: transparent;
+        box-shadow: none;
+        border: 1.5px solid $secondary-color;
+    }
+
+    &.variant_filled {
+        background: $surface-alt;
+        border: none;
+        box-shadow: none;
+    }
+
+    &.variant_dark {
+        background: $dark-color;
+        border-color: $dark-medium;
+        color: #fff;
+
+        .cardTitle { color: #fff; }
+        .cardSubtitle { color: rgba(255,255,255,0.55); }
+    }
+
+    &.variant_accent {
+        border-left: 3px solid $primary-color;
+        border-radius: 0 $radius-md $radius-md 0;
+    }
+}
+
+.cardCover {
+    width: 100%;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform $transition-slow;
+    }
+
+    .hoverable:hover & img {
+        transform: scale(1.04);
+    }
+}
+
+.cardHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: $spacing-md;
+    padding: $spacing-lg $spacing-lg 0;
+}
+
+.cardHeaderMain {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cardTitle {
+    font-family: $font-display;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: $dark-color;
+    line-height: 1.2;
+}
+
+.cardSubtitle {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.4;
+}
+
+.cardExtra {
+    flex-shrink: 0;
+    font-size: 13px;
+    color: $primary-color;
+}
+
+.cardBody {
+    padding: $spacing-lg;
+    flex: 1;
+    font-size: 14px;
+    color: $dark-soft;
+    line-height: 1.65;
+}
+
+.cardFooter {
+    padding: $spacing-md $spacing-lg;
+    border-top: 1px solid $secondary-light;
+    font-size: 13px;
+    color: #888;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+}
+
+.variant_dark .cardFooter {
+    border-top-color: $dark-medium;
+    color: rgba(255,255,255,0.4);
+}

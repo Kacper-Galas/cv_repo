@@ -5,7 +5,8 @@ $grey-light: #999;
 $grey-border: #e0e0e0;
 
 .loginPage {
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -187,6 +188,22 @@ $grey-border: #e0e0e0;
     strong {
         color: $grey-text;
         font-weight: 600;
+    }
+}
+
+.switchMode {
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 12px;
+    color: $dark-color;
+    text-decoration: underline;
+    padding: 0;
+    font-weight: 600;
+
+    &:hover {
+        color: $primary-color;
     }
 }
 

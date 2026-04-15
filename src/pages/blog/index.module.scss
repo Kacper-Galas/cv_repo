@@ -1,4 +1,4 @@
-@import '../../../src/styles/globalVariables.scss';
+﻿@import '../../../src/styles/globalVariables.scss';
 
 $grey-text: #666;
 $grey-light: #999;
@@ -22,46 +22,238 @@ $grey-border: #e0e0e0;
     flex-direction: column;
 }
 
-/* â”€â”€ Top bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-.topBar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    padding-bottom: 16px;
-}
 
-.topBarLeft {
+/* --Hero ──────────────────────────────────────────────────── */
+.hero {
+    padding: 48px 0 56px;
     display: flex;
-    align-items: center;
-    gap: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
 }
 
 .heroTitle {
     font-family: "Bebas Neue", sans-serif;
-    font-size: 52px;
-    letter-spacing: 4px;
+    font-size: clamp(60px, 9vw, 110px);
+    letter-spacing: 6px;
     color: $dark-color;
     margin: 0;
-    line-height: 1;
-    border-left: 4px solid $dark-color;
-    padding-left: 16px;
+    line-height: 0.9;
+    text-transform: uppercase;
 }
 
-.topBarRight {
-    display: flex;
-    align-items: flex-end;
-    gap: 16px;
-    flex: 0 0 auto;
+.heroSubtitle {
+    font-size: 15px;
+    color: $grey-light;
+    margin: 0;
+    letter-spacing: 0.3px;
+    max-width: 440px;
+    line-height: 1.65;
+}
 
-    > :first-child {
-        width: 280px;
-    }
+.heroBar {
+    width: 56px;
+    height: 3px;
+    background: $primary-color;
+}
+
+/* â”€â”€ Top bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.topBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 16px;
+}
+
+.topBarCenter {
+    display: flex;
+    justify-content: center;
 }
 
 /* â”€â”€ Tabs bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .tabsBar {
     margin-bottom: 24px;
+}
+
+/* ── Search ────────────────────────────────────────────────── */
+.searchWrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.searchBox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 2px solid $grey-border;
+    padding: 8px 12px;
+    background: transparent;
+    transition: border-color 0.25s ease;
+    box-sizing: border-box;
+
+    &.searchBoxFocused {
+        border-bottom-color: $dark-color;
+    }
+}
+
+.searchIcon {
+    color: $grey-light;
+    flex-shrink: 0;
+    transition: color 0.2s ease;
+
+    .searchBoxFocused & {
+        color: $dark-color;
+    }
+}
+
+.searchInput {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    color: $dark-color;
+    min-width: 0;
+
+    &::placeholder {
+        color: $grey-light;
+        font-weight: 400;
+    }
+}
+
+.searchClear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 2px;
+    cursor: pointer;
+    color: $grey-light;
+    border-radius: 50%;
+    transition: color 0.15s ease, background 0.15s ease;
+    flex-shrink: 0;
+
+    &:hover {
+        color: $dark-color;
+        background: rgba(0,0,0,0.06);
+    }
+}
+
+.searchPopup {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid $grey-border;
+    box-shadow: 0 12px 40px rgba(15, 25, 35, 0.13);
+    z-index: 500;
+    overflow: hidden;
+    min-width: 320px;
+}
+
+.searchResults {
+    list-style: none;
+    margin: 0;
+    padding: 6px 0;
+}
+
+.searchResult {
+    appearance: none;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+    text-align: left;
+    padding: 10px 16px;
+    transition: background 0.15s ease;
+
+    &:hover {
+        background: $grey-border;
+
+        .searchResultTitle {
+            color: $primary-color;
+        }
+    }
+}
+
+.searchResultThumb {
+    width: 52px;
+    height: 36px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: $grey-border;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+}
+
+.searchResultBody {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.searchResultCategory {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    color: $primary-color;
+    line-height: 1;
+}
+
+.searchResultTitle {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.8px;
+    color: $dark-color;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color 0.15s ease;
+}
+
+.searchResultExcerpt {
+    font-size: 11px;
+    color: $grey-text;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+}
+
+.searchResultMeta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: $grey-light;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.searchEmpty {
+    padding: 20px 16px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: $grey-light;
+    text-align: center;
 }
 
 /* â”€â”€ 2-column layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
@@ -97,40 +289,30 @@ $grey-border: #e0e0e0;
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid $grey-border;
-    transition: color 0.15s ease;
+    border-left: 3px solid transparent;
+    transition: background 0.18s ease, border-left-color 0.18s ease;
 
     &:hover {
-        .menuItemBg {
-            width: calc(100% + 60px);
-        }
+        background: rgba(15, 25, 35, 0.04);
+        border-left-color: $primary-color;
 
         .menuItemText {
-            color: #fff;
+            color: $dark-color;
         }
     }
 
     &.menuItemActive {
-        .menuItemBg {
-            width: calc(100% + 60px);
-        }
+        background: rgba(15, 25, 35, 0.06);
+        border-left-color: $primary-color;
 
         .menuItemText {
-            color: #fff;
+            color: $dark-color;
         }
     }
 }
 
 .menuItemBg {
-    display: block;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: -30px;
-    width: 0;
-    background-color: $dark-color;
-    transform: skew(-15deg);
-    transition: width 0.4s ease;
-    pointer-events: none;
+    display: none;
 }
 
 .menuItemText {
@@ -216,6 +398,7 @@ $grey-border: #e0e0e0;
     flex-direction: column;
     text-align: left;
     overflow: hidden;
+    padding: 0;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
 
     &:hover {
@@ -426,8 +609,154 @@ $grey-border: #e0e0e0;
     font-size: 24px;
     letter-spacing: 1.5px;
     color: $dark-color;
-    margin: 0 0 12px;
+    margin: 0 0 16px;
     line-height: 1.15;
+}
+
+.chapterBlocks {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ── Block rendering in article view ────────────────────────── */
+.blockText {
+    font-size: 15px;
+    color: $grey-text;
+    line-height: 1.8;
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+.blockHtml {
+    font-size: 15px;
+    line-height: 1.75;
+    color: $dark-color;
+
+    h1, h2, h3, h4 { font-family: "Bebas Neue", sans-serif; letter-spacing: 1px; }
+    p  { color: $grey-text; line-height: 1.75; margin: 0 0 10px; }
+    code { font-family: 'Fira Code', monospace; font-size: 13px; background: #f3f4f6; padding: 2px 6px; border-radius: 3px; }
+    pre { background: #0f1923; color: #abb2bf; padding: 16px; overflow-x: auto; border-radius: 6px; }
+    a   { color: $primary-color; }
+    ul, ol { padding-left: 24px; color: $grey-text; line-height: 1.75; }
+    blockquote { border-left: 3px solid $primary-color; padding-left: 16px; color: $grey-text; margin: 0; }
+    img { max-width: 100%; }
+}
+
+.blockCodeWrap {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #2d2d3e;
+}
+
+.blockCodeLang {
+    position: absolute;
+    top: 9px;
+    right: 14px;
+    font-size: 11px;
+    color: rgba(201, 209, 217, 0.4);
+    font-family: 'Fira Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    pointer-events: none;
+}
+
+.blockCode {
+    background: #0d1117;
+    color: #c9d1d9;
+    padding: 18px 18px 18px 18px;
+    margin: 0;
+    font-size: 13px;
+    font-family: 'Fira Mono', 'JetBrains Mono', 'Consolas', monospace;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre;
+
+    code {
+        font-family: inherit;
+        background: none;
+        color: inherit;
+    }
+}
+
+.blockFigure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.blockImg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid $grey-border;
+}
+
+.blockCaption {
+    font-size: 13px;
+    color: $grey-light;
+    text-align: center;
+    font-style: italic;
+}
+
+.blockQuote {
+    border-left: 4px solid $primary-color;
+    margin: 0;
+    padding: 10px 18px;
+    background: rgba($primary-color, 0.04);
+
+    p {
+        margin: 0;
+        font-size: 16px;
+        font-style: italic;
+        color: $dark-color;
+        line-height: 1.65;
+    }
+}
+
+.blockQuoteAuthor {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+    color: $grey-light;
+    font-style: normal;
+}
+
+.blockTableWrap {
+    overflow-x: auto;
+}
+
+.blockTable {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+
+    th, td {
+        border: 1px solid $grey-border;
+        padding: 9px 14px;
+        text-align: left;
+    }
+
+    thead tr {
+        background: rgba($primary-color, 0.06);
+
+        th {
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 13px;
+            letter-spacing: 1.2px;
+            color: $dark-color;
+        }
+    }
+
+    tbody tr:nth-child(even) {
+        background: #fafafa;
+    }
+
+    tbody td {
+        color: $grey-text;
+    }
 }
 
 .detailTags {
@@ -445,6 +774,225 @@ $grey-border: #e0e0e0;
     font-size: 11px;
     letter-spacing: 0.4px;
     color: $grey-light;
+}
+
+/* ── Star rating ────────────────────────────────────────────── */
+.starRating {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 0 16px;
+    border-top: 1px solid $grey-border;
+}
+
+.stars {
+    display: flex;
+    gap: 4px;
+}
+
+.star {
+    appearance: none;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    color: $grey-light;
+    transition: color 0.15s;
+
+    &:disabled {
+        cursor: default;
+    }
+
+    &:not(:disabled):hover {
+        color: #f5a623;
+    }
+}
+
+.starActive {
+    color: #f5a623;
+}
+
+.ratingInfo {
+    font-size: 13px;
+    color: $grey-text;
+}
+
+.ratingCount {
+    color: $grey-light;
+}
+
+.ratingLogin {
+    color: $grey-light;
+    font-style: italic;
+}
+
+/* ── Comments section ─────────────────────────────────────── */
+.commentsSection {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 2px solid $grey-border;
+}
+
+.commentsTitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: $dark-color;
+    margin: 0 0 20px;
+}
+
+.commentsLoading,
+.commentsEmpty {
+    font-size: 14px;
+    color: $grey-light;
+    margin: 0 0 20px;
+}
+
+.commentsList {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.comment {
+    padding: 14px 16px;
+    border: 1px solid $grey-border;
+    background: #fafafa;
+}
+
+.commentHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.commentAuthor {
+    font-size: 13px;
+    font-weight: 600;
+    color: $dark-color;
+}
+
+.commentDate {
+    font-size: 11px;
+    color: $grey-light;
+}
+
+.commentDelete {
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: $grey-light;
+    padding: 0;
+    margin-left: auto;
+    display: flex;
+    transition: color 0.15s;
+
+    &:hover {
+        color: $primary-color;
+    }
+}
+
+.commentContent {
+    font-size: 14px;
+    color: $grey-text;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.commentForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.commentInput {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: $dark-color;
+    border: 1px solid $grey-border;
+    background: #fff;
+    outline: none;
+    resize: vertical;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+
+    &::placeholder {
+        color: $grey-light;
+    }
+
+    &:focus {
+        border-color: $dark-color;
+    }
+}
+
+.commentError {
+    font-size: 13px;
+    color: $primary-color;
+    margin: 0;
+}
+
+.commentSubmit {
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    appearance: none;
+    border: 2px solid $dark-color;
+    background: $dark-color;
+    color: #fff;
+    padding: 10px 20px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover:not(:disabled) {
+        background: #fff;
+        color: $dark-color;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.commentLoginPrompt {
+    font-size: 14px;
+    color: $grey-text;
+    margin: 0;
+
+    a {
+        color: $dark-color;
+        font-weight: 600;
+        text-decoration: underline;
+    }
+}
+
+/* ── Loading / error / empty states ────────────────────────── */
+.loadingState,
+.errorState,
+.emptyState {
+    font-size: 14px;
+    color: $grey-light;
+    padding: 40px 0;
+    text-align: center;
+    grid-column: 1 / -1;
+}
+
+.errorState {
+    color: $primary-color;
 }
 
 /* ── Responsive ────────────────────────────────────────────── */

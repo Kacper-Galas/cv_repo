@@ -1,0 +1,621 @@
+@import '../../../src/styles/globalVariables.scss';
+
+$grey-text: #666;
+$grey-light: #999;
+$grey-border: #e0e0e0;
+
+/* ── Page shell ──────────────────────────────────────────────── */
+.articlePage {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+.articleMain {
+    flex: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 80px 40px 60px;
+    box-sizing: border-box;
+}
+
+/* ── State messages ──────────────────────────────────────────── */
+.stateMsg {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 18px;
+    letter-spacing: 1.5px;
+    color: $grey-light;
+    text-align: center;
+    padding: 80px 0;
+    margin: 0;
+}
+
+.errorMsg {
+    font-size: 15px;
+    color: $primary-color;
+    text-align: center;
+    padding: 80px 0;
+    margin: 0;
+}
+
+/* ── Two-column layout ───────────────────────────────────────── */
+.articleLayout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 0;
+    align-items: stretch; /* must be stretch so sidebar can be as tall as content */
+    min-height: 60vh;
+}
+
+/* ── Sticky sidebar ──────────────────────────────────────────── */
+.sidebar {
+    border-right: 2px solid $grey-border;
+    /* no align-self: start — must stretch to full row height for sticky to work */
+}
+
+.sidebarInner {
+    position: sticky;
+    top: 80px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    padding-bottom: 24px;
+
+    /* thin scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: $grey-border transparent;
+    &::-webkit-scrollbar { width: 4px; }
+    &::-webkit-scrollbar-track { background: transparent; }
+    &::-webkit-scrollbar-thumb { background: $grey-border; border-radius: 2px; }
+}
+
+.backBtn {
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 14px;
+    letter-spacing: 1.2px;
+    color: $grey-text;
+    padding: 16px 16px 12px;
+    width: 100%;
+    text-align: left;
+    border-bottom: 1px solid $grey-border;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: $dark-color;
+    }
+}
+
+.sidebarLabel {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    color: $grey-light;
+    text-transform: uppercase;
+    padding: 16px 16px 8px;
+    margin: 0;
+}
+
+.chapterItem {
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    width: 100%;
+    text-align: left;
+    padding: 11px 14px;
+    border-left: 3px solid transparent;
+    border-bottom: 1px solid $grey-border;
+    position: relative;
+    overflow: hidden;
+    transition: border-left-color 0.18s ease;
+
+    /* skew slider — mirrors the UI button component */
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: -1px;
+        left: -8px;
+        width: 0;
+        background-color: $primary-color;
+        transform: skewX(-15deg);
+        transition: width 0.45s ease;
+        z-index: 0;
+    }
+
+    &:hover {
+        border-left-color: $primary-color;
+
+        &::before {
+            width: calc(100% + 15px);
+        }
+
+        .chapterItemIndex,
+        .chapterItemTitle {
+            color: #fff;
+        }
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.chapterItemActive {
+    border-left-color: $primary-color;
+
+    .chapterItemTitle {
+        color: $dark-color;
+    }
+}
+
+.chapterItemIndex {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: $grey-light;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    transition: color 0.2s ease;
+}
+
+.chapterItemTitle {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    color: $grey-text;
+    line-height: 1.3;
+    position: relative;
+    z-index: 1;
+    transition: color 0.2s ease;
+}
+
+/* ── Article content area ────────────────────────────────────── */
+.content {
+    padding-left: 48px;
+    padding-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.articleHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-left: 4px solid $dark-color;
+    padding-left: 20px;
+}
+
+.articleCategory {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: $grey-text;
+    text-transform: uppercase;
+    align-self: flex-start;
+}
+
+.articleTitle {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 48px;
+    letter-spacing: 2.5px;
+    color: $dark-color;
+    margin: 0;
+    line-height: 1.0;
+}
+
+.articleMeta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: $grey-text;
+
+    span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+}
+
+.articleLead {
+    font-size: 17px;
+    color: $dark-color;
+    font-weight: 400;
+    line-height: 1.65;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $grey-border;
+    margin: 0;
+}
+
+/* ── Chapter sections ────────────────────────────────────────── */
+.chapterSection {
+    padding: 20px 0;
+    border-bottom: 1px solid $grey-border;
+    border-left: 3px solid transparent;
+    padding-left: 0;
+    transition: border-color 0.25s ease, padding-left 0.25s ease;
+    scroll-margin-top: 100px;
+
+    &.chapterSectionActive {
+        border-left-color: $dark-color;
+        padding-left: 18px;
+    }
+
+    &:last-of-type {
+        border-bottom: none;
+    }
+}
+
+.chapterTitle {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 26px;
+    letter-spacing: 1.5px;
+    color: $dark-color;
+    margin: 0 0 16px;
+    line-height: 1.15;
+}
+
+.chapterBlocks {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ── Article tags ────────────────────────────────────────────── */
+.articleTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    border-top: 1px solid $grey-border;
+    padding-top: 16px;
+}
+
+.articleTag {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    letter-spacing: 0.4px;
+    color: $grey-light;
+}
+
+/* ── Block rendering ─────────────────────────────────────────── */
+.blockText {
+    font-size: 15px;
+    color: $grey-text;
+    line-height: 1.85;
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+.blockHtml {
+    font-size: 15px;
+    line-height: 1.75;
+    color: $dark-color;
+
+    h1, h2, h3, h4 { font-family: "Bebas Neue", sans-serif; letter-spacing: 1px; }
+    p  { color: $grey-text; line-height: 1.75; margin: 0 0 10px; }
+    code { font-family: 'Fira Code', monospace; font-size: 13px; background: #f3f4f6; padding: 2px 6px; border-radius: 3px; }
+    pre { background: #0f1923; color: #abb2bf; padding: 16px; overflow-x: auto; border-radius: 6px; }
+    a   { color: $primary-color; }
+    ul, ol { padding-left: 24px; color: $grey-text; line-height: 1.75; }
+    blockquote { border-left: 3px solid $primary-color; padding-left: 16px; color: $grey-text; margin: 0; }
+    img { max-width: 100%; }
+}
+
+.blockCodeWrap {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #2d2d3e;
+}
+
+.blockCodeLang {
+    position: absolute;
+    top: 9px;
+    right: 14px;
+    font-size: 11px;
+    color: rgba(201, 209, 217, 0.4);
+    font-family: 'Fira Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    pointer-events: none;
+}
+
+.blockCode {
+    background: #0d1117;
+    color: #c9d1d9;
+    padding: 18px;
+    margin: 0;
+    font-size: 13px;
+    font-family: 'Fira Mono', 'JetBrains Mono', 'Consolas', monospace;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre;
+
+    code {
+        font-family: inherit;
+        background: none;
+        color: inherit;
+    }
+}
+
+.blockFigure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.blockImg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border: 1px solid $grey-border;
+}
+
+.blockCaption {
+    font-size: 13px;
+    color: $grey-light;
+    text-align: center;
+    font-style: italic;
+}
+
+.blockQuote {
+    border-left: 4px solid $primary-color;
+    margin: 0;
+    padding: 10px 18px;
+    background: rgba($primary-color, 0.04);
+
+    p {
+        margin: 0;
+        font-size: 16px;
+        font-style: italic;
+        color: $dark-color;
+        line-height: 1.65;
+    }
+}
+
+.blockQuoteAuthor {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+    color: $grey-light;
+    font-style: normal;
+}
+
+.blockTableWrap {
+    overflow-x: auto;
+}
+
+.blockTable {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+
+    th, td {
+        border: 1px solid $grey-border;
+        padding: 9px 14px;
+        text-align: left;
+    }
+
+    thead tr {
+        background: rgba($primary-color, 0.06);
+
+        th {
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 13px;
+            letter-spacing: 1.2px;
+            color: $dark-color;
+        }
+    }
+
+    tbody tr:nth-child(even) {
+        background: #fafafa;
+    }
+
+    tbody td {
+        color: $grey-text;
+    }
+}
+
+/* ── Star rating ─────────────────────────────────────────────── */
+.starRating {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px 0 16px;
+    border-top: 1px solid $grey-border;
+}
+
+.stars {
+    display: flex;
+    gap: 4px;
+}
+
+.star {
+    appearance: none;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    color: $grey-light;
+    transition: color 0.15s;
+
+    &:disabled { cursor: default; }
+    &:not(:disabled):hover { color: #f5a623; }
+}
+
+.starActive {
+    color: #f5a623;
+}
+
+.ratingInfo {
+    font-size: 13px;
+    color: $grey-text;
+}
+
+.ratingCount { color: $grey-light; }
+.ratingLogin { color: $grey-light; font-style: italic; }
+
+/* ── Comments ────────────────────────────────────────────────── */
+.commentsSection {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 2px solid $grey-border;
+}
+
+.commentsTitle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: $dark-color;
+    margin: 0 0 20px;
+}
+
+.commentsLoading,
+.commentsEmpty {
+    font-size: 14px;
+    color: $grey-light;
+    margin: 0 0 20px;
+}
+
+.commentsList {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.comment {
+    padding: 14px 16px;
+    border: 1px solid $grey-border;
+    background: #fafafa;
+}
+
+.commentHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.commentAuthor {
+    font-size: 13px;
+    font-weight: 600;
+    color: $dark-color;
+}
+
+.commentDate {
+    font-size: 11px;
+    color: $grey-light;
+}
+
+.commentDelete {
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: $grey-light;
+    padding: 0;
+    margin-left: auto;
+    display: flex;
+    transition: color 0.15s;
+
+    &:hover { color: $primary-color; }
+}
+
+.commentContent {
+    font-size: 14px;
+    color: $grey-text;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.commentForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.commentInput {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: $dark-color;
+    border: 1px solid $grey-border;
+    background: #fff;
+    outline: none;
+    resize: vertical;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+
+    &::placeholder { color: $grey-light; }
+    &:focus { border-color: $dark-color; }
+}
+
+.commentError {
+    font-size: 13px;
+    color: $primary-color;
+    margin: 0;
+}
+
+.commentSubmit {
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    appearance: none;
+    border: 2px solid $dark-color;
+    background: $dark-color;
+    color: #fff;
+    padding: 10px 20px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+
+    &:hover:not(:disabled) {
+        background: #fff;
+        color: $dark-color;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.commentLoginPrompt {
+    font-size: 14px;
+    color: $grey-text;
+    margin: 0;
+
+    a {
+        color: $dark-color;
+        font-weight: 600;
+        text-decoration: underline;
+    }
+}

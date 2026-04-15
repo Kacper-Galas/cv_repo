@@ -1,3 +1,1088 @@
+﻿@import '../../../src/styles/globalVariables.scss';
+
+// ── Local design tokens ───────────────────────────────────────
+$bg:      #060b10;
+$surface: rgba(255, 255, 255, 0.04);
+$surf2:   rgba(255, 255, 255, 0.07);
+$border:  rgba(255, 255, 255, 0.09);
+$text:    #e8eaf0;
+$muted:   rgba(232, 234, 240, 0.45);
+$faint:   rgba(232, 234, 240, 0.16);
+
+// ── Page shell ───────────────────────────────────────────────
+.creatorPage {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: $bg;
+    background-image: radial-gradient(rgba(255,255,255,0.022) 1px, transparent 1px);
+    background-size: 28px 28px;
+    color: $text;
+}
+
+.creatorMain {
+    flex: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 88px 40px 80px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+}
+
+// ── Top bar ──────────────────────────────────────────────────
+.topBar {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.backBtn {
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: $muted;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    align-self: flex-start;
+    transition: color 0.2s;
+    text-transform: uppercase;
+
+    &:hover { color: $text; }
+}
+
+.pageTitle {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 60px;
+    letter-spacing: 6px;
+    color: $text;
+    margin: 0;
+    line-height: 1;
+}
+
+.pageTitleAccent {
+    display: block;
+    width: 56px;
+    height: 3px;
+    background: $primary-color;
+    margin-top: 12px;
+}
+
+// ── Editor / preview panels ──────────────────────────────────
+.editorPanel,
+.previewPanel {
+    display: flex;
+    flex-direction: column;
+    gap: 44px;
+}
+
+// ── Section cards ────────────────────────────────────────────
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    background: $surface;
+    border: 1px solid $border;
+    padding: 32px 36px;
+    position: relative;
+    transition: border-color 0.3s;
+
+    &:hover {
+        border-color: rgba(255, 255, 255, 0.14);
+    }
+}
+
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sectionTitle {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 16px;
+    letter-spacing: 4px;
+    color: $primary-color;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+// ── Fields ───────────────────────────────────────────────────
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.fieldRow {
+    display: flex;
+    gap: 20px;
+}
+
+.label {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    color: $muted;
+    text-transform: uppercase;
+}
+
+.input,
+.select,
+.textarea {
+    width: 100%;
+    padding: 13px 16px;
+    font-size: 14px;
+    color: $text;
+    border: 1px solid $border;
+    background: rgba(255, 255, 255, 0.04);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    box-sizing: border-box;
+    font-family: inherit;
+
+    &::placeholder {
+        color: $faint;
+    }
+
+    &:focus {
+        border-color: rgba(255, 255, 255, 0.45);
+        background: rgba(255, 255, 255, 0.06);
+        box-shadow: none;
+    }
+}
+
+.select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+
+    option {
+        background: #111820;
+        color: $text;
+    }
+}
+
+.textarea {
+    resize: vertical;
+    min-height: 80px;
+    line-height: 1.65;
+}
+
+// ── Thumbnail drop zone ───────────────────────────────────────
+.thumbZone {
+    position: relative;
+    width: 100%;
+    min-height: 140px;
+    aspect-ratio: 16 / 9;
+    border: 2px dashed rgba(232, 234, 240, 0.75);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.25s, background 0.25s;
+    background: rgba(255, 255, 255, 0.1);
+
+    &:hover,
+    &.thumbDragOver {
+        border-color: $primary-color;
+        background: rgba($primary-color, 0.05);
+
+        .thumbIcon {
+            transform: translateY(-5px) scale(1.12);
+            color: $primary-color;
+        }
+
+        .thumbLabel {
+            color: $text;
+        }
+    }
+}
+
+.thumbImg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.thumbOverlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    opacity: 0;
+    transition: opacity 0.22s;
+    color: $text;
+
+    .thumbZone:hover & {
+        opacity: 1;
+    }
+}
+
+.thumbIcon {
+    color: $muted;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.3s;
+}
+
+.thumbLabel {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 13px;
+    letter-spacing: 2.5px;
+    color: $muted;
+    text-transform: uppercase;
+    pointer-events: none;
+    transition: color 0.2s;
+}
+
+.thumbClearBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    appearance: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.65);
+    color: $text;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: border-color 0.2s, background 0.2s;
+
+    &:hover {
+        border-color: $primary-color;
+        background: rgba($primary-color, 0.3);
+    }
+}
+
+.thumbUploading {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+
+    span {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 17px;
+        letter-spacing: 4px;
+        color: $text;
+        animation: thumbPulse 1.1s ease-in-out infinite;
+    }
+}
+
+@keyframes thumbPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+// ── Chapter cards ─────────────────────────────────────────────
+.chapterCard {
+    background: $surface;
+    border: 1px solid $border;
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    position: relative;
+    transition: border-color 0.25s;
+
+    &:hover {
+        border-color: rgba(255, 255, 255, 0.18);
+        box-shadow: none;
+    }
+}
+
+.chapterHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chapterIndex {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 72px;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.07);
+    line-height: 1;
+    position: absolute;
+    top: 6px;
+    right: 18px;
+    pointer-events: none;
+    user-select: none;
+    transition: color 0.3s;
+
+    .chapterCard:hover & {
+        color: rgba(255, 255, 255, 0.38);
+    }
+}
+
+.addChapterBtn {
+    appearance: none;
+    border: 1px solid $border;
+    background: none;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: $muted;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+
+    &:hover {
+        border-color: $primary-color;
+        color: $primary-color;
+        background: rgba($primary-color, 0.07);
+    }
+}
+
+.removeChapterBtn {
+    appearance: none;
+    border: 1px solid transparent;
+    background: none;
+    cursor: pointer;
+    color: $muted;
+    padding: 6px 8px;
+    display: flex;
+    border-radius: 3px;
+    transition: color 0.2s, border-color 0.2s;
+
+    &:hover {
+        color: $primary-color;
+        border-color: rgba($primary-color, 0.3);
+    }
+}
+
+// ── Bottom actions ────────────────────────────────────────────
+.bottomActions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding-top: 22px;
+    border-top: 1px solid $border;
+}
+
+.saveError {
+    width: 100%;
+    text-align: right;
+    font-size: 13px;
+    color: $primary-color;
+    margin: 0;
+}
+
+.previewBtn {
+    appearance: none;
+    border: 1px solid $border;
+    background: none;
+    cursor: pointer;
+    padding: 13px 30px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 14px;
+    letter-spacing: 2.5px;
+    color: $muted;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.2s, color 0.2s;
+
+    &:hover {
+        border-color: $text;
+        color: $text;
+    }
+}
+
+.saveBtn {
+    appearance: none;
+    border: 2px solid $primary-color;
+    background: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    padding: 13px 44px;
+
+    &:hover .saveBg { width: calc(100% + 80px); }
+    &:hover .saveText { color: #fff; }
+
+    &.saveBtnDisabled {
+        opacity: 0.28;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+}
+
+.saveBg {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -40px;
+    width: 0;
+    background: $primary-color;
+    transform: skew(-18deg);
+    transition: width 0.44s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: none;
+}
+
+.saveText {
+    position: relative;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 15px;
+    letter-spacing: 3px;
+    color: $primary-color;
+    transition: color 0.22s;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+// ── Preview panel ─────────────────────────────────────────────
+.previewActions {
+    display: flex;
+}
+
+.actionBtn {
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: $muted;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transition: color 0.2s;
+
+    &:hover { color: $text; }
+}
+
+.previewHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 36px;
+    background: $surface;
+    border: 1px solid $border;
+}
+
+.previewThumb {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+    border: 1px solid $border;
+}
+
+.previewCategory {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: $primary-color;
+    text-transform: uppercase;
+}
+
+.previewTitle {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 44px;
+    letter-spacing: 2px;
+    color: $text;
+    margin: 0;
+    line-height: 1.05;
+}
+
+.previewExcerpt {
+    font-size: 15px;
+    color: $muted;
+    line-height: 1.65;
+    margin: 0;
+}
+
+.previewTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.previewTag {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    color: $muted;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 3px 9px;
+    border: 1px solid $border;
+}
+
+.previewChapter {
+    padding: 32px 36px;
+    border: 1px solid $border;
+    background: $surface;
+}
+
+.previewChapterTitle {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: $text;
+    margin: 0 0 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid $border;
+}
+
+.previewChapterContent {
+    font-size: 15px;
+    color: $muted;
+    line-height: 1.8;
+    margin: 0;
+}
+
+// ── Responsive ────────────────────────────────────────────────
+@media (max-width: 600px) {
+    .creatorMain {
+        padding: 80px 16px 48px;
+    }
+
+    .pageTitle { font-size: 40px; }
+    .fieldRow { flex-direction: column; }
+    .previewTitle { font-size: 32px; }
+
+    .section,
+    .chapterCard,
+    .previewHeader,
+    .previewChapter {
+        padding: 20px 18px;
+    }
+
+    .bottomActions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .previewBtn,
+    .saveBtn {
+        justify-content: center;
+    }
+}
+
+// ── Block system ──────────────────────────────────────────────
+.blocksList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.block {
+    border: 1px solid $border;
+    background: rgba(255, 255, 255, 0.025);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 14px 16px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:hover {
+        border-color: rgba(255, 255, 255, 0.16);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.blockToolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.blockType {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: $faint;
+    text-transform: uppercase;
+}
+
+.blockActions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.blockActionBtn {
+    appearance: none;
+    border: 1px solid transparent;
+    background: none;
+    cursor: pointer;
+    padding: 4px 7px;
+    color: $faint;
+    display: flex;
+    align-items: center;
+    transition: color 0.15s, border-color 0.15s;
+    border-radius: 3px;
+
+    &:hover:not(:disabled) {
+        color: $text;
+        border-color: $border;
+    }
+
+    &:disabled {
+        opacity: 0.2;
+        cursor: not-allowed;
+    }
+}
+
+.blockRemove:hover:not(:disabled) {
+    color: $primary-color !important;
+    border-color: rgba($primary-color, 0.35) !important;
+}
+
+// ── Add block toolbar ─────────────────────────────────────────
+.addBlockToolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.07);
+    margin-top: 4px;
+}
+
+.addBlockLabel {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    color: $faint;
+    text-transform: uppercase;
+    margin-right: 4px;
+}
+
+.addBlockBtn {
+    appearance: none;
+    border: 1px solid $border;
+    background: none;
+    cursor: pointer;
+    padding: 5px 12px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: $muted;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+
+    &:hover {
+        border-color: $primary-color;
+        color: #fff;
+        background: $primary-color;
+    }
+}
+
+// ── Image block ──────────────────────────────────────────────
+.imageBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.imageUploadRow {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+
+    .input { flex: 1; }
+}
+
+.uploadBtn {
+    appearance: none;
+    border: 1px solid $border;
+    background: none;
+    cursor: pointer;
+    padding: 10px 16px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    color: $muted;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: border-color 0.2s, color 0.2s;
+
+    &:hover:not(:disabled) {
+        border-color: $primary-color;
+        color: $primary-color;
+    }
+
+    &:disabled { opacity: 0.4; cursor: not-allowed; }
+}
+
+.imagePreviewThumb {
+    max-height: 160px;
+    max-width: 100%;
+    object-fit: contain;
+    border: 1px solid $border;
+    align-self: flex-start;
+}
+
+// ── Card / Note / Quote ──────────────────────────────────────
+.cardBlock,
+.noteBlock,
+.quoteBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.quoteBlock {
+    border-left: 3px solid $primary-color;
+    padding-left: 14px;
+}
+
+.noteVariantRow {
+    display: flex;
+    gap: 6px;
+}
+
+.variantBtn {
+    appearance: none;
+    border: 1px solid $border;
+    background: none;
+    cursor: pointer;
+    padding: 4px 14px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: $muted;
+    text-transform: uppercase;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+
+.variantBtnActive {
+    &.variant_info    { border-color: #0ea5e9; background: rgba(14, 165, 233, 0.13); color: #38bdf8; }
+    &.variant_success { border-color: #22c55e; background: rgba(34, 197, 94, 0.13);  color: #4ade80; }
+    &.variant_warning { border-color: #f59e0b; background: rgba(245, 158, 11, 0.13); color: #fbbf24; }
+    &.variant_error   { border-color: $primary-color; background: rgba($primary-color, 0.13); color: $primary-color; }
+}
+
+// ── Code textarea ─────────────────────────────────────────────
+.codeTextarea {
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace !important;
+    font-size: 13px !important;
+    background: #0d1117 !important;
+    color: #c9d1d9 !important;
+    border-color: rgba(48, 54, 61, 0.85) !important;
+    line-height: 1.55 !important;
+}
+
+// ── Divider ──────────────────────────────────────────────────
+.dividerPlaceholder { padding: 4px 0; }
+
+// ── Preview block rendering ───────────────────────────────────
+.previewBlocks {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.previewText {
+    font-size: 15px;
+    color: $muted;
+    line-height: 1.8;
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+.previewHtml {
+    font-size: 15px;
+    line-height: 1.75;
+    color: $text;
+
+    h1, h2, h3, h4 { font-family: "Bebas Neue", sans-serif; letter-spacing: 1px; color: $text; }
+    p  { color: $muted; line-height: 1.75; }
+    code { font-family: 'Fira Code', monospace; font-size: 13px; background: rgba(255, 255, 255, 0.09); padding: 2px 6px; color: #ff79c6; border-radius: 3px; }
+    pre { background: #0d1117; color: #c9d1d9; padding: 16px; overflow-x: auto; }
+    a   { color: $primary-color; }
+    ul, ol { padding-left: 24px; color: $muted; line-height: 1.75; }
+    blockquote { border-left: 3px solid $primary-color; padding-left: 16px; color: $muted; margin: 0; }
+}
+
+.previewFigure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.previewImage {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.previewCaption {
+    font-size: 13px;
+    color: $faint;
+    text-align: center;
+    font-style: italic;
+}
+
+// ── Code block ────────────────────────────────────────────────
+.codeBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid rgba(48, 54, 61, 0.85);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.codeTopBar {
+    display: flex;
+    align-items: center;
+    padding: 7px 12px;
+    background: #161b22;
+    border-bottom: 1px solid rgba(48, 54, 61, 0.85);
+}
+
+.codeLanguageSelect {
+    background: #21262d;
+    color: #c9d1d9;
+    border: 1px solid #30363d;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 12px;
+    font-family: 'Fira Mono', 'JetBrains Mono', monospace;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+
+    &:focus { border-color: $primary-color; }
+
+    option {
+        background: #161b22;
+        color: #c9d1d9;
+    }
+}
+
+.previewCodeWrap {
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(48, 54, 61, 0.85);
+}
+
+.previewCodeLang {
+    position: absolute;
+    top: 9px;
+    right: 14px;
+    font-size: 11px;
+    color: rgba(201, 209, 217, 0.3);
+    font-family: 'Fira Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.previewCode {
+    background: #0d1117;
+    color: #c9d1d9;
+    padding: 18px;
+    margin: 0;
+    font-size: 13px;
+    font-family: 'Fira Mono', 'JetBrains Mono', 'Consolas', monospace;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre;
+
+    code {
+        font-family: inherit;
+        background: none;
+        color: inherit;
+    }
+}
+
+// ── Quote block ───────────────────────────────────────────────
+.previewQuote {
+    border-left: 4px solid $primary-color;
+    margin: 0;
+    padding: 12px 20px;
+    background: rgba($primary-color, 0.06);
+
+    p {
+        margin: 0;
+        font-size: 16px;
+        font-style: italic;
+        color: $text;
+        line-height: 1.65;
+    }
+}
+
+.previewQuoteAuthor {
+    display: block;
+    margin-top: 10px;
+    font-size: 13px;
+    color: $muted;
+    font-style: normal;
+}
+
+// ── Table block ───────────────────────────────────────────────
+.tableBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tableScrollWrapper { overflow-x: auto; }
+
+.tableEditor {
+    border-collapse: collapse;
+    min-width: 100%;
+}
+
+.tableEditorTh,
+.tableEditorTd {
+    border: 1px solid $border;
+    padding: 5px;
+    vertical-align: top;
+}
+
+.tableEditorTh {
+    background: rgba($primary-color, 0.07);
+}
+
+.tableHeaderCell {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.tableInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: $text;
+    font-size: 13px;
+    padding: 2px 4px;
+    min-width: 80px;
+    font-family: inherit;
+}
+
+.tableAddBtn {
+    background: rgba($primary-color, 0.1);
+    border: 1px dashed rgba($primary-color, 0.5);
+    color: $primary-color;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+
+    &:hover { background: rgba($primary-color, 0.2); }
+}
+
+.tableRemoveColBtn,
+.tableRemoveRowBtn {
+    background: none;
+    border: none;
+    color: $faint;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px 4px;
+    line-height: 1;
+    border-radius: 3px;
+    transition: color 0.15s, background 0.15s;
+
+    &:hover {
+        color: $primary-color;
+        background: rgba($primary-color, 0.12);
+    }
+}
+
+.tableAddRowBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba($primary-color, 0.07);
+    border: 1px dashed rgba($primary-color, 0.4);
+    color: $primary-color;
+    border-radius: 4px;
+    padding: 5px 13px;
+    font-size: 12px;
+    cursor: pointer;
+    width: fit-content;
+    transition: background 0.2s;
+
+    &:hover { background: rgba($primary-color, 0.15); }
+}
+
+.previewTableWrap { overflow-x: auto; }
+
+.previewTable {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+
+    th, td {
+        border: 1px solid $border;
+        padding: 9px 14px;
+        text-align: left;
+    }
+
+    thead tr {
+        background: rgba($primary-color, 0.09);
+
+        th {
+            font-weight: 600;
+            color: $text;
+            font-family: "Bebas Neue", sans-serif;
+            letter-spacing: 1.2px;
+            font-size: 13px;
+        }
+    }
+
+    tbody {
+        tr { color: $muted; }
+        tr:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
+    }
+}
 @import '../../../src/styles/globalVariables.scss';
 
 $grey-text: #666;
@@ -23,7 +1108,7 @@ $grey-border: #e0e0e0;
     gap: 32px;
 }
 
-/* ── Top bar ───────────────────────────────────────────────── */
+/* â”€â”€ Top bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .topBar {
     display: flex;
     flex-direction: column;
@@ -58,11 +1143,9 @@ $grey-border: #e0e0e0;
     color: $dark-color;
     margin: 0;
     line-height: 1;
-    border-left: 4px solid $primary-color;
-    padding-left: 16px;
 }
 
-/* ── Sections ──────────────────────────────────────────────── */
+/* â”€â”€ Sections â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .editorPanel {
     display: flex;
     flex-direction: column;
@@ -89,7 +1172,7 @@ $grey-border: #e0e0e0;
     margin: 0;
 }
 
-/* ── Fields ────────────────────────────────────────────────── */
+/* â”€â”€ Fields â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .field {
     display: flex;
     flex-direction: column;
@@ -148,7 +1231,7 @@ $grey-border: #e0e0e0;
     line-height: 1.6;
 }
 
-/* ── Chapter cards ─────────────────────────────────────────── */
+/* â”€â”€ Chapter cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .chapterCard {
     border: 1px solid $grey-border;
     padding: 20px;
@@ -212,14 +1295,23 @@ $grey-border: #e0e0e0;
     }
 }
 
-/* ── Bottom actions ────────────────────────────────────────── */
+/* â”€â”€ Bottom actions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .bottomActions {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    flex-wrap: wrap;
     gap: 12px;
     padding-top: 16px;
     border-top: 1px solid $grey-border;
+}
+
+.saveError {
+    width: 100%;
+    text-align: right;
+    font-size: 13px;
+    color: $primary-color;
+    margin: 0;
 }
 
 .previewBtn {
@@ -293,7 +1385,7 @@ $grey-border: #e0e0e0;
     gap: 6px;
 }
 
-/* ── Preview panel ─────────────────────────────────────────── */
+/* â”€â”€ Preview panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .previewPanel {
     display: flex;
     flex-direction: column;
@@ -328,8 +1420,6 @@ $grey-border: #e0e0e0;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    border-left: 4px solid $dark-color;
-    padding-left: 20px;
 }
 
 .previewCategory {
@@ -396,7 +1486,7 @@ $grey-border: #e0e0e0;
     margin: 0;
 }
 
-/* ── Responsive ────────────────────────────────────────────── */
+/* â”€â”€ Responsive â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 @media (max-width: 600px) {
     .creatorMain {
         padding: 76px 16px 40px;
@@ -424,3 +1514,503 @@ $grey-border: #e0e0e0;
         justify-content: center;
     }
 }
+
+/* â”€â”€ Block system â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+.blocksList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.block {
+    border: 1px solid $grey-border;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        border-color: rgba($dark-color, 0.3);
+        box-shadow: 0 2px 12px rgba($dark-color, 0.06);
+    }
+}
+
+.blockToolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.blockType {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.8px;
+    color: $grey-light;
+}
+
+.blockActions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.blockActionBtn {
+    appearance: none;
+    border: 1px solid transparent;
+    background: none;
+    cursor: pointer;
+    padding: 4px 6px;
+    color: $grey-light;
+    display: flex;
+    align-items: center;
+    transition: color 0.15s ease, border-color 0.15s ease;
+    border-radius: 3px;
+
+    &:hover:not(:disabled) {
+        color: $dark-color;
+        border-color: $grey-border;
+    }
+
+    &:disabled {
+        opacity: 0.25;
+        cursor: not-allowed;
+    }
+}
+
+.blockRemove:hover:not(:disabled) {
+    color: $primary-color !important;
+    border-color: rgba($primary-color, 0.3) !important;
+}
+
+/* â”€â”€ Add block toolbar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+.addBlockToolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-top: 10px;
+    border-top: 1px dashed $grey-border;
+    margin-top: 4px;
+}
+
+.addBlockLabel {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: $grey-light;
+    text-transform: uppercase;
+    margin-right: 4px;
+}
+
+.addBlockBtn {
+    appearance: none;
+    border: 1px solid $grey-border;
+    background: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: $grey-text;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+
+    &:hover {
+        border-color: $dark-color;
+        color: $dark-color;
+        background: $dark-color;
+        color: #fff;
+    }
+}
+
+/* â”€â”€ Image block â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+.imageBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.imageUploadRow {
+    display: flex;
+    gap: 8px;
+    align-items: stretch;
+
+    .input {
+        flex: 1;
+    }
+}
+
+.uploadBtn {
+    appearance: none;
+    border: 1px solid $grey-border;
+    background: none;
+    cursor: pointer;
+    padding: 10px 14px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    color: $grey-text;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: border-color 0.2s ease, color 0.2s ease;
+
+    &:hover:not(:disabled) {
+        border-color: $dark-color;
+        color: $dark-color;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+}
+
+.imagePreviewThumb {
+    max-height: 160px;
+    max-width: 100%;
+    object-fit: contain;
+    border: 1px solid $grey-border;
+    align-self: flex-start;
+}
+
+/* â”€â”€ Card block â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+.cardBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* â”€â”€ Note block â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+.noteBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.noteVariantRow {
+    display: flex;
+    gap: 6px;
+}
+
+.variantBtn {
+    appearance: none;
+    border: 1px solid $grey-border;
+    background: none;
+    cursor: pointer;
+    padding: 4px 12px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    color: $grey-text;
+    text-transform: uppercase;
+    transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.variantBtnActive {
+    &.variant_info    { border-color: #0ea5e9; background: #e0f2fe; color: #0369a1; }
+    &.variant_success { border-color: #22c55e; background: #dcfce7; color: #15803d; }
+    &.variant_warning { border-color: #f59e0b; background: #fef3c7; color: #b45309; }
+    &.variant_error   { border-color: $primary-color; background: rgba($primary-color, 0.08); color: $primary-color; }
+}
+
+/* â”€â”€ Code textarea â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+.codeTextarea {
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace !important;
+    font-size: 13px !important;
+    background: #0f1923 !important;
+    color: #abb2bf !important;
+    border-color: #2c3e50 !important;
+    line-height: 1.5 !important;
+}
+
+/* â”€â”€ Divider placeholder â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+.dividerPlaceholder {
+    padding: 4px 0;
+}
+
+/* â”€â”€ Preview block rendering â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+
+.previewBlocks {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.previewText {
+    font-size: 15px;
+    color: $grey-text;
+    line-height: 1.75;
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+.previewHtml {
+    font-size: 15px;
+    line-height: 1.75;
+    color: $dark-color;
+
+    h1, h2, h3, h4 { font-family: "Bebas Neue", sans-serif; letter-spacing: 1px; }
+    p  { color: $grey-text; line-height: 1.75; }
+    code { font-family: 'Fira Code', monospace; font-size: 13px; background: $surface-alt; padding: 2px 6px; }
+    pre { background: #0f1923; color: #abb2bf; padding: 16px; overflow-x: auto; }
+    a   { color: $primary-color; }
+    ul, ol { padding-left: 24px; color: $grey-text; line-height: 1.75; }
+    blockquote { border-left: 3px solid $primary-color; padding-left: 16px; color: $grey-text; margin: 0; }
+}
+
+.previewFigure {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.previewImage {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.previewCaption {
+    font-size: 13px;
+    color: $grey-light;
+    text-align: center;
+    font-style: italic;
+}
+
+/* â”€â”€ Code block â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.codeBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid $grey-border;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.codeTopBar {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    background: #1e1e2e;
+    border-bottom: 1px solid #2d2d3e;
+}
+
+.codeLanguageSelect {
+    background: #2d2d3e;
+    color: #cdd6f4;
+    border: 1px solid #45475a;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-family: 'Fira Mono', 'JetBrains Mono', monospace;
+    cursor: pointer;
+    outline: none;
+}
+
+.previewCodeWrap {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid $grey-border;
+}
+
+.previewCodeLang {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 11px;
+    color: #585b70;
+    font-family: 'Fira Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.previewCode {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    padding: 16px;
+    margin: 0;
+    font-size: 13px;
+    font-family: 'Fira Mono', 'JetBrains Mono', 'Consolas', monospace;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre;
+
+    code {
+        font-family: inherit;
+        background: none;
+        color: inherit;
+    }
+}
+
+/* â”€â”€ Quote block â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.quoteBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 4px 0;
+}
+
+.previewQuote {
+    border-left: 4px solid $primary-color;
+    margin: 0;
+    padding: 10px 16px;
+    background: rgba($primary-color, 0.05);
+    border-radius: 0 8px 8px 0;
+
+    p {
+        margin: 0;
+        font-size: 16px;
+        font-style: italic;
+        color: $dark-color;
+        line-height: 1.6;
+    }
+}
+
+.previewQuoteAuthor {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+    color: $grey-light;
+    font-style: normal;
+}
+
+/* â”€â”€ Table block â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.tableBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tableScrollWrapper {
+    overflow-x: auto;
+}
+
+.tableEditor {
+    border-collapse: collapse;
+    min-width: 100%;
+}
+
+.tableEditorTh,
+.tableEditorTd {
+    border: 1px solid $grey-border;
+    padding: 4px;
+    vertical-align: top;
+}
+
+.tableEditorTh {
+    background: rgba($primary-color, 0.05);
+}
+
+.tableHeaderCell {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.tableInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: $dark-color;
+    font-size: 13px;
+    padding: 2px 4px;
+    min-width: 80px;
+    font-family: inherit;
+}
+
+.tableAddBtn {
+    background: rgba($primary-color, 0.12);
+    border: 1px dashed $primary-color;
+    color: $primary-color;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &:hover {
+        background: rgba($primary-color, 0.22);
+    }
+}
+
+.tableRemoveColBtn,
+.tableRemoveRowBtn {
+    background: none;
+    border: none;
+    color: $grey-light;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px 4px;
+    line-height: 1;
+    border-radius: 3px;
+
+    &:hover {
+        color: #f38ba8;
+        background: rgba(#f38ba8, 0.1);
+    }
+}
+
+.tableAddRowBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba($primary-color, 0.08);
+    border: 1px dashed $primary-color;
+    color: $primary-color;
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    width: fit-content;
+
+    &:hover {
+        background: rgba($primary-color, 0.16);
+    }
+}
+
+.previewTableWrap {
+    overflow-x: auto;
+}
+
+.previewTable {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+
+    th, td {
+        border: 1px solid $grey-border;
+        padding: 8px 12px;
+        text-align: left;
+    }
+
+    thead tr {
+        background: rgba($primary-color, 0.08);
+
+        th {
+            font-weight: 600;
+            color: $dark-color;
+        }
+    }
+
+    tbody tr:nth-child(even) {
+        background: rgba($primary-color, 0.03);
+    }
+}
+

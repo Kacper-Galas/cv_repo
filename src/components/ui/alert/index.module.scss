@@ -1,0 +1,89 @@
+@import '../../../../src/styles/globalVariables.scss';
+
+.alert {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-md;
+    padding: $spacing-md $spacing-lg;
+    border-radius: $radius-md;
+    font-family: $font-body;
+    border-left: 3px solid transparent;
+    overflow: hidden;
+
+    &.type_info {
+        background-color: rgba(59, 130, 246, 0.07);
+        border-left-color: $info;
+        .alertIcon { color: $info; }
+    }
+
+    &.type_success {
+        background-color: rgba(34, 197, 94, 0.07);
+        border-left-color: $success;
+        .alertIcon { color: $success; }
+    }
+
+    &.type_warning {
+        background-color: rgba(245, 158, 11, 0.07);
+        border-left-color: $warning;
+        .alertIcon { color: $warning; }
+    }
+
+    &.type_error {
+        background-color: rgba(255, 82, 70, 0.07);
+        border-left-color: $error;
+        .alertIcon { color: $error; }
+    }
+}
+
+.alertIcon {
+    display: flex;
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.alertContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.alertTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: $dark-color;
+    line-height: 1.4;
+}
+
+.alertMessage {
+    font-size: 13px;
+    color: $dark-soft;
+    line-height: 1.55;
+}
+
+.alertAction {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+.closeBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 3px;
+    cursor: pointer;
+    color: #999;
+    border-radius: $radius-sm;
+    transition: color $transition-fast, background $transition-fast;
+    flex-shrink: 0;
+    margin-top: 1px;
+
+    &:hover {
+        color: $dark-color;
+        background: rgba(0,0,0,0.06);
+    }
+}

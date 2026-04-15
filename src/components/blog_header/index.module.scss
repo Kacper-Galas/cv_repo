@@ -1,44 +1,5 @@
 @import '../../../src/styles/globalVariables.scss';
 
-.headerContainer {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #fff;
-    z-index: 1000;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    box-sizing: border-box;
-}
-
-.headerInner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 40px;
-    height: 60px;
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    color: $dark-color;
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 24px;
-    letter-spacing: 2px;
-    transition: color 0.2s ease;
-
-    &:hover {
-        color: $primary-color;
-    }
-}
-
 .burgerWrap {
     position: fixed;
     top: 0;
@@ -73,9 +34,10 @@
 }
 
 .panelLinks {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 100px 36px 40px;
+    padding: 80px 36px 40px;
     gap: 8px;
 }
 
@@ -129,4 +91,98 @@
     .panelLink {
         font-size: 24px;
     }
+}
+
+/* ── Panel profile / login ─────────────────────────────────── */
+.panelProfile {
+    padding: 20px 36px;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.panelProfileAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: $primary-color;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+}
+
+.panelProfileInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+}
+
+.panelProfileName {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    color: $dark-color;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.panelProfileEmail {
+    font-size: 11px;
+    color: #999;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.panelLogoutBtn {
+    appearance: none;
+    border: 1px solid #e0e0e0;
+    background: none;
+    cursor: pointer;
+    color: #999;
+    padding: 7px 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    flex-shrink: 0;
+    transition: border-color 0.2s, color 0.2s;
+
+    &:hover {
+        border-color: $primary-color;
+        color: $primary-color;
+    }
+}
+
+.panelLoginSection {
+    padding: 20px 36px;
+    border-top: 1px solid #eee;
+}
+
+.panelLoginBtn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 15px;
+    letter-spacing: 1.5px;
+    color: rgba(15, 25, 35, 0.45);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+
+    &:hover {
+        color: $dark-color;
+    }
+
+    svg { flex-shrink: 0; }
 }

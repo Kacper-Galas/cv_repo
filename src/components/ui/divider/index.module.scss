@@ -1,0 +1,71 @@
+@import '../../../../src/styles/globalVariables.scss';
+
+.horizontal {
+    width: 100%;
+    border: none;
+    border-top: 1px solid $secondary-light;
+    margin: $spacing-lg 0;
+
+    &.dashed {
+        border-top-style: dashed;
+    }
+}
+
+.withLabel {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    margin: $spacing-lg 0;
+    border: none;
+
+    &.align_left .line:first-child { flex: 0 0 24px; }
+    &.align_right .line:last-child { flex: 0 0 24px; }
+}
+
+.line {
+    flex: 1;
+    height: 1px;
+    background-color: $secondary-light;
+
+    .dashed & {
+        background: repeating-linear-gradient(
+            90deg,
+            $secondary-color 0px,
+            $secondary-color 4px,
+            transparent 4px,
+            transparent 8px
+        );
+        background-color: transparent;
+        height: 1px;
+    }
+}
+
+.labelText {
+    font-family: $font-body;
+    font-size: 12px;
+    font-weight: 500;
+    color: #aaa;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.vertical {
+    display: inline-block;
+    width: 1px;
+    height: 1em;
+    background-color: $secondary-light;
+    margin: 0 $spacing-sm;
+    vertical-align: middle;
+
+    &.dashed {
+        background: repeating-linear-gradient(
+            180deg,
+            $secondary-color 0px,
+            $secondary-color 4px,
+            transparent 4px,
+            transparent 8px
+        );
+    }
+}

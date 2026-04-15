@@ -1,0 +1,101 @@
+@import '../../../../src/styles/globalVariables.scss';
+
+.switchLabel {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+    cursor: pointer;
+    user-select: none;
+
+    &.disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+    }
+}
+
+.labelText {
+    font-family: $font-body;
+    font-size: 14px;
+    color: $dark-color;
+}
+
+.switchTrack {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    background-color: $secondary-color;
+    border-radius: $radius-full;
+    cursor: pointer;
+    transition: background-color $transition-default;
+    flex-shrink: 0;
+    padding: 0;
+
+    &.checked {
+        background-color: $primary-color;
+    }
+
+    &.disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+    }
+
+    // Sizes
+    &.size_sm {
+        width: 32px;
+        height: 18px;
+        padding: 2px;
+    }
+
+    &.size_md {
+        width: 44px;
+        height: 24px;
+        padding: 3px;
+    }
+
+    &.size_lg {
+        width: 56px;
+        height: 30px;
+        padding: 3px;
+    }
+
+    &:focus-visible {
+        outline: 2px solid $primary-color;
+        outline-offset: 2px;
+    }
+}
+
+.switchThumb {
+    display: block;
+    background: #fff;
+    border-radius: $radius-full;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+    transition: background $transition-fast;
+
+    .size_sm & {
+        width: 14px;
+        height: 14px;
+
+        .checked & {
+            margin-left: calc(32px - 14px - 4px);
+        }
+    }
+
+    .size_md & {
+        width: 18px;
+        height: 18px;
+
+        .checked & {
+            margin-left: calc(44px - 18px - 6px);
+        }
+    }
+
+    .size_lg & {
+        width: 24px;
+        height: 24px;
+
+        .checked & {
+            margin-left: calc(56px - 24px - 6px);
+        }
+    }
+}

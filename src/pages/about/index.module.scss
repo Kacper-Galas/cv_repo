@@ -1,0 +1,218 @@
+@import '../../../src/styles/globalVariables.scss';
+
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+
+.main {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 100px 40px 80px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+}
+
+/* ── Hero ───────────────────────────────────────────────── */
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 80px;
+    align-items: center;
+
+    @media (max-width: 860px) {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+}
+
+.heroText {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.eyebrow {
+    font-family: $font-display;
+    font-size: 14px;
+    letter-spacing: 4px;
+    color: $primary-color;
+    text-transform: uppercase;
+    border-left: 3px solid $primary-color;
+    padding-left: 12px;
+    line-height: 1;
+}
+
+.heroName {
+    font-family: $font-display;
+    font-size: clamp(64px, 9vw, 108px);
+    letter-spacing: 4px;
+    color: $dark-color;
+    margin: 0;
+    line-height: 0.95;
+}
+
+.heroRole {
+    font-family: $font-display;
+    font-size: 22px;
+    letter-spacing: 4px;
+    color: $secondary-color;
+    margin: 0;
+}
+
+.heroBio {
+    font-family: $font-body;
+    font-size: 15px;
+    line-height: 1.75;
+    color: #555;
+    margin: 0;
+    max-width: 520px;
+}
+
+.heroTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Portrait */
+.heroPortrait {
+    position: relative;
+    align-self: stretch;
+    display: flex;
+    align-items: flex-start;
+}
+
+.portraitFrame {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+        display: block;
+        filter: grayscale(15%);
+        transition: filter 0.4s ease;
+
+        &:hover {
+            filter: none;
+        }
+    }
+}
+
+.portraitAccent {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: -20px;
+    bottom: -20px;
+    border: 2px solid $primary-color;
+    z-index: 0;
+    opacity: 0.35;
+}
+
+/* ── Section ────────────────────────────────────────────── */
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.sectionTitle {
+    font-family: $font-display;
+    font-size: 36px;
+    letter-spacing: 3px;
+    color: $dark-color;
+    margin: 0;
+    border-left: 4px solid $dark-color;
+    padding-left: 16px;
+}
+
+/* ── Skills grid ────────────────────────────────────────── */
+.skillsGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px 48px;
+
+    @media (max-width: 640px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.skillItem {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.skillLabel {
+    font-family: $font-body;
+    font-size: 13px;
+    font-weight: 600;
+    color: $dark-color;
+    letter-spacing: 0.4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.skillIcon {
+    color: $primary-color;
+    display: flex;
+    align-items: center;
+}
+
+/* ── CTA ────────────────────────────────────────────────── */
+.ctaSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 48px;
+    background: $dark-color;
+    margin: 0 -8px;
+}
+
+.ctaTitle {
+    font-family: $font-display;
+    font-size: 42px;
+    letter-spacing: 3px;
+    color: #fff;
+    margin: 0;
+}
+
+.ctaText {
+    font-family: $font-body;
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.ctaBtn {
+    font-family: $font-display;
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: $primary-color;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: #fff;
+    }
+}
