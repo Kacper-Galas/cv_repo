@@ -17,7 +17,7 @@ $grey-border: #e0e0e0;
     max-width: 1400px;
     margin: 0 auto;
     width: 100%;
-    padding: 80px 40px 60px;
+    padding: 80px 40px 0;
     box-sizing: border-box;
 }
 
@@ -45,8 +45,10 @@ $grey-border: #e0e0e0;
     display: grid;
     grid-template-columns: 260px 1fr;
     gap: 0;
-    align-items: stretch; /* must be stretch so sidebar can be as tall as content */
+    align-items: stretch;
     min-height: 60vh;
+    padding-top: 40px;
+    padding-bottom: 48px;
 }
 
 /* ── Sticky sidebar ──────────────────────────────────────────── */
@@ -182,48 +184,85 @@ $grey-border: #e0e0e0;
     transition: color 0.2s ease;
 }
 
-/* ── Article content area ────────────────────────────────────── */
-.content {
-    padding-left: 48px;
-    padding-top: 8px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+/* ── Hero intro — 100vh two-panel ────────────────────────────── */
+.heroIntro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    margin: -80px -40px 0;
+    background: #fff;
 }
 
-.articleHeader {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border-left: 4px solid $dark-color;
-    padding-left: 20px;
+/* Left panel — thumbnail */
+.heroImagePanel {
+    position: relative;
+    overflow: hidden;
+    background: $dark-color;
 }
 
-.articleCategory {
+.heroImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.heroImageOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba($dark-color, 0.15) 85%,
+        rgba($dark-color, 0.4) 100%
+    );
+}
+
+/* Right panel — info */
+.heroContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px;
+    gap: 16px;
+    background: $dark-color;
+}
+
+.heroCategory {
     font-family: "Bebas Neue", sans-serif;
     font-size: 12px;
-    letter-spacing: 2px;
-    color: $grey-text;
+    letter-spacing: 3px;
     text-transform: uppercase;
+    color: $primary-color;
+    border: 1px solid rgba($primary-color, 0.4);
+    padding: 4px 12px;
     align-self: flex-start;
 }
 
-.articleTitle {
+.heroTitle {
     font-family: "Bebas Neue", sans-serif;
-    font-size: 48px;
-    letter-spacing: 2.5px;
-    color: $dark-color;
+    font-size: 54px;
+    letter-spacing: 3px;
+    color: #fff;
     margin: 0;
     line-height: 1.0;
 }
 
-.articleMeta {
+.heroExcerpt {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.52);
+    line-height: 1.85;
+    margin: 4px 0 0;
+}
+
+.heroMeta {
     display: flex;
     align-items: center;
     gap: 20px;
     flex-wrap: wrap;
+    margin-top: 12px;
     font-size: 13px;
-    color: $grey-text;
+    color: rgba(255, 255, 255, 0.45);
 
     span {
         display: flex;
@@ -232,29 +271,83 @@ $grey-border: #e0e0e0;
     }
 }
 
-.articleLead {
-    font-size: 17px;
-    color: $dark-color;
-    font-weight: 400;
-    line-height: 1.65;
-    padding-bottom: 20px;
-    border-bottom: 1px solid $grey-border;
-    margin: 0;
+.heroDivider {
+    width: 50px;
+    height: 2px;
+    background: $primary-color;
+    margin: 8px 0;
+    border: none;
+}
+
+.heroTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.heroTag {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    letter-spacing: 0.4px;
+    color: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 2px 8px;
+}
+
+.heroStats {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-top: 12px;
+    padding: 16px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.heroStat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.heroStatIcon {
+    display: flex;
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.heroStatValue {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    color: #fff;
+    line-height: 1;
+}
+
+.heroStatLabel {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* ── Article content area ────────────────────────────────────── */
+.content {
+    padding-left: 48px;
+    padding-right: 24px;
+    padding-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 780px;
 }
 
 /* ── Chapter sections ────────────────────────────────────────── */
 .chapterSection {
     padding: 20px 0;
     border-bottom: 1px solid $grey-border;
-    border-left: 3px solid transparent;
-    padding-left: 0;
-    transition: border-color 0.25s ease, padding-left 0.25s ease;
     scroll-margin-top: 100px;
-
-    &.chapterSectionActive {
-        border-left-color: $dark-color;
-        padding-left: 18px;
-    }
 
     &:last-of-type {
         border-bottom: none;
@@ -276,44 +369,45 @@ $grey-border: #e0e0e0;
     gap: 16px;
 }
 
-/* ── Article tags ────────────────────────────────────────────── */
-.articleTags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    border-top: 1px solid $grey-border;
-    padding-top: 16px;
-}
+/* ── Comments wrapper — separates article from footer ────────── */
+.commentsWrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 48px 40px 64px;
+    border-top: 3px solid $dark-color;
+    position: relative;
 
-.articleTag {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-    font-size: 11px;
-    letter-spacing: 0.4px;
-    color: $grey-light;
+    &::before {
+        content: '';
+        position: absolute;
+        top: -3px;
+        left: 40px;
+        width: 60px;
+        height: 3px;
+        background: $primary-color;
+    }
 }
 
 /* ── Block rendering ─────────────────────────────────────────── */
 .blockText {
-    font-size: 15px;
-    color: $grey-text;
-    line-height: 1.85;
+    font-size: 17px;
+    color: #444;
+    line-height: 1.9;
     margin: 0;
     white-space: pre-wrap;
 }
 
 .blockHtml {
-    font-size: 15px;
-    line-height: 1.75;
+    font-size: 17px;
+    line-height: 1.85;
     color: $dark-color;
 
     h1, h2, h3, h4 { font-family: "Bebas Neue", sans-serif; letter-spacing: 1px; }
-    p  { color: $grey-text; line-height: 1.75; margin: 0 0 10px; }
-    code { font-family: 'Fira Code', monospace; font-size: 13px; background: #f3f4f6; padding: 2px 6px; border-radius: 3px; }
+    p  { color: #444; line-height: 1.85; margin: 0 0 12px; }
+    code { font-family: 'Fira Code', monospace; font-size: 14px; background: #f3f4f6; padding: 2px 6px; border-radius: 3px; }
     pre { background: #0f1923; color: #abb2bf; padding: 16px; overflow-x: auto; border-radius: 6px; }
     a   { color: $primary-color; }
-    ul, ol { padding-left: 24px; color: $grey-text; line-height: 1.75; }
+    ul, ol { padding-left: 24px; color: #444; line-height: 1.85; }
     blockquote { border-left: 3px solid $primary-color; padding-left: 16px; color: $grey-text; margin: 0; }
     img { max-width: 100%; }
 }
@@ -342,11 +436,20 @@ $grey-border: #e0e0e0;
     color: #c9d1d9;
     padding: 18px;
     margin: 0;
-    font-size: 13px;
+    font-size: 14px;
     font-family: 'Fira Mono', 'JetBrains Mono', 'Consolas', monospace;
     line-height: 1.6;
     overflow-x: auto;
+    overflow-y: auto;
+    max-height: 480px;
     white-space: pre;
+
+    /* thin scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #30363d #0d1117;
+    &::-webkit-scrollbar { width: 6px; height: 6px; }
+    &::-webkit-scrollbar-track { background: #0d1117; }
+    &::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
 
     code {
         font-family: inherit;
@@ -473,149 +576,5 @@ $grey-border: #e0e0e0;
 .ratingCount { color: $grey-light; }
 .ratingLogin { color: $grey-light; font-style: italic; }
 
-/* ── Comments ────────────────────────────────────────────────── */
-.commentsSection {
-    margin-top: 40px;
-    padding-top: 24px;
-    border-top: 2px solid $grey-border;
-}
 
-.commentsTitle {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 22px;
-    letter-spacing: 2px;
-    color: $dark-color;
-    margin: 0 0 20px;
-}
 
-.commentsLoading,
-.commentsEmpty {
-    font-size: 14px;
-    color: $grey-light;
-    margin: 0 0 20px;
-}
-
-.commentsList {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.comment {
-    padding: 14px 16px;
-    border: 1px solid $grey-border;
-    background: #fafafa;
-}
-
-.commentHeader {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 6px;
-}
-
-.commentAuthor {
-    font-size: 13px;
-    font-weight: 600;
-    color: $dark-color;
-}
-
-.commentDate {
-    font-size: 11px;
-    color: $grey-light;
-}
-
-.commentDelete {
-    appearance: none;
-    border: none;
-    background: none;
-    cursor: pointer;
-    color: $grey-light;
-    padding: 0;
-    margin-left: auto;
-    display: flex;
-    transition: color 0.15s;
-
-    &:hover { color: $primary-color; }
-}
-
-.commentContent {
-    font-size: 14px;
-    color: $grey-text;
-    margin: 0;
-    line-height: 1.6;
-}
-
-.commentForm {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.commentInput {
-    width: 100%;
-    padding: 12px 14px;
-    font-size: 14px;
-    color: $dark-color;
-    border: 1px solid $grey-border;
-    background: #fff;
-    outline: none;
-    resize: vertical;
-    font-family: inherit;
-    box-sizing: border-box;
-    transition: border-color 0.2s;
-
-    &::placeholder { color: $grey-light; }
-    &:focus { border-color: $dark-color; }
-}
-
-.commentError {
-    font-size: 13px;
-    color: $primary-color;
-    margin: 0;
-}
-
-.commentSubmit {
-    align-self: flex-end;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    appearance: none;
-    border: 2px solid $dark-color;
-    background: $dark-color;
-    color: #fff;
-    padding: 10px 20px;
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 14px;
-    letter-spacing: 1.5px;
-    cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-
-    &:hover:not(:disabled) {
-        background: #fff;
-        color: $dark-color;
-    }
-
-    &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
-}
-
-.commentLoginPrompt {
-    font-size: 14px;
-    color: $grey-text;
-    margin: 0;
-
-    a {
-        color: $dark-color;
-        font-weight: 600;
-        text-decoration: underline;
-    }
-}

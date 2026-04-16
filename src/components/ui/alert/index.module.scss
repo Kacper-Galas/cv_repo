@@ -11,27 +11,35 @@
     overflow: hidden;
 
     &.type_info {
-        background-color: rgba(59, 130, 246, 0.07);
+        background-color: rgba(59, 130, 246, 0.08);
         border-left-color: $info;
         .alertIcon { color: $info; }
+        .alertTitle { color: #1e3a5f; }
+        .alertMessage { color: #1e3a5f; }
     }
 
     &.type_success {
-        background-color: rgba(34, 197, 94, 0.07);
+        background-color: rgba(34, 197, 94, 0.08);
         border-left-color: $success;
         .alertIcon { color: $success; }
+        .alertTitle { color: #14532d; }
+        .alertMessage { color: #1a5c36; }
     }
 
     &.type_warning {
-        background-color: rgba(245, 158, 11, 0.07);
+        background-color: rgba(245, 158, 11, 0.1);
         border-left-color: $warning;
-        .alertIcon { color: $warning; }
+        .alertIcon { color: #b45309; }
+        .alertTitle { color: #78350f; }
+        .alertMessage { color: #7c4a12; }
     }
 
     &.type_error {
-        background-color: rgba(255, 82, 70, 0.07);
+        background-color: rgba(255, 82, 70, 0.08);
         border-left-color: $error;
-        .alertIcon { color: $error; }
+        .alertIcon { color: #b91c1c; }
+        .alertTitle { color: #7f1d1d; }
+        .alertMessage { color: #7f1d1d; }
     }
 }
 
@@ -57,9 +65,9 @@
 }
 
 .alertMessage {
-    font-size: 13px;
+    font-size: 14px;
     color: $dark-soft;
-    line-height: 1.55;
+    line-height: 1.6;
 }
 
 .alertAction {

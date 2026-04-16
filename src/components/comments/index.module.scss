@@ -1,0 +1,327 @@
+@import '../../../src/styles/globalVariables.scss';
+
+$grey-text: #666;
+$grey-light: #999;
+$grey-border: #e0e0e0;
+
+/* ── Root ────────────────────────────────────────────────────── */
+.commentsRoot {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Clean header ────────────────────────────────────────────── */
+.commentsHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.commentsTitle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: $dark-color;
+    margin: 0;
+}
+
+.commentsBadge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 26px;
+    height: 26px;
+    padding: 0 8px;
+    font-size: 13px;
+    letter-spacing: 0;
+    background: rgba($dark-color, 0.08);
+    color: $dark-color;
+    border-radius: 13px;
+}
+
+.commentsDivider {
+    height: 2px;
+    background: $grey-border;
+    width: 100%;
+}
+
+/* ── Body ────────────────────────────────────────────────────── */
+.commentsBody {
+    padding: 24px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+/* ── States ──────────────────────────────────────────────────── */
+.commentsState {
+    font-size: 14px;
+    color: $grey-light;
+    padding: 32px 0;
+    margin: 0;
+    text-align: center;
+}
+
+.commentsEmpty {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 32px 0;
+    color: $grey-border;
+
+    p {
+        margin: 0;
+        font-size: 14px;
+        color: $grey-light;
+    }
+}
+
+/* ── List ────────────────────────────────────────────────────── */
+.commentsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 24px;
+}
+
+.comment {
+    display: flex;
+    background: #fafafa;
+    border: 1px solid $grey-border;
+    overflow: hidden;
+    transition: border-color 0.2s;
+
+    &:hover {
+        border-color: #ccc;
+    }
+}
+
+.commentStrip {
+    width: 4px;
+    flex-shrink: 0;
+}
+
+.commentInner {
+    flex: 1;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.commentTop {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.commentAvatar {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.commentMeta {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.commentAuthor {
+    font-size: 13px;
+    font-weight: 600;
+    color: $dark-color;
+    line-height: 1.2;
+}
+
+.commentDate {
+    font-size: 11px;
+    color: $grey-light;
+    line-height: 1.2;
+}
+
+.commentDelete {
+    appearance: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: $grey-light;
+    padding: 4px;
+    margin-left: auto;
+    display: flex;
+    transition: color 0.15s;
+
+    &:hover {
+        color: $primary-color;
+    }
+}
+
+.commentContent {
+    font-size: 14px;
+    color: $grey-text;
+    margin: 0;
+    line-height: 1.65;
+    word-wrap: break-word;
+    padding-left: 42px;
+}
+
+/* ── Form ────────────────────────────────────────────────────── */
+.commentForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 1px solid $grey-border;
+}
+
+.commentFormLabel {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    color: $dark-color;
+    margin: 0;
+}
+
+.commentFormRow {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.commentFormAvatar {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #fff;
+    margin-top: 2px;
+}
+
+.commentInput {
+    flex: 1;
+    padding: 12px 14px;
+    font-size: 14px;
+    color: $dark-color;
+    border: 1px solid $grey-border;
+    background: #fafafa;
+    outline: none;
+    resize: vertical;
+    font-family: inherit;
+    box-sizing: border-box;
+    min-height: 70px;
+    transition: border-color 0.2s, background 0.2s;
+
+    &::placeholder {
+        color: $grey-light;
+    }
+
+    &:focus {
+        border-color: $dark-color;
+        background: #fff;
+    }
+}
+
+.commentError {
+    font-size: 13px;
+    color: $primary-color;
+    margin: 0;
+    padding-left: 44px;
+}
+
+.commentSubmit {
+    align-self: flex-end;
+    appearance: none;
+    border: none;
+    background: $dark-color;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    transition: background 0.2s;
+
+    &:hover:not(:disabled) {
+        background: $primary-color;
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}
+
+/* ── Login prompt ────────────────────────────────────────────── */
+.commentLoginPrompt {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px 0;
+    border-top: 1px solid $grey-border;
+    color: $grey-light;
+
+    p {
+        margin: 0;
+        font-size: 14px;
+        color: $grey-text;
+    }
+
+    a {
+        color: $dark-color;
+        font-weight: 600;
+        text-decoration: underline;
+        transition: color 0.2s;
+
+        &:hover {
+            color: $primary-color;
+        }
+    }
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .commentsBar {
+        padding: 12px 16px;
+        font-size: 13px;
+    }
+
+    .commentAvatar,
+    .commentFormAvatar {
+        width: 28px;
+        height: 28px;
+        font-size: 11px;
+    }
+
+    .commentContent {
+        padding-left: 38px;
+    }
+
+    .commentInner {
+        padding: 12px 14px;
+    }
+}

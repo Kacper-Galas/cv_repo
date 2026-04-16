@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { BlogHeader } from '../../components/blog_header';
 import { Footer } from '../../components/footer';
+import { CommentsSection } from '../../components/comments';
 import { Card } from '../../components/ui/card';
 import { Alert } from '../../components/ui/alert';
 import { Divider } from '../../components/ui/divider';
-import { api, getAuthData, isAdmin } from '../../api';
+import { api, getAuthData } from '../../api';
 import {
-    FiCalendar, FiClock, FiEye, FiTag, FiStar,
-    FiMessageSquare, FiSend, FiTrash2, FiChevronLeft,
+    FiCalendar, FiClock, FiTag, FiStar,
+    FiChevronLeft, FiUsers, FiEye, FiMessageSquare,
 } from 'react-icons/fi';
 import styles from './index.module.scss';
 
@@ -124,112 +125,6 @@ const StarRating = ({ articleId, initial, userRating: initialUserRating, ratingC
     );
 };
 
-/* ── Comments ─────────────────────────────────────────────── */
-const CommentsSection = ({ articleId }) => {
-    const [comments, setComments] = useState([]);
-    const [loadingComments, setLoadingComments] = useState(true);
-    const [newComment, setNewComment] = useState('');
-    const [sending, setSending] = useState(false);
-    const [sendError, setSendError] = useState('');
-    const auth = getAuthData();
-    const admin = isAdmin();
-
-    useEffect(() => {
-        setLoadingComments(true);
-        api.comments
-            .list(articleId)
-            .then((res) => setComments(res.comments))
-            .catch(() => {})
-            .finally(() => setLoadingComments(false));
-    }, [articleId]);
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if (!newComment.trim()) return;
-        setSendError('');
-        setSending(true);
-        try {
-            const comment = await api.comments.create(articleId, newComment.trim());
-            setComments((prev) => [...prev, comment]);
-            setNewComment('');
-        } catch (err) {
-            setSendError(err.message || 'Nie udało się dodać komentarza.');
-        } finally {
-            setSending(false);
-        }
-    };
-
-    const handleDelete = async (commentId) => {
-        try {
-            await api.comments.delete(articleId, commentId);
-            setComments((prev) => prev.filter((c) => c.id !== commentId));
-        } catch {
-            // silently fail
-        }
-    };
-
-    const formatTs = (ts) => {
-        const d = new Date(ts * 1000);
-        return d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'short', year: 'numeric' });
-    };
-
-    return (
-        <div className={styles.commentsSection}>
-            <h3 className={styles.commentsTitle}>
-                <FiMessageSquare size={16} /> Komentarze ({comments.length})
-            </h3>
-
-            {loadingComments ? (
-                <p className={styles.commentsLoading}>Ładowanie...</p>
-            ) : comments.length === 0 ? (
-                <p className={styles.commentsEmpty}>Bądź pierwszą osobą, która skomentuje!</p>
-            ) : (
-                <ul className={styles.commentsList}>
-                    {comments.map((c) => (
-                        <li key={c.id} className={styles.comment}>
-                            <div className={styles.commentHeader}>
-                                <span className={styles.commentAuthor}>{c.user_name}</span>
-                                <span className={styles.commentDate}>{formatTs(c.created_at)}</span>
-                                {(admin || auth?.id === c.user_id) && (
-                                    <button
-                                        className={styles.commentDelete}
-                                        onClick={() => handleDelete(c.id)}
-                                        title="Usuń komentarz"
-                                    >
-                                        <FiTrash2 size={12} />
-                                    </button>
-                                )}
-                            </div>
-                            <p className={styles.commentContent}>{c.content}</p>
-                        </li>
-                    ))}
-                </ul>
-            )}
-
-            {auth ? (
-                <form className={styles.commentForm} onSubmit={handleSubmit}>
-                    <textarea
-                        className={styles.commentInput}
-                        placeholder="Napisz komentarz..."
-                        value={newComment}
-                        onChange={(e) => setNewComment(e.target.value)}
-                        rows={3}
-                        maxLength={1000}
-                    />
-                    {sendError && <p className={styles.commentError}>{sendError}</p>}
-                    <button type="submit" className={styles.commentSubmit} disabled={sending || !newComment.trim()}>
-                        <FiSend size={14} /> {sending ? 'Wysyłanie...' : 'Wyślij'}
-                    </button>
-                </form>
-            ) : (
-                <p className={styles.commentLoginPrompt}>
-                    <a href="/login">Zaloguj się</a>, aby dodać komentarz.
-                </p>
-            )}
-        </div>
-    );
-};
-
 /* ── Chapter sidebar item ────────────────────────────────── */
 const ChapterItem = ({ chapter, index, isActive, onClick }) => (
     <button
@@ -249,7 +144,8 @@ export const ArticlePage = () => {
     const [article, setArticle] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-    const [activeChapter, setActiveChapter] = useState(null);
+    const [activeChapter, setActiveChapter] = useState(0);
+    const chapterRefs = useRef([]);
 
     useEffect(() => {
         setLoading(true);
@@ -261,13 +157,35 @@ export const ArticlePage = () => {
             .finally(() => setLoading(false));
     }, [id]);
 
+    /* ── IntersectionObserver for active chapter tracking ── */
+    useEffect(() => {
+        if (!article || !article.chapters?.length) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                const visible = entries
+                    .filter((e) => e.isIntersecting)
+                    .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+                if (visible.length > 0) {
+                    const idx = chapterRefs.current.indexOf(visible[0].target);
+                    if (idx !== -1) setActiveChapter(idx);
+                }
+            },
+            { rootMargin: '-80px 0px -50% 0px', threshold: 0 }
+        );
+
+        chapterRefs.current.forEach((el) => {
+            if (el) observer.observe(el);
+        });
+
+        return () => observer.disconnect();
+    }, [article]);
+
     const handleChapterClick = useCallback((index) => {
         setActiveChapter(index);
-        if (article) {
-            const el = document.getElementById(`chapter-${article.id}-${index}`);
-            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    }, [article]);
+        const el = chapterRefs.current[index];
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, []);
 
     return (
         <div className={styles.articlePage}>
@@ -295,88 +213,176 @@ export const ArticlePage = () => {
                 )}
 
                 {article && (
-                    <div className={styles.articleLayout}>
-
-                        {/* ── Sticky chapter sidebar ── */}
-                        <aside className={styles.sidebar}>
-                            <div className={styles.sidebarInner}>
-                                <button
-                                    className={styles.backBtn}
-                                    onClick={() => navigate('/')}
-                                >
-                                    <FiChevronLeft size={14} />
-                                    Artykuły
-                                </button>
-
-                                <p className={styles.sidebarLabel}>Rozdziały</p>
-
-                                {(article.chapters || []).map((chapter, i) => (
-                                    <ChapterItem
-                                        key={i}
-                                        chapter={chapter}
-                                        index={i}
-                                        isActive={activeChapter === i}
-                                        onClick={handleChapterClick}
-                                    />
-                                ))}
-                            </div>
-                        </aside>
-
-                        {/* ── Article content ── */}
-                        <motion.article
-                            className={styles.content}
-                            initial={{ opacity: 0, y: 16 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.35, ease: 'easeOut' }}
+                    <>
+                        {/* ── Hero intro — 100vh two panels ── */}
+                        <motion.div
+                            className={styles.heroIntro}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.5, ease: 'easeOut' }}
                         >
-                            <header className={styles.articleHeader}>
-                                <span className={styles.articleCategory}>{article.category}</span>
-                                <h1 className={styles.articleTitle}>{article.title}</h1>
-                                <div className={styles.articleMeta}>
+                            {/* Left panel — thumbnail */}
+                            <div className={styles.heroImagePanel}>
+                                {article.thumbnail && (
+                                    <>
+                                        <img
+                                            src={article.thumbnail}
+                                            alt={article.title}
+                                            className={styles.heroImage}
+                                        />
+                                        <div className={styles.heroImageOverlay} />
+                                    </>
+                                )}
+                            </div>
+
+                            {/* Right panel — info */}
+                            <div className={styles.heroContent}>
+                                <motion.span
+                                    className={styles.heroCategory}
+                                    initial={{ opacity: 0, x: -12 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.15, duration: 0.3 }}
+                                >
+                                    {article.category}
+                                </motion.span>
+                                <motion.h1
+                                    className={styles.heroTitle}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.2, duration: 0.4 }}
+                                >
+                                    {article.title}
+                                </motion.h1>
+                                <motion.p
+                                    className={styles.heroExcerpt}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.35, duration: 0.35 }}
+                                >
+                                    {article.excerpt}
+                                </motion.p>
+
+                                <hr className={styles.heroDivider} />
+
+                                <motion.div
+                                    className={styles.heroMeta}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.45, duration: 0.3 }}
+                                >
                                     <span><FiCalendar size={13} /> {formatDate(article.date)}</span>
                                     <span><FiClock size={13} /> {article.readTime ?? article.read_time} min czytania</span>
-                                    <span><FiEye size={13} /> {article.views} wyświetleń</span>
-                                </div>
-                            </header>
+                                </motion.div>
 
-                            <p className={styles.articleLead}>{article.excerpt}</p>
-
-                            {(article.chapters || []).map((chapter, i) => (
-                                <section
-                                    key={i}
-                                    id={`chapter-${article.id}-${i}`}
-                                    className={`${styles.chapterSection} ${activeChapter === i ? styles.chapterSectionActive : ''}`}
+                                <motion.div
+                                    className={styles.heroStats}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.5, duration: 0.3 }}
                                 >
-                                    <h2 className={styles.chapterTitle}>{chapter.title}</h2>
-                                    <div className={styles.chapterBlocks}>
-                                        {Array.isArray(chapter.blocks)
-                                            ? chapter.blocks.map((block, j) => <BlockRenderer key={j} block={block} />)
-                                            : chapter.content
-                                                ? <p>{chapter.content}</p>
-                                                : null
-                                        }
+                                    <div className={styles.heroStat}>
+                                        <span className={styles.heroStatIcon}><FiUsers size={14} /></span>
+                                        <span className={styles.heroStatLabel}>Wielu autorów</span>
                                     </div>
-                                </section>
-                            ))}
+                                    <div className={styles.heroStat}>
+                                        <span className={styles.heroStatIcon}><FiEye size={14} /></span>
+                                        <span className={styles.heroStatValue}>{article.views}</span>
+                                        <span className={styles.heroStatLabel}>odsłon</span>
+                                    </div>
+                                    <div className={styles.heroStat}>
+                                        <span className={styles.heroStatIcon}><FiStar size={14} fill="currentColor" /></span>
+                                        <span className={styles.heroStatValue}>{article.rating != null ? article.rating.toFixed(1) : '—'}</span>
+                                        <span className={styles.heroStatLabel}>ocena</span>
+                                    </div>
+                                    <div className={styles.heroStat}>
+                                        <span className={styles.heroStatIcon}><FiMessageSquare size={14} /></span>
+                                        <span className={styles.heroStatValue}>{(article.chapters || []).length}</span>
+                                        <span className={styles.heroStatLabel}>rozdziałów</span>
+                                    </div>
+                                </motion.div>
 
-                            <div className={styles.articleTags}>
-                                {(article.tags || []).map((tag) => (
-                                    <span key={tag} className={styles.articleTag}>
-                                        <FiTag size={11} /> {tag}
-                                    </span>
-                                ))}
+                                <motion.div
+                                    className={styles.heroTags}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.55, duration: 0.3 }}
+                                >
+                                    {(article.tags || []).map((tag) => (
+                                        <span key={tag} className={styles.heroTag}>
+                                            <FiTag size={10} /> {tag}
+                                        </span>
+                                    ))}
+                                </motion.div>
                             </div>
+                        </motion.div>
 
-                            <StarRating
-                                articleId={article.id}
-                                initial={article.rating}
-                                userRating={article.userRating}
-                                ratingCount={article.ratingCount}
-                            />
+                        {/* ── Two-column body ── */}
+                        <div className={styles.articleLayout}>
+                            {/* Sticky chapter sidebar */}
+                            <aside className={styles.sidebar}>
+                                <div className={styles.sidebarInner}>
+                                    <button
+                                        className={styles.backBtn}
+                                        onClick={() => navigate('/')}
+                                    >
+                                        <FiChevronLeft size={14} />
+                                        Artykuły
+                                    </button>
 
+                                    <p className={styles.sidebarLabel}>Rozdziały</p>
+
+                                    {(article.chapters || []).map((chapter, i) => (
+                                        <ChapterItem
+                                            key={i}
+                                            chapter={chapter}
+                                            index={i}
+                                            isActive={activeChapter === i}
+                                            onClick={handleChapterClick}
+                                        />
+                                    ))}
+                                </div>
+                            </aside>
+
+                            {/* Article content */}
+                            <motion.article
+                                className={styles.content}
+                                initial={{ opacity: 0, y: 16 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.35, ease: 'easeOut' }}
+                            >
+                                {(article.chapters || []).map((chapter, i) => (
+                                    <section
+                                        key={i}
+                                        id={`chapter-${article.id}-${i}`}
+                                        ref={(el) => (chapterRefs.current[i] = el)}
+                                        className={styles.chapterSection}
+                                    >
+                                        <h2 className={styles.chapterTitle}>{chapter.title}</h2>
+                                        <div className={styles.chapterBlocks}>
+                                            {Array.isArray(chapter.blocks)
+                                                ? chapter.blocks.map((block, j) => <BlockRenderer key={j} block={block} />)
+                                                : chapter.content
+                                                    ? <p>{chapter.content}</p>
+                                                    : null
+                                            }
+                                        </div>
+                                    </section>
+                                ))}
+
+                                <StarRating
+                                    articleId={article.id}
+                                    initial={article.rating}
+                                    userRating={article.userRating}
+                                    ratingCount={article.ratingCount}
+                                />
+                            </motion.article>
+                        </div>
+
+                        {/* ── Comments — separated from article body ── */}
+                        <div className={styles.commentsWrap}>
                             <CommentsSection articleId={article.id} />
-                        </motion.article>
-                    </div>
+                        </div>
+                    </>
                 )}
             </main>
 
