@@ -1,8 +1,8 @@
 @import '../../../src/styles/globalVariables.scss';
 
-$dark:    #0f1923;
-$coral:   #ff5246;
-$grey:    rgba(15, 25, 35, 0.1);
+$dark: #0f1923;
+$coral: #ff5246;
+$grey: rgba(15, 25, 35, 0.1);
 $text-lo: rgba(15, 25, 35, 0.38);
 $text-hi: #0f1923;
 
@@ -15,86 +15,19 @@ $text-hi: #0f1923;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-
-    &::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background-image: radial-gradient(circle, rgba(15, 25, 35, 0.04) 1px, transparent 1px);
-        background-size: 28px 28px;
-        pointer-events: none;
-        z-index: 0;
-    }
 }
 
-// ─── Marquee ──────────────────────────────────────────────────────────────────
-.marqueeWrapper {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    border-top: 1px solid $grey;
-    border-bottom: 1px solid $grey;
-    padding: 14px 0;
-    z-index: 1;
-
-    // fade edges
-    &::before, &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 120px;
-        z-index: 2;
-        pointer-events: none;
-    }
-    &::before { left: 0; background: linear-gradient(to right, #fff, transparent); }
-    &::after  { right: 0; background: linear-gradient(to left, #fff, transparent); }
+// ─── Reużywalny dot-grid ──────────────────────────────────────────────────────
+// Ustawiany przez JS inline background-image (light/dark variant)
+.dotGrid {
+    position: absolute;
+    inset: 0;
+    background-size: 28px 28px;
+    pointer-events: none;
+    z-index: 0;
 }
 
-.marqueeTrack {
-    display: flex;
-    width: max-content;
-    animation: marqueeScroll 28s linear infinite;
-
-    &:hover {
-        animation-play-state: paused;
-    }
-}
-
-@keyframes marqueeScroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-}
-
-.marqueeTag {
-    font-family: "Bebas Neue", sans-serif;
-    font-size: 13px;
-    letter-spacing: 3px;
-    color: rgba(15, 25, 35, 0.28);
-    white-space: nowrap;
-    padding: 0 24px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    user-select: none;
-    transition: color 0.2s;
-
-    .marqueeTrack:hover & {
-        color: rgba(15, 25, 35, 0.5);
-    }
-}
-
-.marqueeDot {
-    display: inline-block;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: $coral;
-    flex-shrink: 0;
-    opacity: 0.5;
-}
-
-// ─── Bento grid ───────────────────────────────────────────────────────────────
+// ─── Separator ────────────────────────────────────────────────────────────────
 .footerSeparator {
     width: 100%;
     height: 1px;
@@ -103,11 +36,12 @@ $text-hi: #0f1923;
     z-index: 1;
 }
 
+// ─── Bento grid ───────────────────────────────────────────────────────────────
 .bentoGrid {
     position: relative;
     z-index: 1;
     display: grid;
-    grid-template-columns: 1fr 1.1fr 0.9fr;
+    grid-template-columns: 1fr 1.15fr 0.85fr;
     gap: 1px;
     background: $grey;
     border-bottom: 1px solid $grey;
@@ -116,46 +50,66 @@ $text-hi: #0f1923;
     @media (max-width: 900px) {
         grid-template-columns: 1fr 1fr;
     }
+
     @media (max-width: 600px) {
         grid-template-columns: 1fr;
     }
 }
 
-// ─── Shared card base ─────────────────────────────────────────────────────────
+// ─── Shared card ──────────────────────────────────────────────────────────────
 %card {
     background: #fff;
     padding: 52px 44px;
     position: relative;
-    perspective: 800px;
+    perspective: 900px;
+    overflow: hidden;
 
     @media (max-width: 600px) {
         padding: 40px 28px;
     }
 }
 
-// ─── Logo card ────────────────────────────────────────────────────────────────
+// ─── LEFT — logo / manifesto card ─────────────────────────────────────────────
 .cardLogo {
     @extend %card;
     cursor: default;
 }
 
+// Dekoracyjna wielka cyfra w tle — daje głębię i wypełnia pustą przestrzeń
+.logoBgNum {
+    position: absolute;
+    right: -12px;
+    bottom: -28px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(140px, 18vw, 200px);
+    line-height: 1;
+    letter-spacing: -4px;
+    color: rgba(15, 25, 35, 0.04);
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    will-change: transform;
+}
+
 .cardLogoInner {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
     height: 100%;
 }
 
 .logoRow {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
+    margin-bottom: 28px;
 }
 
 .logoText {
     font-family: "Bebas Neue", sans-serif;
-    font-size: clamp(40px, 5vw, 64px);
-    letter-spacing: 5px;
+    font-size: clamp(28px, 3.5vw, 40px);
+    letter-spacing: 6px;
     color: $text-hi;
     line-height: 1;
 }
@@ -164,71 +118,113 @@ $text-hi: #0f1923;
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    opacity: 0.9;
-    margin-right: 2px;
+    opacity: 0.85;
+}
+
+// Manifesto — 3 linie jak okładka magazynu
+.manifesto {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 24px;
+    line-height: 1.0;
+}
+
+.manifestoLine {
+    display: block;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(38px, 5vw, 58px);
+    letter-spacing: 2px;
+    color: $text-hi;
+    line-height: 1.02;
+}
+
+// Słowo "łącznikowe" — mniejsze, przygaszone, daje rytm optyczny
+.manifestoLineDim {
+    font-size: clamp(22px, 3vw, 34px);
+    color: rgba(15, 25, 35, 0.2);
+    letter-spacing: 4px;
 }
 
 .logoTagline {
     font-family: "Inter", system-ui, sans-serif;
-    font-size: 14px;
-    line-height: 1.7;
+    font-size: 13px;
+    line-height: 1.75;
     color: $text-lo;
-    margin: 0;
-    max-width: 280px;
+    margin: 0 0 20px;
+    max-width: 260px;
 }
 
 .logoDivider {
     height: 1px;
     background: rgba(15, 25, 35, 0.1);
     transform-origin: left;
-    margin: 4px 0;
+    margin-bottom: 20px;
 }
 
-.logoStats {
-    display: flex;
-    gap: 32px;
+// Stats — 2×2 grid zamiast poziomej listy
+.logoStatGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(15, 25, 35, 0.07);
+    border: 1px solid rgba(15, 25, 35, 0.07);
+    margin-bottom: auto;
+    padding-bottom: 0;
 }
 
 .logoStat {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 3px;
+    padding: 14px 16px;
+    background: #fff;
+    cursor: default;
+    transition: background 0.2s;
+
+    &:hover {
+        background: #fafafa;
+
+        .logoStatNum {
+            color: $coral;
+        }
+    }
 }
 
 .logoStatNum {
     font-family: "Bebas Neue", sans-serif;
-    font-size: 38px;
+    font-size: 30px;
     letter-spacing: 2px;
     color: $text-hi;
     line-height: 1;
+    transition: color 0.2s;
 }
 
 .logoStatLabel {
     font-family: "Inter", system-ui, sans-serif;
-    font-size: 11px;
-    letter-spacing: 0.5px;
-    color: rgba(15, 25, 35, 0.3);
+    font-size: 10px;
+    letter-spacing: 0.8px;
+    color: rgba(15, 25, 35, 0.28);
     text-transform: uppercase;
 }
 
 .logoNote {
     font-family: "Inter", system-ui, sans-serif;
-    font-size: 12px;
-    line-height: 1.7;
-    color: rgba(15, 25, 35, 0.28);
-    margin: 0;
-    margin-top: auto;
-    max-width: 240px;
+    font-size: 11.5px;
+    line-height: 1.75;
+    color: rgba(15, 25, 35, 0.25);
+    margin: 20px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid rgba(15, 25, 35, 0.07);
 }
 
-// ─── CTA card ─────────────────────────────────────────────────────────────────
+// ─── CENTER — CTA card ────────────────────────────────────────────────────────
 .cardCta {
     @extend %card;
     background: $dark;
     cursor: default;
-    overflow: hidden;
 
-    // fine grain texture
+    // Noise texture
     &::after {
         content: '';
         position: absolute;
@@ -237,10 +233,10 @@ $text-hi: #0f1923;
         background-size: 200px 200px;
         pointer-events: none;
         z-index: 0;
-        opacity: 0.6;
+        opacity: 0.55;
     }
 
-    // top-edge inner highlight
+    // Top highlight
     &::before {
         content: '';
         position: absolute;
@@ -263,7 +259,6 @@ $text-hi: #0f1923;
     z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
     height: 100%;
 }
 
@@ -272,17 +267,17 @@ $text-hi: #0f1923;
     font-size: 11px;
     letter-spacing: 4px;
     color: $coral;
-    margin: 0;
+    margin: 0 0 12px;
     text-transform: uppercase;
 }
 
 .ctaHeadline {
     font-family: "Bebas Neue", sans-serif;
-    font-size: clamp(28px, 3.5vw, 44px);
+    font-size: clamp(30px, 3.8vw, 48px);
     letter-spacing: 2px;
     color: #fff;
-    margin: 0;
-    line-height: 1.08;
+    margin: 0 0 32px;
+    line-height: 1.05;
     text-transform: uppercase;
 }
 
@@ -290,76 +285,141 @@ $text-hi: #0f1923;
     display: block;
 }
 
-// Bloom area
-.ctaBtnArea {
-    position: relative;
+// Perks z checkmarkiem zamiast kółeczka
+.ctaPerks {
+    list-style: none;
+    margin: 0 0 auto;
+    padding: 0;
     display: flex;
-    align-items: center;
-    flex: 1;
-    min-height: 90px;
+    flex-direction: column;
+    gap: 12px;
+    padding-bottom: 32px;
 }
 
-.ctaBtnBloom {
+.ctaPerk {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.1px;
+}
+
+.ctaPerkIcon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border: 1px solid rgba(255, 82, 70, 0.4);
+    color: $coral;
+}
+
+// Divider
+.ctaDivider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    transform-origin: left;
+    margin-bottom: 0;
+}
+
+// ── CTA block — zastępuje goły <a>, hover jako całość ─────────
+.ctaBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    padding: 20px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: none; // łączy się z ctaDivider
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, background 0.25s;
+    cursor: pointer;
+
+    &:hover {
+        border-color: rgba(255, 82, 70, 0.5);
+        background: rgba(255, 82, 70, 0.06);
+
+        .ctaBlockLabel {
+            color: #fff;
+        }
+
+        .ctaBlockArrow {
+            color: $coral;
+        }
+    }
+}
+
+// Bloom wewnątrz bloku
+.ctaBlockBloom {
     position: absolute;
-    width: 260px;
-    height: 260px;
+    width: 220px;
+    height: 220px;
     border-radius: 50%;
-    background: radial-gradient(
-        ellipse at center,
-        rgba(255, 82, 70, 0.18) 0%,
-        rgba(255, 82, 70, 0.06) 42%,
-        transparent 68%
-    );
+    background: radial-gradient(ellipse at center,
+            rgba(255, 82, 70, 0.16) 0%,
+            rgba(255, 82, 70, 0.05) 45%,
+            transparent 70%);
     pointer-events: none;
-    animation: bloomBreath 3.5s ease-in-out infinite;
+    animation: bloomBreath 3.8s ease-in-out infinite;
+    left: -60px;
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 0;
-    left: -40px;
 }
 
 @keyframes bloomBreath {
-    0%, 100% { transform: scale(1);    opacity: 0.7; }
-    50%       { transform: scale(1.15); opacity: 1; }
+
+    0%,
+    100% {
+        opacity: 0.7;
+        transform: translateY(-50%) scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(-50%) scale(1.12);
+    }
 }
 
-.ctaBtn {
+.ctaBlockLeft {
     position: relative;
     z-index: 1;
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-    background: #fff;
-    color: $dark;
-    padding: 14px 32px;
-    border: none;
-    transition: background 0.25s, color 0.25s, transform 0.2s;
-
-    &:hover {
-        background: $coral;
-        color: #fff;
-        transform: translateY(-2px);
-    }
-
-    &:hover .ctaBtnArrow {
-        transform: translateX(5px);
-        color: #fff;
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }
 
-.ctaBtnText {
+.ctaBlockLabel {
     font-family: "Bebas Neue", sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.85);
+    transition: color 0.2s;
     white-space: nowrap;
 }
 
-.ctaBtnArrow {
-    font-size: 15px;
-    color: $coral;
-    transition: transform 0.22s ease, color 0.22s;
+.ctaBlockSub {
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.28);
+    letter-spacing: 0.2px;
 }
 
-// ─── Nav card ─────────────────────────────────────────────────────────────────
+.ctaBlockArrow {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    color: rgba(255, 255, 255, 0.25);
+    flex-shrink: 0;
+    transition: color 0.2s;
+}
+
+// ─── RIGHT — nav card ─────────────────────────────────────────────────────────
 .cardNav {
     @extend %card;
     cursor: default;
@@ -375,7 +435,6 @@ $text-hi: #0f1923;
     height: 100%;
 }
 
-// ── Primary nav ───────────────────────────────────────────────
 .navPrimary {
     display: flex;
     flex-direction: column;
@@ -383,7 +442,7 @@ $text-hi: #0f1923;
 
 .navLabel {
     font-family: "Bebas Neue", sans-serif;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 3.5px;
     color: rgba(15, 25, 35, 0.22);
     text-transform: uppercase;
@@ -428,14 +487,12 @@ $text-hi: #0f1923;
     flex-shrink: 0;
 }
 
-// ── Divider ───────────────────────────────────────────────────
 .navDivider {
     height: 1px;
     background: rgba(15, 25, 35, 0.08);
     margin: 20px 0 16px;
 }
 
-// ── Secondary nav ─────────────────────────────────────────────
 .navSecondary {
     display: flex;
     flex-direction: column;
@@ -547,4 +604,82 @@ $text-hi: #0f1923;
     }
 }
 
+// ─── Marquee (zachowany jeśli używany gdzie indziej) ──────────────────────────
+.marqueeWrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-top: 1px solid $grey;
+    border-bottom: 1px solid $grey;
+    padding: 14px 0;
+    z-index: 1;
 
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 120px;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    &::before {
+        left: 0;
+        background: linear-gradient(to right, #fff, transparent);
+    }
+
+    &::after {
+        right: 0;
+        background: linear-gradient(to left, #fff, transparent);
+    }
+}
+
+.marqueeTrack {
+    display: flex;
+    width: max-content;
+    animation: marqueeScroll 28s linear infinite;
+
+    &:hover {
+        animation-play-state: paused;
+    }
+}
+
+@keyframes marqueeScroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.marqueeTag {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: rgba(15, 25, 35, 0.28);
+    white-space: nowrap;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    user-select: none;
+    transition: color 0.2s;
+
+    .marqueeTrack:hover & {
+        color: rgba(15, 25, 35, 0.5);
+    }
+}
+
+.marqueeDot {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: $coral;
+    flex-shrink: 0;
+    opacity: 0.5;
+}

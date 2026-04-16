@@ -4,21 +4,13 @@ import { motion } from 'framer-motion';
 import { BlogHeader } from '../../components/blog_header';
 import { Footer } from '../../components/footer';
 import { CommentsSection } from '../../components/comments';
+import { ArticleHero } from '../../components/articleHero';
 import { Card } from '../../components/ui/card';
 import { Alert } from '../../components/ui/alert';
 import { Divider } from '../../components/ui/divider';
 import { api, getAuthData } from '../../api';
-import {
-    FiCalendar, FiClock, FiTag, FiStar,
-    FiChevronLeft, FiUsers, FiEye, FiMessageSquare,
-} from 'react-icons/fi';
+import { FiChevronLeft, FiStar } from 'react-icons/fi';
 import styles from './index.module.scss';
-
-/* ── helpers ─────────────────────────────────────────────── */
-const formatDate = (dateStr) => {
-    const d = new Date(dateStr);
-    return d.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' });
-};
 
 /* ── Block renderer ──────────────────────────────────────── */
 function BlockRenderer({ block }) {
@@ -191,6 +183,8 @@ export const ArticlePage = () => {
         <div className={styles.articlePage}>
             <BlogHeader />
 
+            {article && <ArticleHero article={article} />}
+
             <main className={styles.articleMain}>
                 {loading && (
                     <motion.p
@@ -214,108 +208,6 @@ export const ArticlePage = () => {
 
                 {article && (
                     <>
-                        {/* ── Hero intro — 100vh two panels ── */}
-                        <motion.div
-                            className={styles.heroIntro}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.5, ease: 'easeOut' }}
-                        >
-                            {/* Left panel — thumbnail */}
-                            <div className={styles.heroImagePanel}>
-                                {article.thumbnail && (
-                                    <>
-                                        <img
-                                            src={article.thumbnail}
-                                            alt={article.title}
-                                            className={styles.heroImage}
-                                        />
-                                        <div className={styles.heroImageOverlay} />
-                                    </>
-                                )}
-                            </div>
-
-                            {/* Right panel — info */}
-                            <div className={styles.heroContent}>
-                                <motion.span
-                                    className={styles.heroCategory}
-                                    initial={{ opacity: 0, x: -12 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 0.15, duration: 0.3 }}
-                                >
-                                    {article.category}
-                                </motion.span>
-                                <motion.h1
-                                    className={styles.heroTitle}
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.2, duration: 0.4 }}
-                                >
-                                    {article.title}
-                                </motion.h1>
-                                <motion.p
-                                    className={styles.heroExcerpt}
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ delay: 0.35, duration: 0.35 }}
-                                >
-                                    {article.excerpt}
-                                </motion.p>
-
-                                <hr className={styles.heroDivider} />
-
-                                <motion.div
-                                    className={styles.heroMeta}
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ delay: 0.45, duration: 0.3 }}
-                                >
-                                    <span><FiCalendar size={13} /> {formatDate(article.date)}</span>
-                                    <span><FiClock size={13} /> {article.readTime ?? article.read_time} min czytania</span>
-                                </motion.div>
-
-                                <motion.div
-                                    className={styles.heroStats}
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ delay: 0.5, duration: 0.3 }}
-                                >
-                                    <div className={styles.heroStat}>
-                                        <span className={styles.heroStatIcon}><FiUsers size={14} /></span>
-                                        <span className={styles.heroStatLabel}>Wielu autorów</span>
-                                    </div>
-                                    <div className={styles.heroStat}>
-                                        <span className={styles.heroStatIcon}><FiEye size={14} /></span>
-                                        <span className={styles.heroStatValue}>{article.views}</span>
-                                        <span className={styles.heroStatLabel}>odsłon</span>
-                                    </div>
-                                    <div className={styles.heroStat}>
-                                        <span className={styles.heroStatIcon}><FiStar size={14} fill="currentColor" /></span>
-                                        <span className={styles.heroStatValue}>{article.rating != null ? article.rating.toFixed(1) : '—'}</span>
-                                        <span className={styles.heroStatLabel}>ocena</span>
-                                    </div>
-                                    <div className={styles.heroStat}>
-                                        <span className={styles.heroStatIcon}><FiMessageSquare size={14} /></span>
-                                        <span className={styles.heroStatValue}>{(article.chapters || []).length}</span>
-                                        <span className={styles.heroStatLabel}>rozdziałów</span>
-                                    </div>
-                                </motion.div>
-
-                                <motion.div
-                                    className={styles.heroTags}
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ delay: 0.55, duration: 0.3 }}
-                                >
-                                    {(article.tags || []).map((tag) => (
-                                        <span key={tag} className={styles.heroTag}>
-                                            <FiTag size={10} /> {tag}
-                                        </span>
-                                    ))}
-                                </motion.div>
-                            </div>
-                        </motion.div>
-
                         {/* ── Two-column body ── */}
                         <div className={styles.articleLayout}>
                             {/* Sticky chapter sidebar */}

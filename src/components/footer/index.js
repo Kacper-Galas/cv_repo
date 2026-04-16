@@ -1,14 +1,14 @@
 import React, { useRef } from "react";
 import styles from './index.module.scss';
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, useScroll } from "framer-motion";
 import { Link } from "react-router-dom";
-import { FiLinkedin, FiTwitter } from "react-icons/fi";
+import { FiLinkedin, FiTwitter, FiArrowRight, FiCheck } from "react-icons/fi";
 
 /* ── Logo icon ──────────────────────────────────────────── */
-const NexusIcon = () => (
-    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <line x1="2" y1="2" x2="20" y2="20" stroke="#0f1923" strokeWidth="1.8" strokeLinecap="round" />
-        <line x1="20" y1="2" x2="2" y2="20" stroke="#0f1923" strokeWidth="1.8" strokeLinecap="round" />
+const NexusIcon = ({ color = '#0f1923' }) => (
+    <svg width="18" height="18" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <line x1="2" y1="2" x2="20" y2="20" stroke={color} strokeWidth="1.8" strokeLinecap="round" />
+        <line x1="20" y1="2" x2="2" y2="20" stroke={color} strokeWidth="1.8" strokeLinecap="round" />
     </svg>
 );
 
@@ -26,15 +26,35 @@ const NAV_SECONDARY = [
     { label: 'Kontakt', href: '#kontakt' },
 ];
 
-/* ── Tilt card wrapper ───────────────────────────────────────── */
+const STATS = [
+    { n: '48', l: 'Artykułów' },
+    { n: '12', l: 'Autorów' },
+    { n: '5', l: 'Kategorii' },
+    { n: '3', l: 'Lata online' },
+];
+
+const CTA_PERKS = [
+    'Własna strona autora i bio',
+    'Dostęp do zamkniętego community',
+    'Udział w przychodach platformy',
+];
+
+/* ── Manifesto lines — 3 zdania w różnych wagach optycznych ── */
+const MANIFESTO = [
+    { text: 'Wiedza', dim: false },
+    { text: 'bez', dim: true },
+    { text: 'kompromisów.', dim: false },
+];
+
+/* ── Tilt card wrapper ──────────────────────────────────────── */
 const TiltCard = ({ className, children, delay = 0 }) => {
     const ref = useRef(null);
     const x = useMotionValue(0);
     const y = useMotionValue(0);
     const sx = useSpring(x, { stiffness: 200, damping: 28 });
     const sy = useSpring(y, { stiffness: 200, damping: 28 });
-    const rotateX = useTransform(sy, [-0.5, 0.5], [4, -4]);
-    const rotateY = useTransform(sx, [-0.5, 0.5], [-4, 4]);
+    const rotateX = useTransform(sy, [-0.5, 0.5], [3, -3]);
+    const rotateY = useTransform(sx, [-0.5, 0.5], [-3, 3]);
 
     const handleMove = (e) => {
         const rect = ref.current?.getBoundingClientRect();
@@ -53,28 +73,60 @@ const TiltCard = ({ className, children, delay = 0 }) => {
             onMouseLeave={handleLeave}
             initial={{ opacity: 0, y: 32 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay }}
+            viewport={{ once: true, amount: 0.25 }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay }}
         >
             {children}
         </motion.div>
     );
 };
 
+/* ── Dot grid SVG (reużywalne) ──────────────────────────────── */
+const DotGrid = ({ light = false }) => (
+    <div
+        className={styles.dotGrid}
+        style={{
+            backgroundImage: `radial-gradient(circle, ${light
+                    ? 'rgba(255,255,255,0.07)'
+                    : 'rgba(15,25,35,0.055)'
+                } 1px, transparent 1px)`,
+        }}
+    />
+);
+
+/* ── Footer ─────────────────────────────────────────────────── */
 export const Footer = ({ ...props }) => {
     const year = new Date().getFullYear();
+    const footerRef = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: footerRef,
+        offset: ['start end', 'end end'],
+    });
+    // Lewy panel — dekoracyjna cyfra przesuwa się lekko przy scrollu
+    const bigNumY = useTransform(scrollYProgress, [0, 1], [40, -20]);
 
     return (
-        <footer className={styles.footer} {...props}>
+        <footer className={styles.footer} ref={footerRef} {...props}>
 
             <div className={styles.footerSeparator} />
 
-            {/* ── Bento grid ──────────────────────────────────────── */}
             <div className={styles.bentoGrid}>
 
-                {/* Left — logo & info */}
+                {/* ── LEFT — manifesto ─────────────────────────── */}
                 <TiltCard className={styles.cardLogo} delay={0}>
+                    <DotGrid />
+
+                    {/* Dekoracyjna wielka cyfra w tle */}
+                    <motion.span
+                        className={styles.logoBgNum}
+                        style={{ y: bigNumY }}
+                    >
+                        01
+                    </motion.span>
+
                     <div className={styles.cardLogoInner}>
+
+                        {/* Logo row */}
                         <motion.div
                             className={styles.logoRow}
                             initial={{ opacity: 0, y: 10 }}
@@ -86,38 +138,53 @@ export const Footer = ({ ...props }) => {
                             <span className={styles.logoText}>NEXUS</span>
                         </motion.div>
 
+                        {/* Manifesto */}
+                        <div className={styles.manifesto}>
+                            {MANIFESTO.map(({ text, dim }, i) => (
+                                <motion.span
+                                    key={i}
+                                    className={`${styles.manifestoLine} ${dim ? styles.manifestoLineDim : ''}`}
+                                    initial={{ opacity: 0, x: -16 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: 0.18 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                                >
+                                    {text}
+                                </motion.span>
+                            ))}
+                        </div>
+
+                        {/* Tagline */}
                         <motion.p
                             className={styles.logoTagline}
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: 0.26 }}
+                            transition={{ duration: 0.5, delay: 0.5 }}
                         >
                             Ekskluzywna wiedza od praktyków branży.<br />
                             Bez szumu, tylko konkret.
                         </motion.p>
 
+                        {/* Divider */}
                         <motion.div
                             className={styles.logoDivider}
                             initial={{ scaleX: 0 }}
                             whileInView={{ scaleX: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.55, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                            transition={{ duration: 0.55, delay: 0.58, ease: [0.16, 1, 0.3, 1] }}
                         />
 
-                        <div className={styles.logoStats}>
-                            {[
-                                { n: '48', l: 'Artykułów' },
-                                { n: '12', l: 'Autorów' },
-                                { n: '5',  l: 'Kategorii' },
-                            ].map(({ n, l }, i) => (
+                        {/* Stats 2×2 mini grid */}
+                        <div className={styles.logoStatGrid}>
+                            {STATS.map(({ n, l }, i) => (
                                 <motion.div
                                     key={l}
                                     className={styles.logoStat}
                                     initial={{ opacity: 0, y: 12 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
+                                    transition={{ duration: 0.4, delay: 0.64 + i * 0.08 }}
                                 >
                                     <span className={styles.logoStatNum}>{n}</span>
                                     <span className={styles.logoStatLabel}>{l}</span>
@@ -125,21 +192,27 @@ export const Footer = ({ ...props }) => {
                             ))}
                         </div>
 
+                        {/* Note */}
                         <motion.p
                             className={styles.logoNote}
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: 0.76 }}
+                            transition={{ duration: 0.5, delay: 0.92 }}
                         >
-                            Platforma zamknięta&thinsp;—&thinsp;dostęp<br />wyłącznie dla zaproszonych autorów.
+                            Platforma zamknięta&thinsp;—&thinsp;dostęp<br />
+                            wyłącznie dla zaproszonych autorów.
                         </motion.p>
                     </div>
                 </TiltCard>
 
-                {/* Center — CTA */}
+                {/* ── CENTER — CTA ─────────────────────────────── */}
                 <TiltCard className={styles.cardCta} delay={0.1}>
+                    {/* Dot-grid na ciemnym tle */}
+                    <DotGrid light />
+
                     <div className={styles.ctaInner}>
+
                         <motion.p
                             className={styles.ctaEyebrow}
                             initial={{ opacity: 0, y: 8 }}
@@ -165,24 +238,67 @@ export const Footer = ({ ...props }) => {
                             ))}
                         </h3>
 
-                        <div className={styles.ctaBtnArea}>
-                            <span className={styles.ctaBtnBloom} />
+                        {/* Perks */}
+                        <ul className={styles.ctaPerks}>
+                            {CTA_PERKS.map((perk, i) => (
+                                <motion.li
+                                    key={i}
+                                    className={styles.ctaPerk}
+                                    initial={{ opacity: 0, x: -14 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.4, delay: 0.5 + i * 0.09, ease: [0.16, 1, 0.3, 1] }}
+                                >
+                                    <span className={styles.ctaPerkIcon}><FiCheck size={10} /></span>
+                                    {perk}
+                                </motion.li>
+                            ))}
+                        </ul>
+
+                        {/* Divider */}
+                        <motion.div
+                            className={styles.ctaDivider}
+                            initial={{ scaleX: 0 }}
+                            whileInView={{ scaleX: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.78, ease: [0.16, 1, 0.3, 1] }}
+                        />
+
+                        {/* CTA block — hover animowany jako całość */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 12 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.45, delay: 0.88 }}
+                        >
                             <motion.a
                                 href="mailto:kontakt@nexus.pl"
-                                className={styles.ctaBtn}
-                                initial={{ opacity: 0, y: 10 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.4, delay: 0.62 }}
+                                className={styles.ctaBlock}
+                                whileHover="hover"
                             >
-                                <span className={styles.ctaBtnText}>ZŁÓŻ APLIKACJĘ</span>
-                                <span className={styles.ctaBtnArrow}>→</span>
+                                {/* Bloom */}
+                                <span className={styles.ctaBlockBloom} />
+
+                                <div className={styles.ctaBlockLeft}>
+                                    <span className={styles.ctaBlockLabel}>ZŁÓŻ APLIKACJĘ</span>
+                                    <span className={styles.ctaBlockSub}>Odpowiadamy w&nbsp;48&nbsp;h</span>
+                                </div>
+
+                                <motion.span
+                                    className={styles.ctaBlockArrow}
+                                    variants={{
+                                        hover: { x: 6, transition: { type: 'spring', stiffness: 400, damping: 20 } },
+                                    }}
+                                >
+                                    <FiArrowRight size={18} />
+                                </motion.span>
                             </motion.a>
-                        </div>
+                        </motion.div>
+
                     </div>
                 </TiltCard>
 
-                {/* Right — nav */}
+                {/* ── RIGHT — nav ──────────────────────────────── */}
                 <TiltCard className={styles.cardNav} delay={0.2}>
                     <div className={styles.navInner}>
                         <nav className={styles.navPrimary}>
@@ -206,7 +322,7 @@ export const Footer = ({ ...props }) => {
                         <div className={styles.navDivider} />
 
                         <nav className={styles.navSecondary}>
-                            <span className={styles.navSecondaryLabel}>Informacje</span>
+                            <span className={styles.navSecondaryLabel}>Informacje prawne</span>
                             {NAV_SECONDARY.map(({ label, href }) => (
                                 <Link key={label} to={href} className={styles.navSecondaryLink}>
                                     {label}
@@ -218,13 +334,13 @@ export const Footer = ({ ...props }) => {
 
             </div>
 
-            {/* ── Bottom bar ──────────────────────────────────────── */}
+            {/* ── Bottom bar ──────────────────────────────────── */}
             <motion.div
                 className={styles.bottomBar}
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                viewport={{ once: true, amount: 1 }}
-                transition={{ duration: 0.5, delay: 0.45 }}
+                viewport={{ once: true, amount: 0.8 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
             >
                 <div className={styles.bottomContent}>
                     <span className={styles.copyright}>
@@ -234,8 +350,7 @@ export const Footer = ({ ...props }) => {
                     <div className={styles.socialRow}>
                         <motion.a
                             href="https://www.linkedin.com/in/kacper-galas-00b67827a/"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            target="_blank" rel="noopener noreferrer"
                             className={styles.socialBtn}
                             aria-label="LinkedIn"
                             whileHover={{ y: -3, scale: 1.1 }}

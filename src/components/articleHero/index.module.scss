@@ -1,0 +1,387 @@
+@import '../../../src/styles/globalVariables.scss';
+
+$dark: #0f1923;
+$coral: #ff5246;
+$grey: rgba(15, 25, 35, 0.1);
+
+// ─── Shell ────────────────────────────────────────────────────────────────────
+.heroIntro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    width: 100%;
+    background: $dark;
+    overflow: hidden;
+    position: relative;
+}
+
+// ─── LEFT — image panel ───────────────────────────────────────────────────────
+.heroImagePanel {
+    position: relative;
+    overflow: hidden;
+    background: $dark;
+}
+
+// Wrapper dla parallax — musi być overflow:hidden na rodzicu
+.heroImageWrap {
+    position: absolute;
+    inset: -10% 0; // dodatkowa wysokość żeby parallax nie odkrył krawędzi
+    will-change: transform;
+}
+
+.heroImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+// Overlay — opacity kontrolowane przez motion (scroll)
+.heroImageOverlay {
+    position: absolute;
+    inset: 0;
+    background: $dark;
+    pointer-events: none;
+}
+
+// Fallback gdy brak thumbnajla
+.heroImageFallback {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(45deg,
+            rgba(255, 255, 255, 0.02) 0px,
+            rgba(255, 255, 255, 0.02) 1px,
+            transparent 1px,
+            transparent 28px);
+}
+
+// Czarna kurtyna — zjeżdża w górę reveal
+.heroImageCurtain {
+    position: absolute;
+    inset: 0;
+    background: $dark;
+    z-index: 10;
+    transform-origin: top;
+    pointer-events: none;
+}
+
+// Kategoria — floating pill w lewym dolnym rogu obrazu
+.heroCategoryPill {
+    position: absolute;
+    bottom: 28px;
+    left: 28px;
+    z-index: 5;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 11px;
+    letter-spacing: 3.5px;
+    color: $coral;
+    border: 1px solid rgba(255, 82, 70, 0.45);
+    padding: 5px 14px;
+    background: rgba(15, 25, 35, 0.75);
+    backdrop-filter: blur(6px);
+    text-transform: uppercase;
+}
+
+// ─── RIGHT — content panel ────────────────────────────────────────────────────
+.heroContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 72px 60px 72px 52px;
+    gap: 0;
+    background: $dark;
+    position: relative;
+    overflow: hidden;
+
+    // Dot-grid texture — spójna z resztą strony
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 28px 28px;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    // Subtelna linia oddzielająca od obrazu
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    >* {
+        position: relative;
+        z-index: 1;
+    }
+}
+
+// ─── Social proof — ocena + czytelnicy ───────────────────────────────────────
+.heroProof {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-left: 3px solid $coral; // akcent jak w .commentAccent
+}
+
+// Wielka cyfra oceny
+.heroRatingNum {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 44px;
+    line-height: 1;
+    letter-spacing: 2px;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.heroRatingRight {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.heroRatingStars {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+}
+
+.heroRatingLabel {
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.35);
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+}
+
+.heroProofDivider {
+    width: 1px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
+    margin: 0 4px;
+}
+
+.heroProofQuick {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 11px;
+        letter-spacing: 2px;
+        color: rgba(255, 255, 255, 0.28);
+    }
+}
+
+// ─── Title — perspektywa 3D dla char animacji ─────────────────────────────────
+.heroTitle {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(36px, 4.5vw, 62px);
+    letter-spacing: 3px;
+    color: #fff;
+    margin: 0 0 6px;
+    line-height: 1.0;
+    perspective: 600px;
+    overflow: visible;
+}
+
+.heroTitleWord {
+    display: inline-block;
+    margin-right: 0.22em;
+    perspective: 600px;
+}
+
+.heroTitleChar {
+    display: inline-block;
+    will-change: transform, opacity;
+    transform-style: preserve-3d;
+}
+
+.heroTitleSpace {
+    display: inline-block;
+}
+
+// Coral underline pod tytułem
+.heroTitleBar {
+    width: 52px;
+    height: 3px;
+    background: $coral;
+    transform-origin: left;
+    margin-bottom: 22px;
+}
+
+// ─── Excerpt ──────────────────────────────────────────────────────────────────
+.heroExcerpt {
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.85;
+    margin: 0 0 20px;
+    max-width: 480px;
+}
+
+// ─── Meta — data i autor ──────────────────────────────────────────────────────
+.heroMeta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.32);
+
+    span {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+}
+
+// ─── Stats row ────────────────────────────────────────────────────────────────
+.heroStats {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 18px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    margin-bottom: 22px;
+}
+
+.heroStat {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding-right: 20px;
+    margin-right: 20px;
+    border-right: 1px solid rgba(255, 255, 255, 0.07);
+
+    &:last-child {
+        border-right: none;
+        margin-right: 0;
+        padding-right: 0;
+    }
+}
+
+.heroStatIcon {
+    display: flex;
+    color: rgba(255, 255, 255, 0.28);
+    flex-shrink: 0;
+}
+
+.heroStatIconCoral {
+    color: $coral;
+}
+
+.heroStatValue {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: #fff;
+    line-height: 1;
+}
+
+.heroStatValueCoral {
+    color: $coral;
+}
+
+.heroStatLabel {
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.3px;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+// ─── Tags ─────────────────────────────────────────────────────────────────────
+.heroTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.heroTag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.28);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3px 10px;
+    text-transform: uppercase;
+    transition: color 0.2s, border-color 0.2s;
+
+    &:hover {
+        color: $coral;
+        border-color: rgba(255, 82, 70, 0.4);
+    }
+}
+
+// ─── Responsive ───────────────────────────────────────────────────────────────
+@media (max-width: 900px) {
+    .heroIntro {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+
+    .heroImagePanel {
+        height: 50vw;
+        min-height: 280px;
+        max-height: 420px;
+    }
+
+    .heroImageWrap {
+        inset: 0;
+    }
+
+    .heroContent {
+        padding: 48px 32px;
+        justify-content: flex-start;
+    }
+
+    .heroTitle {
+        font-size: clamp(32px, 7vw, 52px);
+    }
+
+    .heroProof {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .heroContent {
+        padding: 36px 24px;
+    }
+
+    .heroRatingNum {
+        font-size: 36px;
+    }
+
+    .heroStats {
+        flex-wrap: wrap;
+        gap: 12px;
+
+        .heroStat {
+            border-right: none;
+            margin-right: 0;
+            padding-right: 0;
+        }
+    }
+}
