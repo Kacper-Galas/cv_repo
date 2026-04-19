@@ -4,57 +4,81 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 4px;
+    gap: 10px;
     font-family: "Bebas Neue", sans-serif;
 }
 
 .paginationArrow {
     appearance: none;
-    border: 2px solid $secondary-color;
+    border: none;
     background: transparent;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     color: $dark-color;
     font-size: 18px;
-    transition: all 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
 
     &:hover:not(:disabled) {
-        border-color: $dark-color;
         color: $primary-color;
+        transform: translateY(-1px);
     }
 
     &:disabled {
-        opacity: 0.3;
+        opacity: 0.22;
         cursor: default;
     }
 }
 
+.paginationViewport {
+    position: relative;
+    overflow: hidden;
+    height: 44px;
+}
+
+.paginationRail {
+    display: flex;
+    align-items: center;
+}
+
+.paginationActiveIndicator {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    transform: translate(-50%, -50%);
+    background: $dark-color;
+    pointer-events: none;
+}
+
 .paginationPage {
     appearance: none;
-    border: 2px solid transparent;
+    border: none;
     background: transparent;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     font-size: 16px;
     letter-spacing: 1px;
-    color: $dark-color;
+    color: rgba(15, 25, 35, 0.36);
     font-family: "Bebas Neue", sans-serif;
-    transition: all 0.2s ease;
+    transition: color 0.2s ease, transform 0.2s ease;
+    position: relative;
+    z-index: 1;
 
     &:hover {
-        border-color: $dark-color;
+        color: $dark-color;
     }
 
     &.activePage {
-        background-color: $dark-color;
         color: #fff;
     }
 }

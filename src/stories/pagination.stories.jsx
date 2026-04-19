@@ -20,12 +20,13 @@ const Template = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {
-    totalPages: 5,
+    totalPages: 7,
     currentPage: 1,
 };
 
 export const ManyPages = Template.bind({});
 ManyPages.args = {
-    totalPages: 12,
+    totalPages: 18,
     currentPage: 6,
+    visibleSlots: 5,
 };

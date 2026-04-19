@@ -31,7 +31,6 @@ export const Divider = ({
         <hr
             className={`${styles.horizontal} ${dashed ? styles.dashed : ''} ${className}`}
             style={style}
-            role="separator"
         />
     );
 };

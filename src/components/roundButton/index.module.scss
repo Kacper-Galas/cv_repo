@@ -1,50 +1,87 @@
 @import '../../styles/globalVariables.scss';
 
-.roundButtonBackground {
-    background-color: $dark-color;
-    height: 60px;
+.roundButton {
+    appearance: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: transform $transition-fast;
+
+    &:hover {
+        transform: translateY(-3px);
+    }
+}
+
+.roundButtonInner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    font-size: 22px;
+    transition: color $transition-default, border-color $transition-default, background $transition-default, box-shadow $transition-default;
+}
+
+.size_sm {
+    width: 48px;
+    height: 48px;
+}
+
+.size_md {
     width: 60px;
-    border-radius: 100%;
-    .roundButtonContainer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: black;
-        background-color: $dark-color;
-        font-size: 22px;
-        border: 2px dashed;
-        border-color: black;
-        border-radius: 100%;
-        transition: 0.2s;
-        height: 100%;
-        width: 100%;
-        box-sizing: border-box;
-        &:hover {
-            cursor: pointer;
-            border-color: $primary-color;
-            color: $primary-color;
-            transform: translateY(-5px);
-        }
-    }
-    .roundButtonContainerLight {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: black;
-        background-color: white;
-        font-size: 22px;
-        border: 2px dashed;
-        border-color: black;
-        border-radius: 100%;
-        transition: 0.2s;
-        height: 100%;
-        width: 100%;
-        box-sizing: border-box;
-        &:hover {
-            cursor: pointer;
-            border-color: $primary-color;
-            color: $primary-color;
-            transform: translateY(-5px);
-        }
-    }
+    height: 60px;
+}
+
+.size_lg {
+    width: 72px;
+    height: 72px;
+}
+
+.bordered .roundButtonInner {
+    border: 2px dashed currentColor;
+}
+
+.solid .roundButtonInner {
+    border: 1px solid transparent;
+}
+
+.variant_dark .roundButtonInner {
+    color: #fff;
+    background: $dark-color;
+}
+
+.variant_light .roundButtonInner {
+    color: $dark-color;
+    background: #fff;
+}
+
+.variant_muted .roundButtonInner {
+    color: $dark-color;
+    background: rgba(15, 25, 35, 0.06);
+}
+
+.variant_accent .roundButtonInner {
+    color: #fff;
+    background: $primary-color;
+}
+
+.elevated .roundButtonInner {
+    box-shadow: 0 14px 28px rgba(15, 25, 35, 0.12);
+}
+
+.roundButton:hover .roundButtonInner {
+    color: $primary-color;
+    border-color: currentColor;
+}
+
+.variant_accent:hover .roundButtonInner {
+    color: #fff;
+    background: #ff6b60;
+}
+
+.variant_dark:hover .roundButtonInner {
+    background: #182430;
 }

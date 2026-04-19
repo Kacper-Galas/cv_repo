@@ -1,116 +1,180 @@
 @import '../../../src/styles/globalVariables.scss';
 
-.button:enabled {
+.button {
     appearance: none;
     border: none;
     background: none;
+    padding: 0;
     color: $dark-color;
     cursor: pointer;
-    position: relative;
-    padding: 8px;
-    transition: all .15s ease;
-    font-family: "Bebas Neue", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    letter-spacing: 2px;
-    font-size: 20px;
+    font-family: $font-display;
+    letter-spacing: 1.9px;
+    transition: transform $transition-fast;
 
-    .buttonLg {
-        position: relative;
-        display: block;
-        padding: 10px 20px;
-        color: #fff;
-        background-color: $dark-color;
-        overflow: hidden;
-        box-shadow: inset 0px 0px 0px 1px transparent;
-    }
-    
-    .buttonSl {
-        display: block;
-        position: absolute;
-        top: 0;
-        bottom: -1px;
-        left: -8px;
-        width: 0;
-        background-color: $primary-color;
-        transform: skew(-15deg);
-        transition: all .5s ease;
-    }
-}
-  
-.button:active::before,
-.button:active::after {
-    right: 3px;
-    left: 3px;
-}
-  
-.button:active::before {
-    top: 3px;
-}
-  
-.button:active::after {
-    bottom: 3px;
-}
-  
-.buttonText {
-    position: relative;
-}
-  
-.button:hover {
-    &:enabled {
-        color: #0f1923;
-    }
-}
-  
-.button:hover .buttonSl {
-    width: calc(100% + 15px);
-}
-  
-.button:hover .buttonLg::after {
-    background-color: #fff;
-}
-
-.button {
     &:disabled {
-        appearance: none;
-        background: none;
-        border: none;
+        opacity: 0.45;
         cursor: not-allowed;
-        position: relative;
-        padding: 8px;
-        margin-bottom: 20px;
-        transition: all .15s ease;
-        font-family: "Bebas Neue", sans-serif;
-        font-weight: 400;
-        font-style: normal;
-        letter-spacing: 2px;
-        font-size: 20px;
+    }
 
-        .buttonLg {
-            position: relative;
-            display: block;
-            background-color: $secondary-color;
-            padding: 10px 20px;
-            overflow: hidden;
-            box-shadow: inset 0px 0px 0px 1px transparent;
-        }
+    &:not(:disabled):active {
+        transform: translateY(1px);
     }
 }
 
-.iconButton {
-    color: white;
-    border: none;
-    background: none;
-    font-size: 22px;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
+.inner {
+    position: relative;
+    display: inline-flex;
     align-items: center;
-    transition: all .2s;
+    justify-content: center;
+    gap: 10px;
+    overflow: hidden;
+    padding: 12px 22px;
+    min-width: 136px;
+    line-height: 1;
+    transition: background $transition-default, color $transition-default, border-color $transition-default;
+}
 
-    &:hover {
-        color: $primary-color;
-        transform: translateY(-5px);
+.slide {
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    left: -8px;
+    width: 0;
+    transform: skewX(-15deg);
+    transition: width 0.45s ease;
+}
+
+.buttonText,
+.icon {
+    position: relative;
+    z-index: 1;
+}
+
+.buttonText {
+    white-space: nowrap;
+}
+
+.icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.size_sm .inner {
+    padding: 10px 16px;
+    min-width: 112px;
+    font-size: 16px;
+}
+
+.size_md .inner {
+    font-size: 20px;
+}
+
+.size_lg .inner {
+    padding: 14px 28px;
+    min-width: 156px;
+    font-size: 22px;
+}
+
+.fullWidth {
+    width: 100%;
+
+    .inner {
+        width: 100%;
     }
+}
+
+.variant_primary .inner {
+    background: $dark-color;
+    color: #fff;
+}
+
+.variant_primary .slide {
+    background: $primary-color;
+}
+
+.variant_secondary .inner {
+    background: #d7d7d7;
+    color: $dark-color;
+}
+
+.variant_secondary .slide {
+    background: $dark-color;
+}
+
+.variant_secondary:hover:not(:disabled) .buttonText,
+.variant_secondary:hover:not(:disabled) .icon {
+    color: #fff;
+}
+
+.variant_outline .inner {
+    border: 1px solid rgba(15, 25, 35, 0.86);
+    color: $dark-color;
+    background: transparent;
+}
+
+.variant_outline .slide {
+    background: $dark-color;
+}
+
+.variant_outline:hover:not(:disabled) .buttonText,
+.variant_outline:hover:not(:disabled) .icon {
+    color: #fff;
+}
+
+.variant_staticDark .inner {
+    background: $dark-color;
+    color: #fff;
+}
+
+.variant_staticGrey .inner {
+    background: rgba(15, 25, 35, 0.08);
+    color: $dark-color;
+}
+
+.variant_ghost .inner {
+    border-bottom: 1px solid rgba(15, 25, 35, 0.16);
+    color: $dark-color;
+    padding-left: 0;
+    padding-right: 0;
+    min-width: auto;
+}
+
+.variant_icon .inner {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    padding: 0;
+    border-radius: 999px;
+    background: rgba(15, 25, 35, 0.06);
+    color: $dark-color;
+}
+
+.iconOnly .icon {
+    font-size: 20px;
+}
+
+.button:hover:not(:disabled) {
+    .slide {
+        width: calc(100% + 16px);
+    }
+}
+
+.variant_staticDark:hover:not(:disabled) .inner {
+    background: #182430;
+}
+
+.variant_staticGrey:hover:not(:disabled) .inner,
+.variant_icon:hover:not(:disabled) .inner {
+    background: rgba(15, 25, 35, 0.12);
+}
+
+.variant_ghost:hover:not(:disabled) .inner {
+    border-bottom-color: $dark-color;
+    color: $primary-color;
+}
+
+.variant_icon:hover:not(:disabled) {
+    transform: translateY(-2px);
 }

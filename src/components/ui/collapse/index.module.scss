@@ -4,19 +4,11 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-
-    &.bordered {
-        border: 1px solid $secondary-light;
-        border-radius: $radius-md;
-        overflow: hidden;
-
-        .collapseItem + .collapseItem {
-            border-top: 1px solid $secondary-light;
-        }
-    }
 }
 
 .collapseItem {
+    border-bottom: 1px solid rgba(15, 25, 35, 0.12);
+
     &.disabled {
         opacity: 0.45;
         pointer-events: none;
@@ -28,23 +20,19 @@
     display: flex;
     align-items: center;
     gap: $spacing-sm;
-    padding: $spacing-md $spacing-lg;
+    padding: 18px 0;
     background: transparent;
     border: none;
     cursor: pointer;
-    font-family: $font-body;
-    font-size: 14px;
-    font-weight: 500;
+    font-family: $font-display;
+    font-size: 20px;
+    letter-spacing: 1.2px;
     color: $dark-color;
     text-align: left;
-    transition: background $transition-fast;
+    transition: color $transition-fast;
 
     &:hover {
-        background: $surface-alt;
-    }
-
-    .open & {
-        background: $surface-alt;
+        color: $primary-color;
     }
 }
 
@@ -58,19 +46,21 @@
 
 .headerTitle {
     flex: 1;
-    line-height: 1.4;
+    line-height: 1;
 }
 
 .headerExtra {
     flex-shrink: 0;
-    font-size: 13px;
+    font-size: 12px;
+    letter-spacing: 0.4px;
     color: $primary-color;
+    font-family: $font-body;
 }
 
 .chevron {
     display: flex;
     align-items: center;
-    color: #aaa;
+    color: rgba(15, 25, 35, 0.34);
     font-size: 16px;
     flex-shrink: 0;
 
@@ -80,10 +70,9 @@
 }
 
 .collapseContent {
-    padding: $spacing-md $spacing-lg $spacing-lg;
+    padding: 0 0 18px;
     font-family: $font-body;
     font-size: 14px;
     color: $dark-soft;
     line-height: 1.65;
-    border-top: 1px solid $secondary-light;
 }

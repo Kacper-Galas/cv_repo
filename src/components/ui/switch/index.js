@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import styles from './index.module.scss';
 
 export const Switch = ({
@@ -25,11 +24,7 @@ export const Switch = ({
             type="button"
             disabled={disabled}
         >
-            <motion.span
-                className={styles.switchThumb}
-                layout
-                transition={{ type: 'spring', stiffness: 500, damping: 35 }}
-            />
+            <span className={styles.switchThumb} />
         </button>
     );
 

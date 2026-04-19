@@ -11,6 +11,8 @@ import { Switch } from '../components/ui/switch';
 import { Textarea } from '../components/ui/textarea';
 import { Avatar, AvatarGroup } from '../components/ui/avatar';
 import { Progress } from '../components/ui/progress';
+import { Select } from '../components/ui/select';
+import { Table } from '../components/ui/table';
 import { Tooltip } from '../components/ui/tooltip';
 
 export default {
@@ -102,15 +104,17 @@ export const AlertDemo = () => (
 );
 
 export const CollapseDemo = () => (
-    <Collapse style={{ maxWidth: 560, margin: 24 }}>
+    <div style={{ maxWidth: 560, margin: 24 }}>
+    <Collapse>
         <CollapseItem title="What is this?" icon={<FiInfo />}>
             This is the content of the first accordion item. It supports any rich content.
         </CollapseItem>
         <CollapseItem title="How does it work?" defaultOpen>
-            The collapse component uses framer-motion for smooth height animation.
+            This version uses only bottom separators and unfolds the content under the active row.
         </CollapseItem>
         <CollapseItem title="Disabled item" disabled>Hidden</CollapseItem>
     </Collapse>
+    </div>
 );
 
 export const SwitchDemo = () => {
@@ -185,5 +189,37 @@ export const ProgressDemo = () => (
             <Progress variant="circle" value={50} color="#3b82f6" />
             <Progress variant="circle" value={30} color="#22c55e" />
         </div>
+    </div>
+);
+
+export const SelectDemo = () => (
+    <div style={{ maxWidth: 320, padding: 24 }}>
+        <Select
+            label="Technologia"
+            value="react"
+            variant="outlined"
+            options={[
+                { label: 'React', value: 'react', description: 'Frontend i interfejsy' },
+                { label: 'Node.js', value: 'node', description: 'Backend i API' },
+                { label: 'CSS', value: 'css', description: 'Layout i systemy wizualne' },
+            ]}
+        />
+    </div>
+);
+
+export const TableDemo = () => (
+    <div style={{ padding: 24 }}>
+        <Table
+            striped
+            columns={[
+                { title: 'Autor', dataIndex: 'author', key: 'author' },
+                { title: 'Temat', dataIndex: 'topic', key: 'topic' },
+                { title: 'Czytanie', dataIndex: 'time', key: 'time', align: 'right' },
+            ]}
+            dataSource={[
+                { key: 1, author: 'Kacper Gałas', topic: 'Architektura komponentów', time: '8 min' },
+                { key: 2, author: 'Anna Nowak', topic: 'Design systems', time: '6 min' },
+            ]}
+        />
     </div>
 );

@@ -1,0 +1,204 @@
+@import '../../../../src/styles/globalVariables.scss';
+
+.select {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 240px;
+    font-family: $font-body;
+}
+
+.fullWidth {
+    width: 100%;
+}
+
+.label {
+    font-family: $font-display;
+    font-size: 12px;
+    letter-spacing: 1.8px;
+    color: rgba(15, 25, 35, 0.58);
+    text-transform: uppercase;
+}
+
+.trigger {
+    appearance: none;
+    width: 100%;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0;
+    color: $dark-color;
+    text-align: left;
+    transition: color $transition-fast, border-color $transition-fast, background $transition-fast;
+
+    &:focus-visible {
+        outline: none;
+    }
+}
+
+.size_sm {
+    min-height: 38px;
+}
+
+.size_md {
+    min-height: 46px;
+}
+
+.size_lg {
+    min-height: 54px;
+}
+
+.variant_minimal {
+    border-bottom: 1px solid rgba(15, 25, 35, 0.16);
+    padding: 0 0 10px;
+
+    &.open,
+    &:hover {
+        border-bottom-color: $dark-color;
+    }
+}
+
+.variant_outlined {
+    border: 1px solid rgba(15, 25, 35, 0.14);
+    padding: 12px 14px;
+    background: #fff;
+
+    &.open,
+    &:hover {
+        border-color: rgba(15, 25, 35, 0.4);
+    }
+}
+
+.variant_filled {
+    padding: 12px 14px;
+    background: rgba(15, 25, 35, 0.04);
+
+    &.open,
+    &:hover {
+        background: rgba(15, 25, 35, 0.08);
+    }
+}
+
+.triggerMain {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.value {
+    font-family: $font-display;
+    font-size: 20px;
+    letter-spacing: 1.4px;
+    line-height: 1;
+    color: inherit;
+}
+
+.description {
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba(15, 25, 35, 0.42);
+}
+
+.chevron {
+    display: flex;
+    align-items: center;
+    color: rgba(15, 25, 35, 0.46);
+    flex-shrink: 0;
+}
+
+.menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+    background: #fff;
+    box-shadow: 0 24px 48px rgba(15, 25, 35, 0.14);
+    border: 1px solid rgba(15, 25, 35, 0.08);
+    z-index: 200;
+}
+
+.option {
+    appearance: none;
+    border: none;
+    background: transparent;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    cursor: pointer;
+    text-align: left;
+    transition: background $transition-fast, color $transition-fast;
+
+    &:hover {
+        background: rgba(15, 25, 35, 0.04);
+
+        .optionLabel {
+            color: $primary-color;
+        }
+    }
+}
+
+.optionSelected {
+    background: rgba(255, 82, 70, 0.08);
+}
+
+.optionBody {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.optionLabel {
+    font-family: $font-display;
+    font-size: 17px;
+    letter-spacing: 1.1px;
+    color: $dark-color;
+    line-height: 1;
+    transition: color $transition-fast;
+}
+
+.optionDescription {
+    font-size: 12px;
+    color: rgba(15, 25, 35, 0.42);
+    line-height: 1.5;
+}
+
+.optionState {
+    display: flex;
+    align-items: center;
+    color: $primary-color;
+    flex-shrink: 0;
+}
+
+.helper {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgba(15, 25, 35, 0.46);
+}
+
+.helperError {
+    color: $error;
+}
+
+.error {
+    border-color: $error;
+    color: $error;
+}
+
+.disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}

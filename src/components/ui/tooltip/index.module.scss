@@ -7,9 +7,13 @@
     justify-content: center;
 }
 
-.tooltip {
+.tooltipLayer {
     position: absolute;
     z-index: 1000;
+    pointer-events: none;
+}
+
+.tooltip {
     background-color: $dark-color;
     color: #fff;
     font-family: $font-body;
@@ -23,30 +27,7 @@
     max-width: 260px;
     white-space: normal;
     text-align: center;
-
-    &.top {
-        bottom: calc(100% + 10px);
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    &.bottom {
-        top: calc(100% + 10px);
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    &.left {
-        right: calc(100% + 10px);
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    &.right {
-        left: calc(100% + 10px);
-        top: 50%;
-        transform: translateY(-50%);
-    }
+    position: relative;
 }
 
 .arrow {

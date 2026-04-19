@@ -21,6 +21,7 @@ const Template = (args) => {
 export const Default = Template.bind({});
 Default.args = {
     label: 'Sortuj',
+    variant: 'minimal',
     options: [
         { label: 'Najnowsze', value: 'newest' },
         { label: 'Najstarsze', value: 'oldest' },
@@ -32,10 +33,22 @@ export const WithPreselection = Template.bind({});
 WithPreselection.args = {
     label: 'Kategoria',
     value: 'react',
+    variant: 'outlined',
     options: [
         { label: 'Wszystkie', value: 'all' },
         { label: 'React', value: 'react' },
         { label: 'Node.js', value: 'nodejs' },
         { label: 'CSS', value: 'css' },
+    ],
+};
+
+export const Filled = Template.bind({});
+Filled.args = {
+    label: 'Widok',
+    value: 'grid',
+    variant: 'filled',
+    options: [
+        { label: 'Grid', value: 'grid' },
+        { label: 'Lista', value: 'list' },
     ],
 };

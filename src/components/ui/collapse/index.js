@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiChevronDown } from 'react-icons/fi';
 import styles from './index.module.scss';
@@ -12,7 +12,6 @@ export const CollapseItem = ({
     disabled = false,
 }) => {
     const [open, setOpen] = useState(defaultOpen);
-    const contentRef = useRef(null);
 
     return (
         <div className={`${styles.collapseItem} ${open ? styles.open : ''} ${disabled ? styles.disabled : ''}`}>
@@ -44,7 +43,7 @@ export const CollapseItem = ({
                         transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
                         style={{ overflow: 'hidden' }}
                     >
-                        <div className={styles.collapseContent} ref={contentRef}>
+                        <div className={styles.collapseContent}>
                             {children}
                         </div>
                     </motion.div>
@@ -54,8 +53,8 @@ export const CollapseItem = ({
     );
 };
 
-export const Collapse = ({ children, bordered = true, className = '' }) => (
-    <div className={`${styles.collapse} ${bordered ? styles.bordered : ''} ${className}`}>
+export const Collapse = ({ children, className = '' }) => (
+    <div className={`${styles.collapse} ${className}`}>
         {children}
     </div>
 );

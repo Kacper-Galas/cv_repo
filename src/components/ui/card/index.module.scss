@@ -2,13 +2,13 @@
 
 .card {
     background: $surface;
-    border-radius: $radius-md;
+    border-radius: 0;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: $shadow-sm;
+    box-shadow: none;
     transition: box-shadow $transition-default, transform $transition-default;
-    border: 1px solid $secondary-light;
+    border: 1px solid rgba(15, 25, 35, 0.1);
     text-align: left;
     font-family: $font-body;
     appearance: none;
@@ -30,11 +30,11 @@
     &.variant_outlined {
         background: transparent;
         box-shadow: none;
-        border: 1.5px solid $secondary-color;
+        border: 1px solid rgba(15, 25, 35, 0.22);
     }
 
     &.variant_filled {
-        background: $surface-alt;
+        background: rgba(15, 25, 35, 0.03);
         border: none;
         box-shadow: none;
     }
@@ -50,7 +50,13 @@
 
     &.variant_accent {
         border-left: 3px solid $primary-color;
-        border-radius: 0 $radius-md $radius-md 0;
+        border-radius: 0;
+    }
+
+    &.variant_editorial {
+        .cardTitle {
+            font-size: 24px;
+        }
     }
 }
 
@@ -71,32 +77,54 @@
     }
 }
 
+.cardCoverLabel {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    padding: 4px 8px;
+    background: rgba(15, 25, 35, 0.58);
+    color: #fff;
+    font-family: $font-display;
+    font-size: 11px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
 .cardHeader {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: $spacing-md;
-    padding: $spacing-lg $spacing-lg 0;
+    padding: 20px 20px 0;
 }
 
 .cardHeaderMain {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
+}
+
+.cardEyebrow {
+    font-family: $font-display;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    color: $primary-color;
+    line-height: 1;
+    text-transform: uppercase;
 }
 
 .cardTitle {
     font-family: $font-display;
-    font-size: 20px;
-    letter-spacing: 1px;
+    font-size: 22px;
+    letter-spacing: 1.2px;
     color: $dark-color;
-    line-height: 1.2;
+    line-height: 1.12;
 }
 
 .cardSubtitle {
     font-size: 13px;
-    color: #888;
-    line-height: 1.4;
+    color: rgba(15, 25, 35, 0.54);
+    line-height: 1.55;
 }
 
 .cardExtra {
@@ -106,16 +134,25 @@
 }
 
 .cardBody {
-    padding: $spacing-lg;
+    padding: 16px 20px 20px;
     flex: 1;
-    font-size: 14px;
+    font-size: 13px;
     color: $dark-soft;
-    line-height: 1.65;
+    line-height: 1.7;
+}
+
+.cardMeta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 20px 18px;
+    color: rgba(15, 25, 35, 0.48);
+    font-size: 12px;
 }
 
 .cardFooter {
-    padding: $spacing-md $spacing-lg;
-    border-top: 1px solid $secondary-light;
+    padding: 16px 20px 20px;
+    border-top: 1px solid rgba(15, 25, 35, 0.08);
     font-size: 13px;
     color: #888;
     display: flex;

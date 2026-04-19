@@ -7,26 +7,45 @@
     font-family: "Bebas Neue", sans-serif;
 }
 
+.fullWidth {
+    width: 100%;
+}
+
 .dropdownTrigger {
     appearance: none;
-    border: 2px solid $dark-color;
+    border: none;
     background: transparent;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    padding: 8px 16px;
+    padding: 10px 0;
     font-family: "Bebas Neue", sans-serif;
     font-size: 18px;
     letter-spacing: 1.5px;
     color: $dark-color;
-    transition: border-color 0.2s ease, color 0.2s ease;
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
     min-width: 160px;
+    width: 100%;
+
+    &.variant_minimal {
+        border-bottom: 1px solid rgba(15, 25, 35, 0.16);
+    }
+
+    &.variant_outlined {
+        padding: 12px 16px;
+        border: 1px solid rgba(15, 25, 35, 0.16);
+    }
+
+    &.variant_filled {
+        padding: 12px 16px;
+        background: rgba(15, 25, 35, 0.05);
+    }
 
     &:hover,
     &.open {
-        border-color: $primary-color;
+        border-color: $dark-color;
         color: $primary-color;
     }
 }
@@ -44,13 +63,15 @@
 
 .dropdownMenu {
     position: absolute;
-    top: calc(100% + 4px);
+    top: calc(100% + 10px);
     left: 0;
     right: 0;
-    background-color: $dark-color;
+    background-color: #fff;
+    border: 1px solid rgba(15, 25, 35, 0.08);
+    box-shadow: 0 24px 48px rgba(15, 25, 35, 0.14);
     list-style: none;
     margin: 0;
-    padding: 4px 0;
+    padding: 8px 0;
     z-index: 200;
     overflow: hidden;
     transform-origin: top;
@@ -58,24 +79,24 @@
 }
 
 .dropdownOption {
-    padding: 10px 16px;
+    padding: 12px 16px;
     cursor: pointer;
     font-size: 16px;
     letter-spacing: 1.2px;
-    color: #fff;
+    color: $dark-color;
     display: flex;
     align-items: center;
     gap: 8px;
     transition: background-color 0.15s ease, color 0.15s ease;
 
     &:hover {
-        background-color: rgba(255, 255, 255, 0.08);
+        background-color: rgba(15, 25, 35, 0.04);
         color: $primary-color;
     }
 
     &.selectedOption {
         color: $primary-color;
-        background-color: rgba(255, 82, 70, 0.15);
+        background-color: rgba(255, 82, 70, 0.12);
     }
 }
 

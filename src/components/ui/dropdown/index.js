@@ -8,6 +8,8 @@ export const Dropdown = ({
     options = [],
     value,
     onChange,
+    variant = 'minimal',
+    fullWidth = false,
 }) => {
     const [isOpen, setIsOpen] = useState(false);
     const wrapperRef = useRef(null);
@@ -25,9 +27,9 @@ export const Dropdown = ({
     }, []);
 
     return (
-        <div className={styles.dropdownWrapper} ref={wrapperRef}>
+        <div className={`${styles.dropdownWrapper} ${fullWidth ? styles.fullWidth : ''}`} ref={wrapperRef}>
             <button
-                className={`${styles.dropdownTrigger} ${isOpen ? styles.open : ''}`}
+                className={`${styles.dropdownTrigger} ${styles[`variant_${variant}`]} ${isOpen ? styles.open : ''}`}
                 onClick={() => setIsOpen((prev) => !prev)}
                 type="button"
             >
